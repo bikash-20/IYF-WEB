@@ -62,11 +62,13 @@
   --accent-soft: rgba(217, 138, 43, 0.12);
 
   /* Glass tokens — for the navbar over content */
-  --glass-bg: rgba(255, 252, 245, 0.72);
-  --glass-bg-tinted: rgba(255, 252, 245, 0.86);
-  /* v0.7: deeper, more transparent — blends into the hero instead of
-     reading as a separate olive-gray band. */
-  --glass-bg-deep: rgba(10, 8, 14, 0.46);
+  --glass-bg: rgba(255, 252, 245, 0.7);
+  --glass-bg-tinted: rgba(255, 252, 245, 0.82);
+  /* v0.7.1: clear black tint at 35% with a 12px blur — the navbar
+     visually merges with the deity photo instead of reading as an
+     olive-gray band on top of it. */
+  --glass-bg-deep: rgba(0, 0, 0, 0.35);
+  --glass-blur: 12px;
   --glass-border: rgba(255, 255, 255, 0.4);
 
   /* Mantra ticker — dark, runs across every page beneath the nav.
