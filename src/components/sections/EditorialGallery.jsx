@@ -108,7 +108,7 @@ export function EditorialGallery() {
               </span>
               <figcaption className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
                 <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90">
-                  {i === 0 ? 'Sri Sri Radh Madhava' : 'IYF Sylhet'}
+                  {item.tag || 'IYF Sylhet'}
                 </div>
                 <div className="mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-hover:text-saffron-200">
                   {item.caption || item.label}
