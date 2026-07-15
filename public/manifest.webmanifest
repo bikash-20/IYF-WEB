@@ -1,0 +1,77 @@
+{
+  "name": "IYF SYLHET",
+  "short_name": "IYF SYLHET",
+  "description": "ISKCON Youth Forum, Sylhet — A home for young devotees at Sri Sri Radha Madhava Mandir.",
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait",
+  "background_color": "#FBF7F0",
+  "theme_color": "#D98A2B",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["lifestyle", "education", "spirituality"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today\u2019s Darshan",
+      "short_name": "Darshan",
+      "description": "What is alive at the mandir right now",
+      "url": "/?source=pwa&goto=schedule",
+      "icons": [{ "src": "/pwa-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Visit",
+      "short_name": "Visit",
+      "description": "Address, map, and contact for Sri Sri Radha Madhava Mandir",
+      "url": "/visit?source=pwa",
+      "icons": [{ "src": "/pwa-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Be SMART Course",
+      "short_name": "Be SMART",
+      "description": "A 9-module intro to Krishna consciousness",
+      "url": "/courses?source=pwa",
+      "icons": [{ "src": "/pwa-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

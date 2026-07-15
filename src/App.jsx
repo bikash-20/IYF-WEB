@@ -1,10 +1,11 @@
-import { Suspense, lazy } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Layout } from '@/components/layout/Layout.jsx';
 import { ScrollToTop } from '@/components/layout/ScrollToTop.jsx';
 import { RouteFallback } from '@/components/layout/RouteFallback.jsx';
 import { HomePage } from '@/pages/HomePage.jsx';
+import { InstallBanner } from '@/components/pwa/InstallBanner.jsx';
 
 // Route-level code splitting. The home page is the most-visited screen
 // and stays in the initial bundle. Everything else is split out so the
@@ -37,6 +38,22 @@ const NotFoundPage = lazy(() =>
 
 export default function App() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // PWA shortcuts land at /?source=pwa&goto=schedule etc. We honour the
+  // `goto` hint once, then strip the query so the URL stays clean.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(location.search);
+    const goto = params.get('goto');
+    if (location.pathname === '/' && goto) {
+      params.delete('source');
+      params.delete('goto');
+      const next = `/${goto}${params.toString() ? `?${params.toString()}` : ''}`;
+      navigate(next, { replace: true });
+    }
+  }, [location.pathname, location.search, navigate]);
+
   return (
     <Layout>
       <ScrollToTop />
@@ -56,6 +73,7 @@ export default function App() {
           </Routes>
         </AnimatePresence>
       </Suspense>
+      <InstallBanner />
     </Layout>
   );
 }
