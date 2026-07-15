@@ -62,14 +62,14 @@ export function PrabhupadaCorner() {
                 caption="1 September 1896 — 14 November 1977"
                 interactive
               />
-              <figure className="absolute -bottom-6 -right-6 hidden max-w-[210px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift md:block">
-                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
+              <figure className="absolute -bottom-6 -right-6 hidden max-w-[210px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift dark:border-white/10 dark:bg-ink-floating/95 md:block">
+                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                   Founder-ācārya
                 </div>
-                <div className="mt-1 font-display text-lg leading-tight text-temple-900">
+                <div className="mt-1 font-display text-lg leading-tight text-temple-900 dark:text-fg-main">
                   Śrīla Prabhupāda
                 </div>
-                <div className="mt-2 text-[11px] leading-relaxed text-temple-700/80">
+                <div className="mt-2 text-[11px] leading-relaxed text-temple-700/80 dark:text-fg-muted">
                   International Society for
                   <br />
                   Krishna Consciousness
@@ -92,7 +92,7 @@ export function PrabhupadaCorner() {
 
             <motion.h2
               variants={fadeUp}
-              className="mt-4 font-display text-display-lg text-balance text-temple-900"
+              className="mt-4 font-display text-display-lg text-balance text-temple-900 dark:text-fg-main dark:glow-gold-soft"
             >
               One man. One trunk of books.{' '}
               <span className="text-saffron-gradient italic">A world awakened.</span>
@@ -104,7 +104,7 @@ export function PrabhupadaCorner() {
 
             <motion.p
               variants={fadeUp}
-              className="mt-6 max-w-prose text-base leading-relaxed text-temple-800/80"
+              className="mt-6 max-w-prose text-base leading-relaxed text-temple-800/80 dark:text-fg-body dark:leading-dark"
             >
               His Divine Grace A. C. Bhaktivedanta Swami Prabhupāda was born
               Abhay Charan De in Calcutta on 1 September 1896, the day after
@@ -118,7 +118,7 @@ export function PrabhupadaCorner() {
 
             <motion.p
               variants={fadeUp}
-              className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/75"
+              className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/75 dark:text-fg-body dark:leading-dark"
             >
               In July 1966 he incorporated the International Society for
               Krishna Consciousness in New York. In the twelve years that
@@ -132,7 +132,7 @@ export function PrabhupadaCorner() {
 
             <motion.p
               variants={fadeUp}
-              className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/75"
+              className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/75 dark:text-fg-body dark:leading-dark"
             >
               He left this world in Vrindavan on 14 November 1977. The
               Bhaktivedanta Book Trust, the movement he began, and the
@@ -144,14 +144,14 @@ export function PrabhupadaCorner() {
             {/* Key facts — compact data strip */}
             <motion.dl
               variants={fadeUp}
-              className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-temple-800/10 pt-6 sm:grid-cols-4"
+              className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-temple-800/10 pt-6 dark:border-white/8 sm:grid-cols-4"
             >
               {KEY_FACTS.map((f) => (
                 <div key={f.label}>
-                  <dt className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
+                  <dt className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                     {f.label}
                   </dt>
-                  <dd className="mt-1 font-display text-sm leading-snug text-temple-900">
+                  <dd className="mt-1 font-display text-sm leading-snug text-temple-900 dark:text-fg-main">
                     {f.value}
                   </dd>
                 </div>
@@ -160,7 +160,7 @@ export function PrabhupadaCorner() {
 
             {/* Selected writings */}
             <motion.div variants={fadeUp} className="mt-8">
-              <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/70">
+              <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/70 dark:text-fg-muted">
                 <BookOpen size={12} aria-hidden="true" />
                 Selected writings
               </div>
@@ -168,7 +168,7 @@ export function PrabhupadaCorner() {
                 {SELECTED_WRITINGS.map((title) => (
                   <li
                     key={title}
-                    className="flex items-baseline gap-2 text-sm text-temple-800/85"
+                    className="flex items-baseline gap-2 text-sm text-temple-800/85 dark:text-fg-body"
                   >
                     <span
                       aria-hidden="true"

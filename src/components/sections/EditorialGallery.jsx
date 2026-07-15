@@ -63,7 +63,7 @@ export function EditorialGallery() {
                 delay: i * 0.04,
               }}
               className={cn(
-                'group relative overflow-hidden rounded-editorial shadow-soft outline-none ring-cream-50/0 transition-shadow duration-500 ease-divine hover:shadow-temple focus-visible:ring-2 focus-visible:ring-saffron-500/60 motion-reduce:transition-none',
+                'group relative overflow-hidden rounded-editorial shadow-soft outline-none ring-cream-50/0 transition-shadow duration-500 ease-divine hover:shadow-temple focus-visible:ring-2 focus-visible:ring-saffron-500/60 motion-reduce:transition-none dark:shadow-lift dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.6),0_0_30px_rgba(224,170,76,0.18)] dark:focus-visible:ring-saffron-400/70',
                 spans[i],
                 'min-h-[260px] md:min-h-0',
               )}
@@ -74,7 +74,7 @@ export function EditorialGallery() {
                   alt={item.alt}
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-divine group-hover:scale-[1.06]"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-divine group-hover:scale-[1.06] dark:cinematic"
                 />
               ) : (
                 <div
@@ -107,10 +107,10 @@ export function EditorialGallery() {
                 </svg>
               </span>
               <figcaption className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90">
+                <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:glow-gold-soft">
                   {item.tag || 'IYF Sylhet'}
                 </div>
-                <div className="mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-hover:text-saffron-200">
+                <div className="mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-hover:text-saffron-200 dark:group-hover:text-saffron-300">
                   {item.caption || item.label}
                 </div>
               </figcaption>
@@ -126,7 +126,7 @@ export function EditorialGallery() {
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 360, damping: 24 }}
-            className="group inline-flex items-center gap-3 rounded-full border border-temple-800/20 bg-cream-50 px-6 py-3 text-xs font-medium uppercase tracking-eyebrow text-temple-800 transition-all duration-300 hover:border-saffron-500 hover:bg-saffron-500/5 hover:text-saffron-600 motion-reduce:transition-none"
+            className="group inline-flex items-center gap-3 rounded-full border border-temple-800/20 bg-cream-50 px-6 py-3 text-xs font-medium uppercase tracking-eyebrow text-temple-800 transition-all duration-300 hover:border-saffron-500 hover:bg-saffron-500/5 hover:text-saffron-600 motion-reduce:transition-none dark:border-white/10 dark:bg-ink-floating/85 dark:text-fg-main dark:hover:border-saffron-400 dark:hover:bg-saffron-400/10 dark:hover:text-saffron-300"
           >
             <Play size={12} className="text-saffron-500 transition-transform duration-300 group-hover:scale-110" />
             Watch on Gauradesh TV

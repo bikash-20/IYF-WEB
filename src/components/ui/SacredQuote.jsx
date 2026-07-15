@@ -34,7 +34,7 @@ export function SacredQuote({
             aria-hidden
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover object-center opacity-40 anim-kenburns"
+            className="h-full w-full object-cover object-center opacity-40 anim-kenburns dark:cinematic"
           />
         </div>
       )}

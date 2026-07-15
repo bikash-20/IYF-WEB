@@ -54,20 +54,20 @@ function FestivalCard({ festival }) {
   const meta = TYPE_META[festival.type] || TYPE_META.single;
   return (
     <RevealOnScroll>
-      <article className="group relative flex h-full flex-col rounded-2xl border border-temple-800/10 bg-cream-50 p-5 shadow-soft transition-all duration-500 ease-divine hover:border-saffron-500/40 hover:shadow-temple motion-reduce:transition-none">
+      <article className="group relative flex h-full flex-col rounded-2xl border border-temple-800/10 bg-cream-50 p-5 shadow-soft transition-all duration-500 ease-divine hover:border-saffron-500/40 hover:shadow-temple motion-reduce:transition-none dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift dark:hover:border-saffron-400/40 dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.55),0_0_30px_rgba(224,170,76,0.15)]">
         <header className="flex items-start justify-between gap-3">
           <div>
-            <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-600">
+            <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
               {bandLabel(festival)}
             </div>
-            <h3 className="mt-1 font-display text-xl text-temple-800 md:text-2xl">
+            <h3 className="mt-1 font-display text-xl text-temple-800 md:text-2xl dark:text-fg-main">
               {festival.name}
             </h3>
           </div>
           <Badge tone={meta.tone}>{meta.label}</Badge>
         </header>
 
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-temple-700/80">
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-temple-700/80 dark:text-fg-body dark:leading-dark">
           {festival.summary}
         </p>
 
@@ -109,14 +109,14 @@ function TimelineStrip({ festivals }) {
   });
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-temple-800/10 bg-cream-50 p-5 shadow-soft md:p-6">
-      <div className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+    <div className="overflow-hidden rounded-2xl border border-temple-800/10 bg-cream-50 p-5 shadow-soft dark:border-white/8 dark:bg-ink-floating/85 dark:shadow-lift md:p-6">
+      <div className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
         <CalendarRange size={14} aria-hidden="true" />
         Year at a glance
       </div>
 
       <div className="mt-4 space-y-2">
-        <div className="grid grid-cols-12 gap-2 font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/60">
+        <div className="grid grid-cols-12 gap-2 font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/60 dark:text-fg-muted">
           {months.map((m) => (
             <div key={m} className="text-center">{m}</div>
           ))}
@@ -124,7 +124,7 @@ function TimelineStrip({ festivals }) {
 
         {rows.map(({ f, start, span }) => (
           <div key={f.id} className="grid grid-cols-12 items-center gap-2">
-            <div className="col-span-12 md:col-span-3 md:pr-3 text-sm text-temple-800">
+            <div key={i} className="col-span-12 md:col-span-3 md:pr-3 text-sm text-temple-800 dark:text-fg-main">
               {f.name}
             </div>
             <div className="col-span-12 md:col-span-9 grid grid-cols-12 gap-2">
@@ -152,7 +152,7 @@ function TimelineStrip({ festivals }) {
         ))}
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-4 font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/70">
+      <div className="mt-4 flex flex-wrap items-center gap-4 font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/70 dark:text-fg-muted">
         <span className="inline-flex items-center gap-2">
           <span className="h-2 w-4 rounded-full bg-saffron-500/80" aria-hidden="true" />
           Single day
@@ -189,7 +189,7 @@ export function CalendarSection({ festivals }) {
 
       {grouped.map((band) => (
         <section key={band.id}>
-          <h2 className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+          <h2 className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
             {band.label}
           </h2>
 

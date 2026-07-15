@@ -34,14 +34,14 @@ export function AboutSection() {
             </motion.div>
             <motion.h2
               variants={fadeUp}
-              className="mt-4 font-display text-display-lg text-balance text-temple-900"
+              className="mt-4 font-display text-display-lg text-balance text-temple-900 dark:text-fg-main dark:glow-gold-soft"
             >
               A quiet place to remember{' '}
               <span className="text-saffron-gradient italic">Krishna</span>.
             </motion.h2>
             <motion.p
               variants={fadeUp}
-              className="mt-6 max-w-prose text-lg leading-relaxed text-temple-800/85"
+              className="mt-6 max-w-prose text-lg leading-relaxed text-temple-800/85 dark:text-fg-body dark:leading-dark"
             >
               ISKCON Youth Forum is the youth community of Sri Sri Radha Madhava
               Mandir in Jugaltila. Since 2007, this temple has hosted daily darshan,
@@ -50,7 +50,7 @@ export function AboutSection() {
             </motion.p>
             <motion.p
               variants={fadeUp}
-              className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/70"
+              className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/70 dark:text-fg-body dark:leading-dark"
             >
               We are non-sectarian within the Vaishnava tradition, and the doors
               of the mandir are open to everyone — to chant, to hear, to sit for
@@ -60,7 +60,7 @@ export function AboutSection() {
             <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/about"
-                className="group inline-flex items-center gap-2 rounded-full bg-temple-900 px-5 py-2.5 text-xs font-medium uppercase tracking-eyebrow text-cream-50 transition-all duration-300 hover:bg-temple-800"
+                className="group inline-flex items-center gap-2 rounded-full bg-temple-900 px-5 py-2.5 text-xs font-medium uppercase tracking-eyebrow text-cream-50 transition-all duration-300 hover:bg-temple-800 dark:bg-ink-floating dark:text-fg-main dark:hover:bg-ink-lift dark:shadow-soft"
               >
                 Read the temple&apos;s story
                 <ArrowUpRight
@@ -70,7 +70,7 @@ export function AboutSection() {
               </Link>
               <Link
                 to="/visit"
-                className="inline-flex items-center gap-2 rounded-full border border-temple-800/30 px-5 py-2.5 text-xs font-medium uppercase tracking-eyebrow text-temple-900 transition-all duration-300 hover:border-saffron-500 hover:text-saffron-600"
+                className="inline-flex items-center gap-2 rounded-full border border-temple-800/30 px-5 py-2.5 text-xs font-medium uppercase tracking-eyebrow text-temple-900 transition-all duration-300 hover:border-saffron-500 hover:text-saffron-600 dark:border-white/15 dark:text-fg-main dark:hover:border-saffron-400 dark:hover:text-saffron-400"
               >
                 Plan your visit
               </Link>
@@ -99,14 +99,14 @@ export function AboutSection() {
                 priority
                 interactive
               />
-              <figure className="absolute -bottom-6 -left-6 hidden max-w-[180px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift md:block">
-                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
+              <figure className="absolute -bottom-6 -left-6 hidden max-w-[180px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift dark:border-white/10 dark:bg-ink-floating/95 dark:shadow-lift md:block">
+                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                   Est.
                 </div>
-                <div className="mt-1 font-display text-2xl text-temple-900">
+                <div className="mt-1 font-display text-2xl text-temple-900 dark:text-fg-main">
                   2007
                 </div>
-                <div className="mt-2 text-[11px] leading-relaxed text-temple-700/80">
+                <div className="mt-2 text-[11px] leading-relaxed text-temple-700/80 dark:text-fg-muted">
                   {site.address.city}, Bangladesh
                 </div>
               </figure>

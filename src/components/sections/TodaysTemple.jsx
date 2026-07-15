@@ -92,12 +92,12 @@ export function TodaysTemple() {
           <div className="relative">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <div className="eyebrow">Live schedule</div>
-              <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-temple-600/70">
+              <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-temple-600/70 dark:text-fg-muted">
                 Bangladesh · {fmt(bdMinutes)}
               </div>
             </div>
 
-            <h3 className="mt-4 font-display text-display-md text-balance text-temple-900">
+            <h3 className="mt-4 font-display text-display-md text-balance text-temple-900 dark:text-fg-main dark:glow-gold-soft">
               {current
                 ? current.label
                 : closedTemple
@@ -106,7 +106,7 @@ export function TodaysTemple() {
             </h3>
 
             {current && (
-              <p className="mt-3 max-w-prose text-base leading-relaxed text-temple-800/80">
+              <p className="mt-3 max-w-prose text-base leading-relaxed text-temple-800/80 dark:text-fg-body dark:leading-dark">
                 {current.note}
               </p>
             )}
@@ -126,11 +126,9 @@ export function TodaysTemple() {
                     <span className="font-mono text-[0.68rem] uppercase tracking-eyebrow text-saffron-600 tabular-nums">
                       {p.time}
                     </span>
-                    <span
-                      className={`font-display text-base ${
-                        isLive ? 'text-saffron-gradient italic' : 'text-temple-800'
-                      }`}
-                    >
+                    <span className={`font-display text-base ${
+                        isLive ? 'text-saffron-gradient italic dark:glow-gold-soft' : 'text-temple-800 dark:text-fg-main'
+                      }`}>
                       {p.label}
                     </span>
                     <span className="text-right">
@@ -145,7 +143,7 @@ export function TodaysTemple() {
                       ) : isDone ? (
                         <Check size={12} className="inline-block text-temple-500" aria-label="Completed" />
                       ) : (
-                        <span className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-temple-700/70">
+                        <span className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-temple-700/70 dark:text-fg-muted">
                           {pretty(minutesUntil(p.time, bdMinutes))}
                         </span>
                       )}
@@ -157,7 +155,7 @@ export function TodaysTemple() {
 
             <Link
               to="/schedule"
-              className="mt-7 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-eyebrow text-saffron-600 transition-colors duration-300 hover:text-saffron-700"
+              className="mt-7 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-eyebrow text-saffron-600 transition-colors duration-300 hover:text-saffron-700 dark:text-saffron-400 dark:hover:text-saffron-300 dark:glow-gold-soft"
             >
               Full day & weekly rotation <ArrowUpRight size={12} />
             </Link>
@@ -176,10 +174,10 @@ export function TodaysTemple() {
             <div className="tex-overlay tex-linen" aria-hidden />
             <div className="relative">
               <div className="eyebrow">Thought of the day</div>
-              <p className="mt-4 font-display text-2xl italic leading-snug text-balance text-temple-900 md:text-3xl">
+              <p className="mt-4 font-display text-2xl italic leading-snug text-balance text-temple-900 md:text-3xl dark:text-fg-main dark:glow-gold-soft">
                 {thought.text}
               </p>
-              <div className="mt-5 font-mono text-[0.62rem] uppercase tracking-eyebrow text-temple-600/70">
+              <div className="mt-5 font-mono text-[0.62rem] uppercase tracking-eyebrow text-temple-600/70 dark:text-fg-muted">
                 — {thought.author}
               </div>
             </div>
@@ -195,16 +193,16 @@ export function TodaysTemple() {
             <div className="tex-overlay tex-cloth" aria-hidden />
             <div className="relative">
               <div className="eyebrow">Verse of the day</div>
-              <p className="mt-4 font-display text-xl leading-snug text-temple-900 md:text-2xl">
+              <p className="mt-4 font-display text-xl leading-snug text-temple-900 md:text-2xl dark:text-fg-main">
                 {verse.sanskrit}
               </p>
-              <p className="mt-2 text-sm italic text-temple-700/85">
+              <p className="mt-2 text-sm italic text-temple-700/85 dark:text-fg-body dark:leading-dark">
                 {verse.transliteration}
               </p>
-              <p className="mt-4 text-base leading-relaxed text-temple-800">
+              <p className="mt-4 text-base leading-relaxed text-temple-800 dark:text-fg-body dark:leading-dark">
                 {verse.translation}
               </p>
-              <div className="mt-5 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
+              <div className="mt-5 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                 {verse.reference}
               </div>
             </div>
@@ -250,8 +248,8 @@ export function TodaysTemple() {
           </div>
         </motion.div>
 
-        <div className="mt-8 flex items-center gap-2 text-xs text-temple-700/70">
-          <Clock size={12} className="text-temple-500" />
+        <div className="mt-8 flex items-center gap-2 text-xs text-temple-700/70 dark:text-fg-muted">
+          <Clock size={12} className="text-temple-500 dark:text-fg-muted" />
           <span>Live schedule ticks every minute. Times follow Bangladesh Standard Time (UTC+6).</span>
         </div>
       </Container>

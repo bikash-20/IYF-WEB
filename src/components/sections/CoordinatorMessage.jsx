@@ -30,7 +30,7 @@ export function CoordinatorMessage() {
             {/* Eyebrow */}
             <motion.div
               variants={fadeUp}
-              className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600"
+              className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft"
             >
               A personal letter
             </motion.div>
@@ -38,7 +38,7 @@ export function CoordinatorMessage() {
             {/* Display headline */}
             <motion.h2
               variants={fadeUp}
-              className="mt-4 font-display text-display-lg text-balance text-temple-900"
+              className="mt-4 font-display text-display-lg text-balance text-temple-900 dark:text-fg-main dark:glow-gold-soft"
             >
               Connecting with your{' '}
               <span className="text-saffron-gradient italic">own heart</span>.
@@ -47,22 +47,22 @@ export function CoordinatorMessage() {
             {/* Salutation */}
             <motion.p
               variants={fadeUp}
-              className="mt-10 font-display text-2xl italic text-temple-800"
+              className="mt-10 font-display text-2xl italic text-temple-800 dark:text-fg-main"
             >
               Dear friend,
             </motion.p>
 
             {/* Letter body — serif prose, generous spacing, narrow measure */}
-            <div className="mt-8 space-y-7 max-w-[34rem] text-[1.075rem] leading-[1.85] text-temple-800/85">
+            <div className="mt-8 space-y-7 max-w-[34rem] text-[1.075rem] leading-[1.85] text-temple-800/85 dark:text-fg-body dark:leading-dark">
               {/* Opening paragraph with drop quote */}
               <motion.p variants={fadeUp} className="relative">
                 <span
                   aria-hidden="true"
-                  className="float-left mr-3 mt-1 font-display text-[5rem] leading-[0.85] text-maroon-600/85 select-none"
+                  className="float-left mr-3 mt-1 font-display text-[5rem] leading-[0.85] text-maroon-600/85 select-none dark:text-maroon-400"
                 >
                   &ldquo;
                 </span>
-                <em className="font-display text-[1.18rem] not-italic text-temple-900">
+                <em className="font-display text-[1.18rem] not-italic text-temple-900 dark:text-fg-main">
                   In today&rsquo;s world, we have learned how to connect with
                   everyone through technology, yet many of us struggle to
                   connect with our own hearts.
@@ -101,21 +101,21 @@ export function CoordinatorMessage() {
             {/* Signature block */}
             <motion.div
               variants={fadeUp}
-              className="mt-12 max-w-[34rem] border-t border-saffron-500/30 pt-8"
+              className="mt-12 max-w-[34rem] border-t border-saffron-500/30 pt-8 dark:border-saffron-400/25"
             >
-              <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/60">
+              <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/60 dark:text-fg-muted">
                 With warm regards,
               </div>
               <div
-                className="mt-3 font-handwriting text-[2.6rem] leading-none text-temple-900"
+                className="mt-3 font-handwriting text-[2.6rem] leading-none text-temple-900 dark:text-fg-main dark:glow-gold-soft"
                 style={{ letterSpacing: '0.01em' }}
               >
                 Devarshi Srivas Dasa
               </div>
-              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-600">
+              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                 <span>— Coordinator</span>
-                <span className="text-temple-700/40">·</span>
-                <span className="text-temple-700/70">
+                <span className="text-temple-700/40 dark:text-fg-muted/60">·</span>
+                <span className="text-temple-700/70 dark:text-fg-muted">
                   ISKCON Youth Forum, Sylhet
                 </span>
               </div>
@@ -143,9 +143,9 @@ export function CoordinatorMessage() {
                 aspect="4/5"
                 interactive
               />
-              <figcaption className="mt-5 text-center font-display text-base italic text-temple-700/70 md:text-left">
+              <figcaption className="mt-5 text-center font-display text-base italic text-temple-700/70 dark:text-fg-muted md:text-left">
                 &mdash; Devarshi Srivas Dasa
-                <span className="mt-0.5 block font-mono text-[0.62rem] not-italic uppercase tracking-eyebrow text-saffron-600">
+                <span className="mt-0.5 block font-mono text-[0.62rem] not-italic uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                   Coordinator, IYF Sylhet
                 </span>
               </figcaption>

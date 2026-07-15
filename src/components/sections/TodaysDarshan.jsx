@@ -39,7 +39,7 @@ export function TodaysDarshan() {
             transition={{ duration: 1.1, ease: easeDivine }}
             className="md:col-span-7"
           >
-            <div className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-8 shadow-soft backdrop-blur-sm md:p-10">
+            <div className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-8 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift md:p-10">
               <RadialLight
                 color="rgba(217,138,43,0.18)"
                 size="50%"
@@ -53,19 +53,19 @@ export function TodaysDarshan() {
 
               {current ? (
                 <>
-                  <h3 className="mt-5 font-display text-display-md text-balance">
+                  <h3 className="mt-5 font-display text-display-md text-balance dark:text-fg-main">
                     {current.label}
                   </h3>
-                  <p className="mt-4 max-w-prose text-base leading-relaxed text-temple-700/85">
+                  <p className="mt-4 max-w-prose text-base leading-relaxed text-temple-700/85 dark:text-fg-body dark:leading-dark">
                     {current.note}
                   </p>
-                  <div className="mt-6 flex flex-wrap items-center gap-4 font-mono text-[0.72rem] uppercase tracking-eyebrow text-saffron-600">
+                  <div className="mt-6 flex flex-wrap items-center gap-4 font-mono text-[0.72rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                     <span className="inline-flex items-center gap-2">
                       <Clock size={12} />
                       Began {current.time}
                     </span>
-                    <span className="text-temple-400">·</span>
-                    <span className="text-temple-700/70">Bangladesh time {fmt(bdMinutes)}</span>
+                    <span className="text-temple-400 dark:text-fg-muted">·</span>
+                    <span className="text-temple-700/70 dark:text-fg-muted">Bangladesh time {fmt(bdMinutes)}</span>
                   </div>
                 </>
               ) : (
@@ -90,17 +90,17 @@ export function TodaysDarshan() {
             transition={{ duration: 1.1, ease: easeDivine, delay: 0.1 }}
             className="flex flex-col gap-4 md:col-span-5"
           >
-            <div className="rounded-editorial border border-temple-800/10 bg-cream-50/60 p-7">
+            <div className="rounded-editorial border border-temple-800/10 bg-cream-50/60 p-7 dark:border-white/8 dark:bg-ink-floating/65">
               <div className="eyebrow">Up next</div>
               {next && (
-                <h4 className="mt-3 font-display text-2xl text-temple-800">
+                <h4 className="mt-3 font-display text-2xl text-temple-800 dark:text-fg-main">
                   {next.label}
                 </h4>
               )}
-              <p className="mt-2 text-sm leading-relaxed text-temple-700/80">
+              <p className="mt-2 text-sm leading-relaxed text-temple-700/80 dark:text-fg-body dark:leading-dark">
                 {next?.note}
               </p>
-              <div className="mt-5 font-mono text-xs uppercase tracking-eyebrow text-saffron-600">
+              <div className="mt-5 font-mono text-xs uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                 {next?.time}
               </div>
             </div>
@@ -109,10 +109,10 @@ export function TodaysDarshan() {
               to="/schedule"
               className="group inline-flex items-center justify-between gap-3 rounded-editorial border border-saffron-500/40 bg-saffron-500/[0.06] p-5 text-sm transition-all duration-500 hover:bg-saffron-500/[0.12]"
             >
-              <span className="font-mono text-xs uppercase tracking-eyebrow text-saffron-600">
+              <span className="font-mono text-xs uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
                 See the full day
               </span>
-              <Sparkles size={14} className="text-saffron-500 transition-transform duration-300 group-hover:translate-x-0.5" />
+              <Sparkles size={14} className="text-saffron-500 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-saffron-400" />
             </Link>
           </motion.div>
         </div>

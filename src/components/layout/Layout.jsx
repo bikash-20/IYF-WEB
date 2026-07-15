@@ -13,10 +13,16 @@ import { Footer } from './Footer.jsx';
  * The top-edge saffron scroll-progress bar is still off (removed in
  * v0.7). The `ScrollProgress` primitive still exists in
  * `src/components/ui/` if we ever want it back as an opt-in.
+ *
+ * v0.8: theme-aware surfaces. The wrapper carries the page bg + fg
+ * for both modes; `bg-cream-50 text-temple-800` in light and
+ * `dark:bg-ink-page dark:text-fg-main` in dark. The transition runs
+ * 700ms via the `html` rule in `index.css` so flipping themes
+ * cross-fades every layer, not just the wrapper.
  */
 export function Layout({ children }) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-cream-50 text-temple-800">
+    <div className="relative flex min-h-screen flex-col bg-cream-50 text-temple-800 dark:bg-ink-page dark:text-fg-main">
       <Navbar />
       <main id="main" className="flex-1">
         {children}

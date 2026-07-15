@@ -6,7 +6,26 @@
 // All colors are exposed as Tailwind utilities (e.g. `bg-cream-50`,
 // `text-saffron-600`, `border-maroon-700`) and CSS custom properties in
 // `src/styles/tokens.css`. Keep both in sync.
+/**
+ * Theme strategy — class-based dark mode.
+ *
+ * `darkMode: 'class'` flips a `.dark` class on <html> to drive every
+ * dark-mode variant. All Tailwind colors are exposed as utility names
+ * (e.g. `bg-cream-50`, `text-saffron-600`) with both light and dark
+ * values; components opt into dark variants via `dark:` prefixes. The
+ * CSS-variable equivalents in `src/styles/tokens.css` mirror this — the
+ * ThemeProvider flips `.dark` on <html>, which swaps the custom
+ * properties for hard-coded rgba values used by Framer Motion + SVG +
+ * inline gradients that can't read Tailwind utilities.
+ *
+ * Brand philosophy: light mode is "morning darshan, soft sunlight,
+ * cream walls, open space" and dark mode is "evening arati, deep blue
+ * sky, gentle lamp light, quiet atmosphere". The two moods are
+ * deliberately different rather than inversions of each other — see
+ * tokens.css for the design intent.
+ */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     container: {
@@ -27,6 +46,10 @@ export default {
     },
     extend: {
       colors: {
+        // Cream — warm-paper surfaces for light mode. Dark mode
+        // surfaces pull from `ink-*` and `plum-dark` instead; cream is
+        // not used as a background in dark mode (the mood is "evening
+        // temple", not "white-on-black").
         cream: {
           50: '#FBF7F0',
           100: '#F5EFE3',
@@ -47,26 +70,63 @@ export default {
           700: '#4E3825',
           800: '#2E2118',
         },
+        // Saffron — accent gold. In dark mode these same hues glow
+        // brighter (lighter + warmer 400/300 tones) with text-shadow
+        // applied via the .glow-gold utility — never a flat fill.
         saffron: {
           300: '#F1B96B',
           400: '#E5A24A',
           500: '#D98A2B',
-          600: '#B86E1E',
+          600: '#B86E1e',
+          // Lighter gold for dark-mode accents (oil-lamp warmth).
+          'gold-dark': '#E0AA4C',
         },
         peacock: {
           500: '#1B5E7A',
           600: '#134A60',
           700: '#0D3A4C',
+          // Dark-mode peacock — the "evening sky" wash behind
+          // important sections. Deep, not bright.
+          'dark': '#0B2533',
+          'deep': '#091823',
         },
         maroon: {
           600: '#7A1F2B',
           700: '#5C1620',
           800: '#3F0E16',
+          // Dark-mode plum — used for altar/cardinal accent.
+          'plum-dark': '#2A0A12',
         },
         ink: {
           900: '#15131A',
           800: '#1E1A24',
           700: '#27212E',
+          // New dark palette — page/section/card/floating hierarchy.
+          // Each layer sits one notch lighter than the previous so
+          // surfaces feel like they're floating at different depths.
+          'page': '#0F0D13',         // outermost page
+          'page-2': '#11101A',       // alt page rhythm
+          'section': '#141118',      // raised section
+          'charcoal': '#18151D',     // mid-elevation section
+          'card': '#1A1720',         // card surface
+          'floating': '#211C29',     // floating card / dialog
+          'lift': '#26212F',         // hover state on floating
+          'border': '#2A2433',       // visible borders on dark
+        },
+        // Dark-mode fg tones — never #FFFFFF, always warm cream.
+        'fg': {
+          main: '#F2EEE7',
+          body: '#D4CEC5',
+          muted: '#AAA29B',
+          'muted-2': '#8A827B',
+          accent: '#E0AA4C',
+        },
+        // Lamp glow — radial-gradient targets for the dark-mode
+        // "oil-lamp warmth" atmosphere behind important sections.
+        'lamp': {
+          warm: '#D2963C',
+          amber: '#A66A1F',
+          'oil': '#C8884F',
         },
       },
       fontFamily: {

@@ -22,7 +22,7 @@ export function ScheduleTimeline() {
           lede="Timings shift slightly with the seasons. Mangal Arati begins before sunrise — please arrive quietly."
         />
 
-        <ol className="relative ml-2 mt-12 border-l border-editorial">
+        <ol className="relative ml-2 mt-12 border-l border-editorial dark:border-white/8">
           {dailySchedule.map((row, i) => (
             <motion.li
               key={row.id}
@@ -39,20 +39,20 @@ export function ScheduleTimeline() {
                 aria-hidden
                 className="absolute -left-2 top-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full"
               >
-                <span className="absolute inset-0 rounded-full bg-saffron-500/25 blur-[2px]" />
-                <span className="relative h-2.5 w-2.5 rounded-full border-2 border-cream-50 bg-saffron-500" />
+                <span className="absolute inset-0 rounded-full bg-saffron-500/25 blur-[2px] dark:bg-saffron-400/35" />
+                <span className="relative h-2.5 w-2.5 rounded-full border-2 border-cream-50 bg-saffron-500 dark:border-ink-page dark:bg-saffron-400" />
               </motion.span>
 
               <motion.div
                 variants={fadeUpSm}
                 className="flex flex-col gap-2 md:flex-row md:items-baseline md:gap-10"
               >
-                <div className="font-mono text-xs uppercase tracking-eyebrow text-saffron-600 md:w-24 md:shrink-0">
+                <div className="font-mono text-xs uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft md:w-24 md:shrink-0">
                   {row.time}
                 </div>
                 <div>
-                  <div className="font-display text-2xl text-temple-800">{row.label}</div>
-                  <div className="mt-1 max-w-prose text-sm leading-relaxed text-temple-700/80">
+                  <div className="font-display text-2xl text-temple-800 dark:text-fg-main">{row.label}</div>
+                  <div className="mt-1 max-w-prose text-sm leading-relaxed text-temple-700/80 dark:text-fg-body dark:leading-dark">
                     {row.note}
                   </div>
                 </div>

@@ -64,12 +64,19 @@ export function Footer() {
       whileInView="visible"
       viewport={{ once: true, margin: '-80px' }}
       variants={stagger}
-      className="relative overflow-hidden border-t border-temple-800/10 bg-ink-900 text-cream-100"
+      className="relative overflow-hidden border-t border-temple-800/10 bg-ink-900 text-cream-100 dark:border-white/8"
     >
-      {/* corner glow */}
+      {/* Corner glow — saffron halo behind the footer in light mode;
+          in dark mode the `.dark .lamp-ambient` overlay adds a second
+          radial on the upper-right so the footer feels like it's lit
+          by oil lamps at the edge of the temple. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-32 left-1/2 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-saffron-500/10 blur-3xl"
+      />
+      <span
+        aria-hidden="true"
+        className="lamp-ambient-br absolute inset-0 opacity-0 transition-opacity duration-700 ease-divine dark:opacity-100"
       />
 
       {/* Mantra inscription — v0.7.3. Lives here (and on About) so

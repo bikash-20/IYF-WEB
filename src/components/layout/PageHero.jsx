@@ -8,16 +8,17 @@ import { ChevronRight } from 'lucide-react';
  */
 export function PageHero({ eyebrow, title, description, breadcrumb }) {
   return (
-    <section className="relative overflow-hidden border-b border-temple-800/10 bg-cream-100/60">
-      <div className="pointer-events-none absolute inset-0 grain opacity-50" aria-hidden />
+    <section className="relative overflow-hidden border-b border-temple-800/10 bg-cream-100/60 dark:border-white/8 dark:bg-ink-section-2">
+      <div aria-hidden className="lamp-ambient pointer-events-none absolute inset-0 opacity-0 dark:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 grain opacity-50 dark:opacity-30" aria-hidden />
       <div className="container relative py-20 md:py-28">
         {breadcrumb && (
-          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-temple-700/70">
-            <Link to="/" className="hover:text-saffron-600">
+          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-temple-700/70 dark:text-fg-muted">
+            <Link to="/" className="hover:text-saffron-600 dark:hover:text-saffron-400">
               Home
             </Link>
             <ChevronRight size={12} aria-hidden />
-            <span className="text-temple-800">{breadcrumb}</span>
+            <span className="text-temple-800 dark:text-fg-main">{breadcrumb}</span>
           </nav>
         )}
         <motion.div
@@ -27,11 +28,11 @@ export function PageHero({ eyebrow, title, description, breadcrumb }) {
           className="max-w-3xl"
         >
           <div className="eyebrow">{eyebrow}</div>
-          <h1 className="mt-3 font-display text-display-lg text-balance text-temple-800">
+          <h1 className="mt-3 font-display text-display-lg text-balance text-temple-800 dark:text-fg-main dark:glow-gold-soft">
             {title}
           </h1>
           {description && (
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-temple-700 md:text-lg">
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-temple-700 md:text-lg dark:text-fg-body dark:leading-dark">
               {description}
             </p>
           )}

@@ -17,7 +17,7 @@ export function VisitSection() {
 
         <div className="grid gap-5 md:grid-cols-12">
           <RevealOnScroll className="md:col-span-7">
-            <div className="relative h-80 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-200/50 md:h-full">
+            <div className="relative h-80 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-200/50 dark:border-white/8 dark:bg-ink-section-2 md:h-full">
               <div
                 className="absolute inset-0 opacity-80"
                 style={{
@@ -29,10 +29,10 @@ export function VisitSection() {
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div className="relative flex flex-col items-center gap-2 text-center">
                   <div className="relative">
-                    <div className="absolute -inset-3 animate-glow rounded-full bg-saffron-500/40 blur-md" aria-hidden />
-                    <div className="relative h-4 w-4 rounded-full bg-saffron-500 ring-4 ring-cream-50" />
+                    <div className="absolute -inset-3 animate-glow rounded-full bg-saffron-500/40 blur-md dark:bg-saffron-400/55" aria-hidden />
+                    <div className="relative h-4 w-4 rounded-full bg-saffron-500 ring-4 ring-cream-50 dark:bg-saffron-400 dark:ring-ink-page" />
                   </div>
-                  <span className="mt-2 max-w-xs font-mono text-[0.7rem] uppercase tracking-eyebrow text-temple-800">
+                  <span className="mt-2 max-w-xs font-mono text-[0.7rem] uppercase tracking-eyebrow text-temple-800 dark:text-fg-body">
                     Jugaltila, Kajalshah · opposite Osmani Medical College, Gate No. 1
                   </span>
                 </div>
@@ -52,7 +52,7 @@ export function VisitSection() {
           </RevealOnScroll>
 
           <RevealOnScroll className="md:col-span-5" delay={0.1}>
-            <ul className="divide-y divide-temple-800/10 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50">
+            <ul className="divide-y divide-temple-800/10 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50 dark:divide-white/8 dark:border-white/8 dark:bg-ink-floating/85">
               <ContactRow icon={<Phone size={14} />} k="Phone" v={site.contacts.phoneDisplay} href={`tel:${site.contacts.phone}`} />
               <ContactRow
                 icon={<MessageCircle size={14} />}
@@ -90,7 +90,7 @@ function ContactRow({ icon, k, v, href }) {
   const isExternal = href?.startsWith('http');
   const content = (
     <span className="flex items-center gap-2">
-      <span className="transition-colors duration-300 group-hover/row:text-saffron-700">
+      <span className="transition-colors duration-300 group-hover/row:text-saffron-700 dark:text-fg-main dark:group-hover/row:text-saffron-400">
         {v}
       </span>
       <span aria-hidden="true" className="row-arrow text-saffron-500">
@@ -99,7 +99,7 @@ function ContactRow({ icon, k, v, href }) {
     </span>
   );
   return (
-    <li className="group/row row-tint border-b border-temple-800/10 last:border-0">
+    <li className="group/row row-tint border-b border-temple-800/10 last:border-0 dark:border-white/8">
       {href ? (
         <a
           href={href}
@@ -107,14 +107,14 @@ function ContactRow({ icon, k, v, href }) {
           rel={isExternal ? 'noopener noreferrer' : undefined}
           className="flex items-center justify-between gap-4 px-5 py-4 outline-none"
         >
-          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
             {icon} {k}
           </span>
           {content}
         </a>
       ) : (
         <div className="flex items-center justify-between gap-4 px-5 py-4">
-          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
             {icon} {k}
           </span>
           {content}

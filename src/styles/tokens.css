@@ -96,4 +96,91 @@
   --radius-lg: 1.25rem;
   --radius-xl: 1.75rem;
   --radius-2xl: 2.5rem;
+
+  /* Dark-mode ambient — used by Atmosphere + RadialLight behind
+     important sections. Subtle warm bloom like distant oil lamps. */
+  --lamp-ambient-1: rgba(210, 150, 60, 0.08);
+  --lamp-ambient-2: rgba(166, 106, 31, 0.06);
+
+  /* Cinematic photo filter — applied to images in dark mode so the
+     scene looks like scripture illuminated by lamplight, not HDR. */
+  --photo-cinematic: brightness(0.88) contrast(1.08) saturate(0.92);
+
+  /* Type rhythm dark — slightly increased line-height for night
+     reading. Components can override the base 1.5 with this token. */
+  --leading-dark: 1.7;
+
+  /* Glow text-shadow for gold accents — the "oil-lamp glow" applied
+     to headlines, eyebrows, and section numerals in dark mode. */
+  --glow-gold: 0 0 14px rgba(224, 170, 76, 0.45),
+               0 0 32px rgba(224, 170, 76, 0.18);
+  --glow-gold-soft: 0 0 10px rgba(224, 170, 76, 0.30);
+}
+
+/* ---------------------------------------------------------------
+ * Dark theme — class-based.
+ *
+ * Driven by the `.dark` class on <html>, set by ThemeProvider. The
+ * design intent is "evening arati at the temple after sunset":
+ *   - never pure black (we use #0F0D13 / #141118 / #1A1720 / #211C29)
+ *   - never pure white text (#F2EEE7 main, #D4CEC5 body, #AAA29B muted)
+ *   - oil-lamp gold for accents (#E0AA4C) with text-shadow glow
+ *   - alternating section rhythm: deep ink → charcoal → dark peacock
+ *     → dark plum → deep ink so each transition feels intentional
+ *
+ * If you change a value here, change it in tailwind.config.js too.
+ * --------------------------------------------------------------- */
+.dark {
+  /* Background hierarchy — page → section → card → floating.
+     Each layer sits one notch lighter so cards visibly float. */
+  --bg: #0F0D13;
+  --bg-elevated: #141118;
+  --bg-section-2: #18151D;        /* alt section rhythm */
+  --bg-section-3: #0B2533;        /* dark peacock section */
+  --bg-section-4: #1B1218;        /* dark plum section */
+  --bg-card: #1A1720;
+  --bg-floating: #211C29;
+  --bg-deep: #0A0810;
+
+  /* Foreground — warm cream, never #FFFFFF */
+  --fg: #F2EEE7;
+  --fg-muted: rgba(242, 238, 231, 0.62);
+  --fg-inverse: #2E2118;
+
+  /* Borders — barely-there white at 6% opacity */
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
+
+  /* Accent — oil-lamp gold with glow. The text-shadow is applied by
+     the .glow-gold utility class so non-text uses stay clean. */
+  --accent: #E0AA4C;
+  --accent-soft: rgba(224, 170, 76, 0.16);
+
+  /* Glass — dark frosted. rgba(20,18,25,.72) was the inspiration;
+     we use a slightly cooler shade so the navbar doesn't blend
+     into the page bg entirely. */
+  --glass-bg: rgba(20, 18, 25, 0.72);
+  --glass-bg-tinted: rgba(20, 18, 25, 0.82);
+  --glass-bg-deep: rgba(0, 0, 0, 0.55);
+  --glass-blur: 24px;
+  --glass-border: rgba(255, 255, 255, 0.05);
+
+  /* Ticker / mantra */
+  --ticker-fg: #E0AA4C;
+  --ticker-fg-alt: #F2EEE7;
+
+  /* Shadows — softer and warmer in dark mode so cards read as
+     floating under lamp light, not on top of the page. */
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.30);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.30), 0 16px 40px rgba(0, 0, 0, 0.40);
+  --shadow-temple: 0 4px 8px rgba(0, 0, 0, 0.35), 0 24px 56px rgba(0, 0, 0, 0.50);
+  --shadow-saffron: 0 8px 28px rgba(224, 170, 76, 0.28);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+                  0 8px 32px rgba(0, 0, 0, 0.40);
+
+  /* Motion — dark mode is slower (calmer). Components that use
+     --duration-base get 700ms instead of 450ms. */
+  --duration-slow: 900ms;
+  --duration-base: 700ms;
+  --duration-fast: 350ms;
 }

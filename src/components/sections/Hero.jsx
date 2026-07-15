@@ -8,6 +8,7 @@ import { Embers } from '@/components/ui/Embers.jsx';
 import { IncenseDust } from '@/components/ui/IncenseDust.jsx';
 import { useHeroTime } from '@/hooks/useHeroTime.js';
 import { useCurrentProgram } from '@/hooks/useNow.js';
+import { useTheme } from '@/features/theme/useTheme.js';
 import { site } from '@/lib/site.js';
 import { easeDivine, staggerWords, wordRise } from '@/lib/motion.js';
 import { cn } from '@/lib/cn.js';
@@ -84,6 +85,8 @@ function prettyMinutes(diff) {
 export function Hero() {
   const ref = useRef(null);
   const prefersReduced = useReducedMotion();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const { phase, gradient, deep, lampIntensity } = useHeroTime();
   const { current, next, closedTemple, bdMinutes } = useCurrentProgram();
 
@@ -169,8 +172,11 @@ export function Hero() {
   const diff = target ? minutesUntilLabel(target.time, bdMinutes) : null;
 
   // Pre-compute the radial light colors based on lamp intensity.
-  const saffronLight = `rgba(229,162,74,${(0.34 * lampIntensity).toFixed(3)})`;
-  const peacockLight = `rgba(27,94,122,${(0.18 + 0.14 * (1 - lampIntensity)).toFixed(3)})`;
+  // In dark mode the lamp bloom is brighter and warmer so the mood
+  // reads as "lit by oil lamps" rather than "studio".
+  const saffronLight = `rgba(229,162,74,${((isDark ? 0.42 : 0.34) * lampIntensity).toFixed(3)})`;
+  const peacockLight = `rgba(27,94,122,${((isDark ? 0.16 : 0.18) + (isDark ? 0.10 : 0.14) * (1 - lampIntensity)).toFixed(3)})`;
+  const extraLamp = `rgba(245,200,120,${((isDark ? 0.32 : 0.24) * lampIntensity).toFixed(3)})`;
 
   return (
     <section
@@ -211,11 +217,17 @@ export function Hero() {
               : `translate3d(${parallax.x}px, ${parallax.y}px, 0)`,
           }}
         >
-          {/* Full-bleed deity photo — edge-to-edge, no crop, no border. */}
+          {/* Full-bleed deity photo — edge-to-edge, no crop, no border.
+              In dark mode the photo picks up the cinematic filter
+              (brightness .88 / contrast 1.08 / saturate .92) so it
+              reads as scripture lit by lamp, not HDR. */}
           <img
             src="/little-1.jpg"
             alt=""
-            className="h-full w-full object-cover object-center opacity-90"
+            className={cn(
+              'h-full w-full object-cover object-center opacity-90',
+              isDark && 'cinematic',
+            )}
           />
         </div>
       </motion.div>
@@ -236,6 +248,12 @@ export function Hero() {
         <div className="absolute inset-0 anim-breathe">
           <RadialLight color={saffronLight} size="62%" pos="50% 22%" />
           <RadialLight color={peacockLight} size="55%" pos="82% 88%" />
+          {/* Extra warm bloom in dark mode — a soft second lamp above
+              the headline so the text feels surrounded by oil-lamp
+              light, not floating against a flat gradient. */}
+          {isDark && (
+            <RadialLight color={extraLamp} size="48%" pos="22% 30%" />
+          )}
         </div>
 
         {/* Lamp bloom — pinned upper-right. The base bloom drives
@@ -253,7 +271,7 @@ export function Hero() {
             )}
           >
             <RadialLight
-              color={`rgba(245,200,120,${(0.24 * lampIntensity).toFixed(3)})`}
+              color={`rgba(245,200,120,${((isDark ? 0.30 : 0.24) * lampIntensity).toFixed(3)})`}
               size="80%"
               pos="50% 50%"
             />
@@ -290,7 +308,7 @@ export function Hero() {
           >
             <motion.div
               variants={wordRise}
-              className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-300"
+              className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-300 glow-gold-soft"
             >
               {site.legalName} · Jugaltila, Kajalshah
             </motion.div>

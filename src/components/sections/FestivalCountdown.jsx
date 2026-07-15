@@ -36,7 +36,7 @@ export function FestivalCountdown() {
       <span className="font-display text-4xl tabular-nums text-cream-50 md:text-5xl">
         {String(value).padStart(2, '0')}
       </span>
-      <span className="mt-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300">
+      <span className="mt-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300 dark:text-saffron-400 dark:glow-gold-soft">
         {label}
       </span>
     </div>
@@ -50,7 +50,7 @@ export function FestivalCountdown() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 1.0, ease: easeDivine }}
-          className="relative overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/60 p-8 md:p-14"
+          className="relative overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/60 p-8 dark:border-saffron-400/15 dark:bg-ink-deep md:p-14"
         >
           <RadialLight
             color="rgba(217,138,43,0.22)"
@@ -69,7 +69,7 @@ export function FestivalCountdown() {
           <div className="relative grid items-center gap-10 md:grid-cols-2">
             <div>
               <div className="eyebrow text-saffron-300">Upcoming festival</div>
-              <h3 className="mt-4 font-display text-display-md text-cream-50 text-balance">
+              <h3 className="mt-4 font-display text-display-md text-cream-50 text-balance dark:glow-gold-soft">
                 {featuredFestival.title}
               </h3>
               <p className="mt-3 font-display text-base italic text-saffron-300">

@@ -9,14 +9,29 @@ import { cn } from '@/lib/cn.js';
  * hover and presses on tap, not just a nested span.
  */
 const variants = {
+  // Primary saffron — same on both themes. In dark mode we add a
+  // text-shadow glow so the gold reads as "oil-lamp" rather than a
+  // flat fill, and the soft saffron shadow stays so the button
+  // lifts off the page.
   primary:
-    'bg-saffron-500 text-cream-50 hover:bg-saffron-600 shadow-soft hover:shadow-saffron',
+    'bg-saffron-500 text-temple-900 hover:bg-saffron-400 shadow-soft hover:shadow-saffron dark:text-temple-900 dark:hover:bg-saffron-gold-dark dark:hover:shadow-saffron dark:glow-gold-soft',
+  // Ghost / outline. Light: warm temple border, gold on hover.
+  // Dark: barely-there white border (8% opacity), warm gold on
+  // hover — the "Apple-glass" pattern the brief asks for.
   ghost:
-    'border border-temple-800/25 text-temple-800 hover:border-saffron-500 hover:text-saffron-600 bg-transparent',
+    'border border-temple-800/25 text-temple-800 hover:border-saffron-500 hover:text-saffron-600 bg-transparent ' +
+    'dark:border-white/10 dark:text-fg-body dark:hover:border-saffron-400 dark:hover:text-saffron-400 dark:hover:bg-white/4',
+  // Solid dark — the deepest CTA. In light mode it's ink-900; in
+  // dark mode it's a slightly-lifted floating card surface so the
+  // button reads against the page bg.
   dark:
-    'bg-ink-900 text-cream-50 hover:bg-ink-800',
+    'bg-ink-900 text-cream-50 hover:bg-ink-800 dark:bg-ink-floating dark:text-fg-main dark:hover:bg-ink-lift',
+  // Cream — for use over the deity hero, or as a "neutral" intent.
+  // Dark mode flips to a frosted glass: rgba(255,255,255,.03) bg +
+  // 8% white border, slightly more opaque on hover.
   cream:
-    'bg-cream-100 text-temple-800 hover:bg-cream-50 border border-temple-800/10 hover:border-saffron-500',
+    'bg-cream-100 text-temple-800 hover:bg-cream-50 border border-temple-800/10 hover:border-saffron-500 ' +
+    'dark:bg-white/4 dark:text-fg-main dark:border-white/10 dark:hover:bg-white/8 dark:hover:border-saffron-400/60',
 };
 
 const sizes = {
