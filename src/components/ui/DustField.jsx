@@ -1,28 +1,40 @@
 import { useMemo } from 'react';
 
 /**
- * DustField — a layer of very subtle, slowly drifting particles
- * behind the hero deity. Tuned to feel like incense smoke and temple
- * dust caught in a shaft of light. Particles are deterministic per
- * mount (no hydration mismatch) and respect prefers-reduced-motion.
+ * DustField — the layer of slow particles behind the hero deity.
  *
- * Implementation note: we render the particles as positioned divs and
- * drive them with a single CSS keyframe via inline custom properties
- * (`--dx`, `--dy`, `--delay`, `--duration`). This stays GPU-friendly
- * (transform + opacity) and avoids per-particle Framer overhead.
+ * v0.7.3 — Living Hero pass 2: dial the motion up so the air reads
+ * as alive. The previous tuning (1–3.5 px particles, 22–52 s loops,
+ * pure white) was almost invisible against the deity photo at
+ * today's opacities. We're now:
+ *   - Larger particles (1.5–4.5 px)
+ *   - Two colour groups — warm cream for general dust, golden
+ *     saffron embers for the lit shaft over the lamp
+ *   - Wider drift range with a soft horizontal sway
+ *   - A fraction of particles twinkle (opacity loop) so the field
+ *     shimmers instead of drifting in lockstep
+ *   - Always visible (the `motion-reduce:hidden` wrapper was
+ *     killing the field on devices that report reduced motion for
+ *     accessibility — we now let the keyframes fall back to the
+ *     CSS reduce query, which scales them down rather than
+ *     removing them)
+ *
+ * Deterministic per mount (no hydration mismatch).
  */
-export function DustField({ count = 28, seed = 17 }) {
+export function DustField({ count = 44, seed = 17 }) {
   const particles = useMemo(() => makeParticles(count, seed), [count, seed]);
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 overflow-hidden motion-reduce:hidden"
+      className="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden
     >
       {particles.map((p) => (
         <span
           key={p.id}
-          className="absolute block rounded-full bg-cream-50 mix-blend-screen will-change-transform"
+          className={`absolute block rounded-full will-change-transform ${
+            p.warm ? 'bg-saffron-200' : 'bg-cream-50'
+          }`}
           style={{
             top: `${p.top}%`,
             left: `${p.left}%`,
@@ -31,14 +43,19 @@ export function DustField({ count = 28, seed = 17 }) {
             opacity: p.opacity,
             filter: p.blur ? `blur(${p.blur}px)` : undefined,
             boxShadow: p.glow
-              ? '0 0 6px 2px rgba(253, 224, 152, 0.55)'
+              ? p.warm
+                ? '0 0 10px 3px rgba(241, 185, 107, 0.65)'
+                : '0 0 8px 2px rgba(253, 224, 152, 0.55)'
               : undefined,
-            animationName: 'drift',
-            animationDuration: `${p.dur}s`,
-            animationDelay: `${p.delay}s`,
-            animationTimingFunction: 'ease-in-out',
-            animationIterationCount: 'infinite',
-            animationDirection: 'alternate',
+            mixBlendMode: p.warm ? 'screen' : 'screen',
+            animationName: p.twinkle ? 'twinkle, drift' : 'drift',
+            animationDuration: p.twinkle
+              ? `${p.twinkleDur}s, ${p.dur}s`
+              : `${p.dur}s`,
+            animationDelay: `${p.delay}s, ${p.delay}s`,
+            animationTimingFunction: 'ease-in-out, ease-in-out',
+            animationIterationCount: 'infinite, infinite',
+            animationDirection: 'alternate, alternate',
             ['--dx']: `${p.dx}vw`,
             ['--dy']: `${p.dy}vh`,
           }}
@@ -60,14 +77,35 @@ function makeParticles(count, seed) {
   return Array.from({ length: count }, (_, i) => {
     const top = rand() * 100;
     const left = rand() * 100;
-    const size = 1 + Math.round(rand() * 2.5); // 1–3.5px
-    const opacity = 0.18 + rand() * 0.45;
-    const blur = rand() > 0.7 ? 1 : 0;
+    const size = 1.5 + rand() * 3; // 1.5–4.5px
+    const opacity = 0.22 + rand() * 0.55;
+    const blur = rand() > 0.6 ? 1.5 : 0;
     const glow = rand() > 0.78;
-    const dx = (rand() - 0.5) * 8; // -4..4 vw
-    const dy = -2 - rand() * 6; // always upward-ish, -2..-8 vh
-    const dur = 22 + rand() * 30; // 22–52s
+    // A handful of particles are warm saffron "embers" — concentrated
+    // roughly in the upper-right where the lamp bloom lives.
+    const warm = rand() > 0.78 && left > 55 && top < 65;
+    // Wider drift: -7..7 vw horizontal, -3..-12 vh upward.
+    const dx = (rand() - 0.5) * 14;
+    const dy = -3 - rand() * 9;
+    const dur = 18 + rand() * 26; // 18–44s — tighter loops feel alive
     const delay = -rand() * dur; // negative = already mid-cycle
-    return { id: i, top, left, size, opacity, blur, glow, dx, dy, dur, delay };
+    const twinkle = rand() > 0.55;
+    const twinkleDur = 3 + rand() * 5; // 3–8s opacity loop
+    return {
+      id: i,
+      top,
+      left,
+      size,
+      opacity,
+      blur,
+      glow,
+      warm,
+      dx,
+      dy,
+      dur,
+      delay,
+      twinkle,
+      twinkleDur,
+    };
   });
 }

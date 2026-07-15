@@ -4,6 +4,7 @@ import { Play, MapPin, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/Button.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { DustField } from '@/components/ui/DustField.jsx';
+import { Embers } from '@/components/ui/Embers.jsx';
 import { useHeroTime } from '@/hooks/useHeroTime.js';
 import { useCurrentProgram } from '@/hooks/useNow.js';
 import { site } from '@/lib/site.js';
@@ -13,30 +14,43 @@ import { cn } from '@/lib/cn.js';
 /**
  * Home hero — the signature moment.
  *
- * v0.4 (Living Hero) rewrite. The headline goal: a single full-bleed
- * scene in which the deity feels alive, the air feels lit, and the
- * page rewards scrolling. Layered, never two-column.
+ * v0.4 (Living Hero) rewrite. v0.7.3 Living Hero pass 2 — the deity
+ * reads as alive instead of pasted onto the page, and the hero now
+ * responds to scroll with movement instead of just dimming.
  *
  * Stack (bottom → top):
  *   1. Time-of-day base gradient (warm cream → deep amber → indigo)
- *   2. Deity photo, full-bleed, mouse-parallax (3-5px max), respecting
- *      `object-position: center`
- *   3. DustField — 28 slowly drifting particles
- *   4. Two radial lights, breathing (24s loop): saffron upper-center,
- *      peacock lower-right
- *   5. Foreground mist (bottom-anchored soft fade)
- *   6. Grain overlay
- *   7. Typography: eyebrow → headline (word-rise) → subhead → CTA →
- *      live "Next darshan" tag
+ *   2. Deity photo, full-bleed, with intrinsic breath + scroll-driven
+ *      parallax (vertical lift + horizontal sway) and mouse parallax
+ *      (±6 px). Scale 1 → 1.06 across the hero, opacity holds at 1
+ *      until the user is 70% out before fading.
+ *   3. DustField — 44 drifting particles (cream + saffron embers,
+ *      ~half twinkling). Visible at all times.
+ *   4. Two ambient radial lights, breathing (24 s loop): saffron
+ *      upper-center, peacock lower-right.
+ *   5. Lamp bloom — saffron, upper-right, with a slow flicker overlay
+ *      so the diya feels lit instead of stable.
+ *   6. Embers — 14 slow rising sparks above the lamp bloom.
+ *   7. Foreground mist (drift loop + scroll-thinning) so the bottom
+ *      of the hero never sits static.
+ *   8. Grain overlay.
+ *   9. Typography: eyebrow → headline (word-rise) → subhead → CTA →
+ *      live "Next darshan" tag. Headline rises ~32 px and softens
+ *      opacity as the user scrolls, so the text feels like it's
+ *      pulling away with the page.
  *
  * Scroll-driven:
- *   - Hero scales 1 → 1.04 and fades 1 → 0.85 over the first 80vh
- *   - Headline rises a few pixels to feel "lifted away" as the user
- *     scrolls into the next section
+ *   - Deity photo lifts upward and to the side at a small angle
+ *     (parallax tilt) instead of just scaling.
+ *   - Foreground mist thins as the user scrolls so the next section
+ *     reveals underneath instead of just appearing on top.
+ *   - Headline rises a bit faster than the photo so the words read
+ *     as "lifting away" rather than glued to the image.
  *
- * Live data:
- *   - "Next darshan begins in 27 minutes" updates every minute via
- *     `useCurrentProgram`. Uses shared `programStatusAt` helpers.
+ * Reduced motion:
+ *   - Mouse parallax and all custom CSS animations are gated behind
+ *     `prefers-reduced-motion`. Scroll transforms remain but at
+ *     their full-reduce scale (translate 0 → -8 px, scale 1 → 1.02).
  */
 
 const headline = ['ISKCON', 'Youth', 'Forum'];
@@ -76,12 +90,40 @@ export function Hero() {
     target: ref,
     offset: ['start start', 'end start'],
   });
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.04]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0.85]);
-  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -28]);
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.9, 0.6]);
 
-  // Mouse parallax — bounded to ±5px so it never feels gimmicky.
+  // Deity photo: lifts upward, sways slightly left, scales a touch,
+  // and only fades once the user is most of the way past the hero.
+  const photoY = useTransform(scrollYProgress, [0, 1], [0, -72]);
+  const photoX = useTransform(scrollYProgress, [0, 1], [0, -24]);
+  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+  const photoOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.55, 0.92, 1],
+    [1, 1, 0.55, 0.2],
+  );
+  const photoRotate = useTransform(scrollYProgress, [0, 1], [0, -1.2]);
+
+  // Foreground mist thins on scroll so the next section reveals
+  // through it instead of being hidden until the hero's last frame.
+  const mistOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.7, 0.25]);
+  const mistY = useTransform(scrollYProgress, [0, 1], [0, -28]);
+
+  // Headline travels further than the photo so the words read as
+  // "lifting away" with the page, not glued to the image.
+  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -56]);
+  const headlineOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.45, 0.85, 1],
+    [1, 0.95, 0.55, 0.25],
+  );
+
+  // Saffron bloom drift on scroll — moves slightly so the lamp
+  // catches the rising scroll motion.
+  const bloomY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const bloomScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
+  // Mouse parallax — bounded to ±6 px so it never feels gimmicky.
+  // Layered on top of the scroll parallax for a hand-held feel.
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
   useEffect(() => {
     if (prefersReduced) return undefined;
@@ -97,8 +139,8 @@ export function Hero() {
       // Normalize to [-1, 1] around viewport center.
       const nx = (e.clientX / w) * 2 - 1;
       const ny = (e.clientY / h) * 2 - 1;
-      targetX = -nx * 5;
-      targetY = -ny * 4;
+      targetX = -nx * 6;
+      targetY = -ny * 5;
       if (!raf) raf = requestAnimationFrame(step);
     };
     const step = () => {
@@ -125,8 +167,8 @@ export function Hero() {
   const diff = target ? minutesUntilLabel(target.time, bdMinutes) : null;
 
   // Pre-compute the radial light colors based on lamp intensity.
-  const saffronLight = `rgba(229,162,74,${(0.32 * lampIntensity).toFixed(3)})`;
-  const peacockLight = `rgba(27,94,122,${(0.18 + 0.12 * (1 - lampIntensity)).toFixed(3)})`;
+  const saffronLight = `rgba(229,162,74,${(0.34 * lampIntensity).toFixed(3)})`;
+  const peacockLight = `rgba(27,94,122,${(0.18 + 0.14 * (1 - lampIntensity)).toFixed(3)})`;
 
   return (
     <section
@@ -144,17 +186,23 @@ export function Hero() {
         className={cn('absolute inset-0 -z-30 bg-gradient-to-t', deep)}
       />
 
-      {/* ----- Layer 2: deity photo with mouse parallax ------------- */}
+      {/* ----- Layer 2: deity photo with mouse + scroll parallax ----- */}
       <motion.div
         aria-hidden
         className="absolute inset-0 -z-20"
         style={{
-          scale: heroScale,
-          opacity: heroOpacity,
+          x: photoX,
+          y: photoY,
+          scale: photoScale,
+          opacity: photoOpacity,
+          rotate: photoRotate,
         }}
       >
         <div
-          className="absolute inset-0 will-change-transform"
+          className={cn(
+            'absolute inset-0 will-change-transform',
+            prefersReduced ? undefined : 'anim-deity-breath',
+          )}
           style={{
             transform: prefersReduced
               ? undefined
@@ -172,10 +220,10 @@ export function Hero() {
 
       {/* ----- Layer 3: dust field --------------------------------- */}
       <div className="absolute inset-0 -z-10">
-        <DustField count={28} />
+        <DustField count={44} />
       </div>
 
-      {/* ----- Layer 4: breathing radial lights -------------------- */}
+      {/* ----- Layer 4: ambient radial lights (breathing) ---------- */}
       <div className="absolute inset-0 -z-10">
         <div
           className="absolute inset-0 anim-breathe"
@@ -184,19 +232,46 @@ export function Hero() {
           <RadialLight color={saffronLight} size="62%" pos="50% 22%" />
           <RadialLight color={peacockLight} size="55%" pos="82% 88%" />
         </div>
-        {/* Lamp bloom — pinned upper-right, also breathes */}
-        <div className="anim-breathe absolute -right-20 -top-24 h-[420px] w-[420px]">
-          <RadialLight color={`rgba(245,200,120,${(0.20 * lampIntensity).toFixed(3)})`} size="80%" pos="50% 50%" />
-        </div>
+
+        {/* Lamp bloom — pinned upper-right. The base bloom drives
+            with scroll; the flicker class adds a slow warm flicker
+            so the diya feels lit instead of static. */}
+        <motion.div
+          aria-hidden
+          className="absolute -right-20 -top-24 h-[420px] w-[420px]"
+          style={{ y: bloomY, scale: bloomScale }}
+        >
+          <div
+            className={cn(
+              'absolute inset-0',
+              prefersReduced ? undefined : 'anim-lamp-flicker',
+            )}
+          >
+            <RadialLight
+              color={`rgba(245,200,120,${(0.24 * lampIntensity).toFixed(3)})`}
+              size="80%"
+              pos="50% 50%"
+            />
+          </div>
+        </motion.div>
       </div>
 
-      {/* ----- Layer 5: foreground mist (anchors the typography) --- */}
-      <div
+      {/* ----- Layer 5: ember sparks above the lamp ----------------- */}
+      <div className="absolute inset-0 -z-10">
+        <Embers count={14} />
+      </div>
+
+      {/* ----- Layer 6: foreground mist (drifts + scroll-thins) ---- */}
+      <motion.div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent"
+        className={cn(
+          'absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent',
+          prefersReduced ? undefined : 'anim-mist-drift',
+        )}
+        style={{ opacity: mistOpacity, y: mistY }}
       />
 
-      {/* ----- Layer 6: film grain --------------------------------- */}
+      {/* ----- Layer 7: film grain --------------------------------- */}
       <div aria-hidden className="absolute inset-0 -z-10 grain opacity-12 mix-blend-overlay" />
 
       {/* ----- Typography + CTA ----------------------------------- */}

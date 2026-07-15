@@ -330,11 +330,56 @@
     to   { transform: translate3d(var(--dx, 0), var(--dy, -4vh), 0); opacity: var(--drift-o-to,   0.6); }
   }
 
+  /* `twinkle` — opacity loop used by a fraction of dust particles
+     so the field shimmers instead of drifting in lockstep. Runs
+     alongside the drift animation (two animations on one element). */
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; }
+    50%      { opacity: 0.85; }
+  }
+
+  /* `ember-rise` — slow upward embers from the lamp area. Pairs
+     with a horizontal sway so embers feel lit, not falling. */
+  @keyframes ember-rise {
+    0%   { transform: translate3d(0, 0, 0) scale(0.7); opacity: 0; }
+    15%  { opacity: 0.9; }
+    100% { transform: translate3d(var(--ember-dx, 0), -28vh, 0) scale(1.1); opacity: 0; }
+  }
+
   /* `breathe` — the slow radial-light pulse behind the deity.
      A 24-second cycle that just barely changes opacity + scale. */
   @keyframes breathe {
     0%, 100% { opacity: 0.55; transform: scale(1); }
     50%      { opacity: 0.78; transform: scale(1.05); }
+  }
+
+  /* `lamp-flicker` — a subtle warm-light flicker on the saffron
+     bloom. Layered on top of `breathe` so the lamp never feels
+     sterile; the variance is small enough that it reads as a real
+     flame rather than a strobe. */
+  @keyframes lamp-flicker {
+    0%, 100% { opacity: 1;    filter: brightness(1)    saturate(1); }
+    13%      { opacity: 0.86; filter: brightness(0.92) saturate(1.08); }
+    27%      { opacity: 1.04; filter: brightness(1.06) saturate(1.02); }
+    41%      { opacity: 0.92; filter: brightness(0.95) saturate(1.05); }
+    63%      { opacity: 1.02; filter: brightness(1.03) saturate(1); }
+    81%      { opacity: 0.9;  filter: brightness(0.94) saturate(1.06); }
+  }
+
+  /* `mist-drift` — slow horizontal breath on the foreground mist
+     so the bottom edge of the hero never sits dead-still. */
+  @keyframes mist-drift {
+    0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.85; }
+    50%      { transform: translate3d(2%, -1%, 0); opacity: 1; }
+  }
+
+  /* `deity-breath` — extremely slow vertical sway on the deity
+     photo itself so the figure feels like it's gently breathing
+     rather than pasted onto the page. The translation is tiny
+     (~3px) on purpose — anything more reads as gimmicky. */
+  @keyframes deity-breath {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50%      { transform: translate3d(0, -3px, 0); }
   }
 
   /* `shimmer` — slow background-position sweep on the Sylhet
@@ -354,8 +399,24 @@
     background-size: 200% 200%;
     animation: shimmer 25s ease-in-out infinite;
   }
+  .anim-lamp-flicker {
+    animation: lamp-flicker 6.5s ease-in-out infinite;
+    will-change: opacity, filter;
+  }
+  .anim-mist-drift {
+    animation: mist-drift 18s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+  .anim-deity-breath {
+    animation: deity-breath 11s ease-in-out infinite;
+    will-change: transform;
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .anim-breathe, .anim-shimmer { animation: none !important; }
+    .anim-breathe,
+    .anim-shimmer,
+    .anim-lamp-flicker,
+    .anim-mist-drift,
+    .anim-deity-breath { animation: none !important; }
   }
 }
