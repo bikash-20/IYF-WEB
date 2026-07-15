@@ -31,7 +31,7 @@ export function CardEyebrow({ children, className }) {
   return (
     <div
       className={cn(
-        'font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft',
+        'font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft',
         className,
       )}
     >

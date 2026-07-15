@@ -63,7 +63,7 @@ export function PrabhupadaCorner() {
                 interactive
               />
               <figure className="absolute -bottom-6 -right-6 hidden max-w-[210px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift dark:border-white/10 dark:bg-ink-floating/95 md:block">
-                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                   Founder-ācārya
                 </div>
                 <div className="mt-1 font-display text-lg leading-tight text-temple-900 dark:text-fg-main">
@@ -148,7 +148,7 @@ export function PrabhupadaCorner() {
             >
               {KEY_FACTS.map((f) => (
                 <div key={f.label}>
-                  <dt className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+                  <dt className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                     {f.label}
                   </dt>
                   <dd className="mt-1 font-display text-sm leading-snug text-temple-900 dark:text-fg-main">

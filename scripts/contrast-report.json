@@ -1,0 +1,1176 @@
+{
+  "home-light": {
+    "total": 394,
+    "failures": [
+      {
+        "text": "IYF · Sylhet",
+        "tag": "a",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "group flex items-center gap-3",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.9,
+        "min": 4.5
+      },
+      {
+        "text": "IYF · Sylhet",
+        "tag": "span",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "18px",
+        "fontWeight": "500",
+        "cls": "font-display text-base font-medium tracking-tight md:text-lg transition-colors duration-700 text-cre",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.9,
+        "min": 4.5
+      },
+      {
+        "text": "About\nSchedule\nEvents\nGallery\nCourses\nVisit",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "hidden items-center gap-1 md:flex",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.9,
+        "min": 4.5
+      },
+      {
+        "text": "About",
+        "tag": "a",
+        "color": "rgba(245, 239, 227, 0.8)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "cls": "link-underline rounded-full px-4 py-2 text-sm transition-colors duration-300 text-cream-100/80 hover",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.64,
+        "min": 4.5
+      },
+      {
+        "text": "Schedule",
+        "tag": "a",
+        "color": "rgba(245, 239, 227, 0.8)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "cls": "link-underline rounded-full px-4 py-2 text-sm transition-colors duration-300 text-cream-100/80 hover",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.64,
+        "min": 4.5
+      },
+      {
+        "text": "Events",
+        "tag": "a",
+        "color": "rgba(245, 239, 227, 0.8)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "cls": "link-underline rounded-full px-4 py-2 text-sm transition-colors duration-300 text-cream-100/80 hover",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.64,
+        "min": 4.5
+      },
+      {
+        "text": "Gallery",
+        "tag": "a",
+        "color": "rgba(245, 239, 227, 0.8)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "cls": "link-underline rounded-full px-4 py-2 text-sm transition-colors duration-300 text-cream-100/80 hover",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.64,
+        "min": 4.5
+      },
+      {
+        "text": "Courses",
+        "tag": "a",
+        "color": "rgba(245, 239, 227, 0.8)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "cls": "link-underline rounded-full px-4 py-2 text-sm transition-colors duration-300 text-cream-100/80 hover",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.64,
+        "min": 4.5
+      },
+      {
+        "text": "Visit",
+        "tag": "a",
+        "color": "rgba(245, 239, 227, 0.8)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "cls": "link-underline rounded-full px-4 py-2 text-sm transition-colors duration-300 text-cream-100/80 hover",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.64,
+        "min": 4.5
+      },
+      {
+        "text": "CONTACT",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgba(0, 0, 0, 0.5)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "hidden items-center gap-2 md:flex",
+        "bgColor": "rgb(126, 124, 120)",
+        "ratio": 3.9,
+        "min": 4.5
+      },
+      {
+        "text": "Sylhet",
+        "tag": "span",
+        "color": "rgba(0, 0, 0, 0)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(21, 19, 26)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "88px",
+        "fontWeight": "400",
+        "cls": "block font-display italic anim-shimmer text-saffron-gradient",
+        "bgColor": "rgb(21, 19, 26)",
+        "ratio": 1.14,
+        "min": 3
+      },
+      {
+        "text": "VISIT THE TEMPLE",
+        "tag": "a",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(21, 19, 26)",
+          "rgb(217, 138, 43)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "cls": "group/btn relative inline-flex items-center justify-center gap-2 rounded-full font-medium uppercase ",
+        "bgColor": "rgb(217, 138, 43)",
+        "ratio": 2.58,
+        "min": 4.5
+      },
+      {
+        "text": "WATCH LIVE DARSHAN",
+        "tag": "a",
+        "color": "rgb(46, 33, 24)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(21, 19, 26)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "cls": "group/btn relative inline-flex items-center justify-center gap-2 rounded-full font-medium uppercase ",
+        "bgColor": "rgb(21, 19, 26)",
+        "ratio": 1.18,
+        "min": 4.5
+      },
+      {
+        "text": "UPCOMING FESTIVAL\nJanmashtami\n\nAppearance day of Sri Krishna\n\nA full day and nig",
+        "tag": "div",
+        "color": "rgb(46, 33, 24)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "relative grid items-center gap-8 md:grid-cols-[1fr_auto]",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 1.97,
+        "min": 4.5
+      },
+      {
+        "text": "UPCOMING FESTIVAL\nJanmashtami\n\nAppearance day of Sri Krishna\n\nA full day and nig",
+        "tag": "div",
+        "color": "rgb(46, 33, 24)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 1.97,
+        "min": 4.5
+      },
+      {
+        "text": "UPCOMING FESTIVAL",
+        "tag": "div",
+        "color": "rgb(241, 185, 107)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "11.2px",
+        "fontWeight": "400",
+        "cls": "eyebrow text-saffron-300",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 4.48,
+        "min": 4.5
+      },
+      {
+        "text": "Appearance day of Sri Krishna",
+        "tag": "p",
+        "color": "rgb(241, 185, 107)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-base italic text-saffron-300",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 4.48,
+        "min": 4.5
+      },
+      {
+        "text": "50\nDAYS\n·\n04\nHOURS\n·\n08\nMIN",
+        "tag": "div",
+        "color": "rgb(46, 33, 24)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "flex flex-wrap items-center gap-4 md:gap-5",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 1.97,
+        "min": 4.5
+      },
+      {
+        "text": "50\nDAYS",
+        "tag": "div",
+        "color": "rgb(46, 33, 24)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "flex flex-col items-center",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 1.97,
+        "min": 4.5
+      },
+      {
+        "text": "DAYS",
+        "tag": "span",
+        "color": "rgb(241, 185, 107)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "9.92px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-300",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 4.48,
+        "min": 4.5
+      },
+      {
+        "text": "04\nHOURS",
+        "tag": "div",
+        "color": "rgb(46, 33, 24)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "flex flex-col items-center",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 1.97,
+        "min": 4.5
+      },
+      {
+        "text": "HOURS",
+        "tag": "span",
+        "color": "rgb(241, 185, 107)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "9.92px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-300",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 4.48,
+        "min": 4.5
+      },
+      {
+        "text": "08\nMIN",
+        "tag": "div",
+        "color": "rgb(46, 33, 24)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "flex flex-col items-center",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 1.97,
+        "min": 4.5
+      },
+      {
+        "text": "MIN",
+        "tag": "span",
+        "color": "rgb(241, 185, 107)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)",
+          "rgba(30, 26, 36, 0.75)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "9.92px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-300",
+        "bgColor": "rgb(84, 80, 84)",
+        "ratio": 4.48,
+        "min": 4.5
+      },
+      {
+        "text": "READ THE TEMPLE'S STORY",
+        "tag": "a",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(245, 239, 227)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "12px",
+        "fontWeight": "500",
+        "cls": "group inline-flex items-center gap-2 rounded-full bg-temple-900 px-5 py-2.5 text-xs font-medium uppe",
+        "bgColor": "rgb(245, 239, 227)",
+        "ratio": 1.07,
+        "min": 4.5
+      },
+      {
+        "text": "“",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.3)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "144px",
+        "fontWeight": "400",
+        "cls": "font-display select-none pointer-events-none absolute left-1/2 -top-10 -translate-x-1/2 text-[7rem] ",
+        "bgColor": "rgb(251, 247, 240)",
+        "ratio": 1.65,
+        "min": 3
+      },
+      {
+        "text": "Chant the holy names of Krishna — Hare Krishna Hare Krishna, Krishna Krishna Har",
+        "tag": "blockquote",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "64px",
+        "fontWeight": "400",
+        "cls": "font-display text-quote italic text-cream-50 text-balance",
+        "bgColor": "rgb(251, 247, 240)",
+        "ratio": 1,
+        "min": 3
+      },
+      {
+        "text": "— SRI CHAITANYA MAHAPRABHU · ADI PURANA",
+        "tag": "div",
+        "color": "rgb(241, 185, 107)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "11.2px",
+        "fontWeight": "400",
+        "cls": "mt-10 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-300",
+        "bgColor": "rgb(251, 247, 240)",
+        "ratio": 1.65,
+        "min": 4.5
+      },
+      {
+        "text": "FOUNDER-ĀCĀRYA · ISKCON",
+        "tag": "span",
+        "color": "rgb(184, 110, 30)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(245, 239, 227)",
+          "rgba(217, 138, 43, 0.05)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-[0.65rem] uppercase tr",
+        "bgColor": "rgb(244, 234, 218)",
+        "ratio": 3.33,
+        "min": 4.5
+      },
+      {
+        "text": "DAILY DARSHAN",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.9)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:g",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.56,
+        "min": 4.5
+      },
+      {
+        "text": "LORD KRISHNA",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.06,
+        "min": 4.5
+      },
+      {
+        "text": "DAILY DARSHAN",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.9)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:g",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.56,
+        "min": 4.5
+      },
+      {
+        "text": "Inside the mandir",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.06,
+        "min": 4.5
+      },
+      {
+        "text": "DAILY DARSHAN",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.9)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:g",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.56,
+        "min": 4.5
+      },
+      {
+        "text": "Sri Sri Radha Madhava",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.06,
+        "min": 4.5
+      },
+      {
+        "text": "FESTIVAL",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.9)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:g",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.56,
+        "min": 4.5
+      },
+      {
+        "text": "Rathayatra",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.06,
+        "min": 4.5
+      },
+      {
+        "text": "VYASAPUJA",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.9)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:g",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.56,
+        "min": 4.5
+      },
+      {
+        "text": "Srila Prabhupada Vyasapuja",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.06,
+        "min": 4.5
+      },
+      {
+        "text": "VYASAPUJA",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.9)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:g",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.56,
+        "min": 4.5
+      },
+      {
+        "text": "Jayapataka Swami Vyasapuja",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.06,
+        "min": 4.5
+      },
+      {
+        "text": "FESTIVAL",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.9)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:g",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.56,
+        "min": 4.5
+      },
+      {
+        "text": "Jhulan Yatra",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.06,
+        "min": 4.5
+      },
+      {
+        "text": "MONTH",
+        "tag": "div",
+        "color": "rgba(241, 185, 107, 0.9)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "10.4px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:g",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.56,
+        "min": 4.5
+      },
+      {
+        "text": "Damodar Month",
+        "tag": "div",
+        "color": "rgb(251, 247, 240)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(247, 240, 226)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "cls": "mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-",
+        "bgColor": "rgb(247, 240, 226)",
+        "ratio": 1.06,
+        "min": 4.5
+      },
+      {
+        "text": "→",
+        "tag": "span",
+        "color": "rgb(217, 138, 43)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "row-arrow text-saffron-500",
+        "bgColor": "rgb(251, 247, 240)",
+        "ratio": 2.58,
+        "min": 4.5
+      },
+      {
+        "text": "→",
+        "tag": "span",
+        "color": "rgb(217, 138, 43)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "row-arrow text-saffron-500",
+        "bgColor": "rgb(251, 247, 240)",
+        "ratio": 2.58,
+        "min": 4.5
+      },
+      {
+        "text": "→",
+        "tag": "span",
+        "color": "rgb(217, 138, 43)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "row-arrow text-saffron-500",
+        "bgColor": "rgb(251, 247, 240)",
+        "ratio": 2.58,
+        "min": 4.5
+      },
+      {
+        "text": "→",
+        "tag": "span",
+        "color": "rgb(217, 138, 43)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "row-arrow text-saffron-500",
+        "bgColor": "rgb(251, 247, 240)",
+        "ratio": 2.58,
+        "min": 4.5
+      },
+      {
+        "text": "→",
+        "tag": "span",
+        "color": "rgb(217, 138, 43)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "row-arrow text-saffron-500",
+        "bgColor": "rgb(251, 247, 240)",
+        "ratio": 2.58,
+        "min": 4.5
+      }
+    ],
+    "warnings": [
+      {
+        "text": "BORN",
+        "tag": "dt",
+        "color": "rgb(156, 87, 18)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(245, 239, 227)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "9.92px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow",
+        "bgColor": "rgb(245, 239, 227)",
+        "ratio": 4.84,
+        "min": 4.5
+      },
+      {
+        "text": "ENTERED",
+        "tag": "dt",
+        "color": "rgb(156, 87, 18)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(245, 239, 227)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "9.92px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow",
+        "bgColor": "rgb(245, 239, 227)",
+        "ratio": 4.84,
+        "min": 4.5
+      },
+      {
+        "text": "FOUNDED",
+        "tag": "dt",
+        "color": "rgb(156, 87, 18)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(245, 239, 227)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "9.92px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow",
+        "bgColor": "rgb(245, 239, 227)",
+        "ratio": 4.84,
+        "min": 4.5
+      },
+      {
+        "text": "BOOKS",
+        "tag": "dt",
+        "color": "rgb(156, 87, 18)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(245, 239, 227)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "9.92px",
+        "fontWeight": "400",
+        "cls": "font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow",
+        "bgColor": "rgb(245, 239, 227)",
+        "ratio": 4.84,
+        "min": 4.5
+      },
+      {
+        "text": "WATCH & FOLLOW",
+        "tag": "div",
+        "color": "rgb(156, 87, 18)",
+        "layers": [
+          "rgb(251, 247, 240)",
+          "rgb(251, 247, 240)",
+          "rgb(245, 239, 227)"
+        ],
+        "bodyBg": "rgb(251, 247, 240)",
+        "fontSize": "11.2px",
+        "fontWeight": "400",
+        "cls": "eyebrow",
+        "bgColor": "rgb(245, 239, 227)",
+        "ratio": 4.84,
+        "min": 4.5
+      }
+    ]
+  },
+  "about-light": {
+    "total": 4,
+    "failures": [
+      {
+        "text": "Error response",
+        "tag": "h1",
+        "color": "rgb(0, 0, 0)",
+        "layers": [],
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "fontSize": "32px",
+        "fontWeight": "700",
+        "cls": "",
+        "bgColor": "rgb(0, 0, 0)",
+        "ratio": 1,
+        "min": 3
+      },
+      {
+        "text": "Error code: 404",
+        "tag": "p",
+        "color": "rgb(0, 0, 0)",
+        "layers": [],
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "",
+        "bgColor": "rgb(0, 0, 0)",
+        "ratio": 1,
+        "min": 4.5
+      },
+      {
+        "text": "Message: File not found.",
+        "tag": "p",
+        "color": "rgb(0, 0, 0)",
+        "layers": [],
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "",
+        "bgColor": "rgb(0, 0, 0)",
+        "ratio": 1,
+        "min": 4.5
+      },
+      {
+        "text": "Error code explanation: 404 - Nothing matches the given URI.",
+        "tag": "p",
+        "color": "rgb(0, 0, 0)",
+        "layers": [],
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "",
+        "bgColor": "rgb(0, 0, 0)",
+        "ratio": 1,
+        "min": 4.5
+      }
+    ],
+    "warnings": []
+  },
+  "schedule-light": {
+    "total": 4,
+    "failures": [
+      {
+        "text": "Error response",
+        "tag": "h1",
+        "color": "rgb(0, 0, 0)",
+        "layers": [],
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "fontSize": "32px",
+        "fontWeight": "700",
+        "cls": "",
+        "bgColor": "rgb(0, 0, 0)",
+        "ratio": 1,
+        "min": 3
+      },
+      {
+        "text": "Error code: 404",
+        "tag": "p",
+        "color": "rgb(0, 0, 0)",
+        "layers": [],
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "",
+        "bgColor": "rgb(0, 0, 0)",
+        "ratio": 1,
+        "min": 4.5
+      },
+      {
+        "text": "Message: File not found.",
+        "tag": "p",
+        "color": "rgb(0, 0, 0)",
+        "layers": [],
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "",
+        "bgColor": "rgb(0, 0, 0)",
+        "ratio": 1,
+        "min": 4.5
+      },
+      {
+        "text": "Error code explanation: 404 - Nothing matches the given URI.",
+        "tag": "p",
+        "color": "rgb(0, 0, 0)",
+        "layers": [],
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "cls": "",
+        "bgColor": "rgb(0, 0, 0)",
+        "ratio": 1,
+        "min": 4.5
+      }
+    ],
+    "warnings": []
+  },
+  "home-dark": {
+    "total": 394,
+    "failures": [
+      {
+        "text": "Sylhet",
+        "tag": "span",
+        "color": "rgba(0, 0, 0, 0)",
+        "layers": [
+          "rgb(15, 13, 19)",
+          "rgb(15, 13, 19)",
+          "rgb(21, 19, 26)"
+        ],
+        "bodyBg": "rgb(15, 13, 19)",
+        "fontSize": "88px",
+        "fontWeight": "400",
+        "cls": "block font-display italic anim-shimmer text-saffron-gradient",
+        "bgColor": "rgb(21, 19, 26)",
+        "ratio": 1.14,
+        "min": 3
+      },
+      {
+        "text": "Krishna",
+        "tag": "span",
+        "color": "rgba(0, 0, 0, 0)",
+        "layers": [
+          "rgb(15, 13, 19)",
+          "rgb(15, 13, 19)",
+          "rgb(24, 21, 29)"
+        ],
+        "bodyBg": "rgb(15, 13, 19)",
+        "fontSize": "64px",
+        "fontWeight": "400",
+        "cls": "text-saffron-gradient italic",
+        "bgColor": "rgb(24, 21, 29)",
+        "ratio": 1.16,
+        "min": 3
+      },
+      {
+        "text": "A world awakened.",
+        "tag": "span",
+        "color": "rgba(0, 0, 0, 0)",
+        "layers": [
+          "rgb(15, 13, 19)",
+          "rgb(15, 13, 19)",
+          "rgb(24, 21, 29)"
+        ],
+        "bodyBg": "rgb(15, 13, 19)",
+        "fontSize": "64px",
+        "fontWeight": "400",
+        "cls": "text-saffron-gradient italic",
+        "bgColor": "rgb(24, 21, 29)",
+        "ratio": 1.16,
+        "min": 3
+      },
+      {
+        "text": "own heart",
+        "tag": "span",
+        "color": "rgba(0, 0, 0, 0)",
+        "layers": [
+          "rgb(15, 13, 19)",
+          "rgb(15, 13, 19)",
+          "rgb(15, 13, 19)"
+        ],
+        "bodyBg": "rgb(15, 13, 19)",
+        "fontSize": "64px",
+        "fontWeight": "400",
+        "cls": "text-saffron-gradient italic",
+        "bgColor": "rgb(15, 13, 19)",
+        "ratio": 1.09,
+        "min": 3
+      },
+      {
+        "text": "“",
+        "tag": "span",
+        "color": "rgba(122, 31, 43, 0.85)",
+        "layers": [
+          "rgb(15, 13, 19)",
+          "rgb(15, 13, 19)",
+          "rgb(15, 13, 19)"
+        ],
+        "bodyBg": "rgb(15, 13, 19)",
+        "fontSize": "80px",
+        "fontWeight": "400",
+        "cls": "float-left mr-3 mt-1 font-display text-[5rem] leading-[0.85] text-maroon-600/85 select-none dark:tex",
+        "bgColor": "rgb(15, 13, 19)",
+        "ratio": 1.89,
+        "min": 3
+      }
+    ],
+    "warnings": []
+  },
+  "about-dark": {
+    "total": 4,
+    "failures": [],
+    "warnings": []
+  },
+  "schedule-dark": {
+    "total": 4,
+    "failures": [],
+    "warnings": []
+  }
+}

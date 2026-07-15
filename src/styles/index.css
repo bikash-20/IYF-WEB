@@ -168,9 +168,16 @@
 }
 
 @layer components {
-  /* Eyebrow label used in section heads */
+  /* Eyebrow label used in section heads.
+     `saffron-700` keeps contrast ≥ 4.5:1 on cream-50 at 0.7rem (~11px),
+     where `saffron-600` (#B86E1e) only lands at 3.68:1 and fails WCAG AA.
+     In dark mode we swap to saffron-400 (warm oil-lamp gold) so it
+     stays ≥ 4.5:1 against ink-floating/ink-section backgrounds. */
   .eyebrow {
-    @apply font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600;
+    @apply font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700;
+  }
+  .dark .eyebrow {
+    color: rgb(229 162 74 / var(--tw-text-opacity, 1));
   }
 
   /* Editorial breathing room. Tightened from py-24/32/40 to keep the
@@ -192,7 +199,7 @@
      scrolling. Eyebrow ~28px = one line of small-caps; title ~38px =
      one strong column; paragraph ~22px = roomy, never crowded. */
   .type-eyebrow {
-    @apply font-mono text-[0.78rem] uppercase tracking-eyebrow text-saffron-600;
+    @apply font-mono text-[0.78rem] uppercase tracking-eyebrow text-saffron-700;
   }
   .type-title {
     @apply font-display text-[2.1rem] leading-[1.06] text-temple-900 sm:text-[2.4rem];
@@ -368,6 +375,19 @@
   .cta-solid:focus-visible {
     outline: 2px solid var(--saffron-500);
     outline-offset: 3px;
+  }
+  /* Dark-mode CTA: keep saffron-500 fill but force the dark text
+     to win over the global `.dark .text-temple-800` remap (which
+     would otherwise cream-ify the label and give us a 2.38:1
+     fail on saffron-500). We use ink-900 (#15131A) here because
+     that color is *not* in the global remap, so it stays dark.
+     Contrast: ink-900 on saffron-500 ≈ 8.1:1 (AAA). */
+  .dark .cta-solid {
+    --tw-text-opacity: 1;
+    color: rgb(21 19 26 / var(--tw-text-opacity, 1));
+  }
+  .dark .cta-solid:hover {
+    background-color: rgb(241 185 107 / var(--tw-bg-opacity, 1));
   }
   .cta-solid {
     @apply motion-reduce:transition-none;

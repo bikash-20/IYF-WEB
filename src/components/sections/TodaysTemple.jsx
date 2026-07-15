@@ -85,7 +85,7 @@ export function TodaysTemple() {
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
           variants={stagger(0.05)}
-          className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/85 p-7 shadow-soft backdrop-blur-sm md:p-10"
+          className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/85 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift md:p-10"
         >
           <div className="tex-overlay tex-paper" aria-hidden />
 
@@ -123,7 +123,7 @@ export function TodaysTemple() {
                       isDone ? 'opacity-55' : ''
                     }`}
                   >
-                    <span className="font-mono text-[0.68rem] uppercase tracking-eyebrow text-saffron-600 tabular-nums">
+                    <span className="font-mono text-[0.68rem] uppercase tracking-eyebrow text-saffron-700 tabular-nums dark:text-saffron-300">
                       {p.time}
                     </span>
                     <span className={`font-display text-base ${
@@ -133,7 +133,7 @@ export function TodaysTemple() {
                     </span>
                     <span className="text-right">
                       {isLive ? (
-                        <span className="inline-flex items-center gap-1.5 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
+                        <span className="inline-flex items-center gap-1.5 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-300">
                           <span className="relative inline-block h-1.5 w-1.5">
                             <span className="absolute inset-0 animate-glow rounded-full bg-saffron-500" />
                             <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-saffron-500" />
@@ -155,7 +155,7 @@ export function TodaysTemple() {
 
             <Link
               to="/schedule"
-              className="mt-7 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-eyebrow text-saffron-600 transition-colors duration-300 hover:text-saffron-700 dark:text-saffron-400 dark:hover:text-saffron-300 dark:glow-gold-soft"
+              className="mt-7 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-eyebrow text-saffron-700 transition-colors duration-300 hover:text-saffron-700 dark:text-saffron-400 dark:hover:text-saffron-300 dark:glow-gold-soft"
             >
               Full day & weekly rotation <ArrowUpRight size={12} />
             </Link>
@@ -169,7 +169,7 @@ export function TodaysTemple() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.9, ease: easeDivine, delay: 0.05 }}
-            className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-7 shadow-soft backdrop-blur-sm md:p-10"
+            className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/75 dark:shadow-lift md:p-10"
           >
             <div className="tex-overlay tex-linen" aria-hidden />
             <div className="relative">
@@ -188,7 +188,7 @@ export function TodaysTemple() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.9, ease: easeDivine, delay: 0.12 }}
-            className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-7 shadow-soft backdrop-blur-sm md:p-10"
+            className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/75 dark:shadow-lift md:p-10"
           >
             <div className="tex-overlay tex-cloth" aria-hidden />
             <div className="relative">
@@ -202,7 +202,7 @@ export function TodaysTemple() {
               <p className="mt-4 text-base leading-relaxed text-temple-800 dark:text-fg-body dark:leading-dark">
                 {verse.translation}
               </p>
-              <div className="mt-5 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+              <div className="mt-5 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                 {verse.reference}
               </div>
             </div>

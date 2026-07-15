@@ -55,7 +55,7 @@ export function VisitPage() {
             </div>
 
             <div className="md:col-span-5">
-              <ul className="divide-y divide-temple-800/10 rounded-xl2 border border-temple-800/10 bg-cream-50">
+              <ul className="divide-y divide-temple-800/10 rounded-xl2 border border-temple-800/10 bg-cream-50 dark:divide-white/8 dark:border-white/8 dark:bg-ink-floating/85">
                 <Row icon={<Phone size={14} />} k="Phone" v={site.contacts.phoneDisplay} href={`tel:${site.contacts.phone}`} />
                 <Row icon={<MessageCircle size={14} />} k="WhatsApp" v="+880 1714-101688" href={site.contacts.whatsapp} />
                 <Row icon={<Phone size={14} />} k="Alt. Number" v={site.contacts.altPhoneDisplay} href={`tel:${site.contacts.altPhone}`} />
@@ -64,18 +64,18 @@ export function VisitPage() {
               </ul>
 
               <div className="mt-5 grid grid-cols-2 gap-3">
-                <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-5">
-                  <MapPin size={16} className="text-saffron-600" />
-                  <div className="mt-3 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+                <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-5 dark:border-white/8 dark:bg-ink-floating/85">
+                  <MapPin size={16} className="text-saffron-600 dark:text-saffron-400" />
+                  <div className="mt-3 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
                     Address
                   </div>
                   <p className="mt-1 text-sm text-temple-700/85">
                     {site.address.line1}, {site.address.line2}, {site.address.city} {site.address.postal}
                   </p>
                 </div>
-                <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-5">
-                  <Clock size={16} className="text-saffron-600" />
-                  <div className="mt-3 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+                <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-5 dark:border-white/8 dark:bg-ink-floating/85">
+                  <Clock size={16} className="text-saffron-600 dark:text-saffron-400" />
+                  <div className="mt-3 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
                     Temple hours
                   </div>
                   <p className="mt-1 text-sm text-temple-700/85">
@@ -94,7 +94,7 @@ export function VisitPage() {
 function Row({ icon, k, v, href }) {
   return (
     <li className="flex items-center justify-between gap-4 px-5 py-4">
-      <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+      <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
         {icon} {k}
       </span>
       {href ? (

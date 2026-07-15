@@ -57,7 +57,7 @@ function FestivalCard({ festival }) {
       <article className="group relative flex h-full flex-col rounded-2xl border border-temple-800/10 bg-cream-50 p-5 shadow-soft transition-all duration-500 ease-divine hover:border-saffron-500/40 hover:shadow-temple motion-reduce:transition-none dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift dark:hover:border-saffron-400/40 dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.55),0_0_30px_rgba(224,170,76,0.15)]">
         <header className="flex items-start justify-between gap-3">
           <div>
-            <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+            <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
               {bandLabel(festival)}
             </div>
             <h3 className="mt-1 font-display text-xl text-temple-800 md:text-2xl dark:text-fg-main">
@@ -72,7 +72,7 @@ function FestivalCard({ festival }) {
         </p>
 
         <footer className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-saffron-500/40 bg-saffron-500/10 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-600">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-saffron-500/40 bg-saffron-500/10 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-700">
             <UtensilsCrossed size={12} aria-hidden="true" />
             Prasadam served free
           </span>
@@ -110,7 +110,7 @@ function TimelineStrip({ festivals }) {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-temple-800/10 bg-cream-50 p-5 shadow-soft dark:border-white/8 dark:bg-ink-floating/85 dark:shadow-lift md:p-6">
-      <div className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+      <div className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
         <CalendarRange size={14} aria-hidden="true" />
         Year at a glance
       </div>
@@ -189,7 +189,7 @@ export function CalendarSection({ festivals }) {
 
       {grouped.map((band) => (
         <section key={band.id}>
-          <h2 className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+          <h2 className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
             {band.label}
           </h2>
 

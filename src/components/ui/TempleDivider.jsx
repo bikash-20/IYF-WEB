@@ -90,7 +90,7 @@ export function TempleDivider({ label, motif, className }) {
       <div className="hr-soft bg-saffron-400/80 dark:bg-saffron-400/50" />
       {motif && <Motif kind={motif} />}
       {label && (
-        <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600/80 dark:text-saffron-400/80 dark:glow-gold-soft">
+        <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700/80 dark:text-saffron-400/80 dark:glow-gold-soft">
           {label}
         </div>
       )}

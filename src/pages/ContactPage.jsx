@@ -106,7 +106,7 @@ function DirectRow({ icon: Icon, k, v, href }) {
   const isExternal = href?.startsWith('http');
   const inner = (
     <>
-      <span className="flex items-center gap-2.5 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+      <span className="flex items-center gap-2.5 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
         <Icon size={14} aria-hidden="true" /> {k}
       </span>
       <span className="flex items-center gap-2 text-sm text-temple-800">
@@ -159,7 +159,7 @@ function FormCard({ title, eyebrow, icon: Icon, children, successText }) {
           <Icon size={18} aria-hidden="true" />
         </span>
         <div>
-          <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+          <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
             {eyebrow}
           </div>
           <h3 className="mt-0.5 font-display text-2xl text-temple-800 md:text-[1.65rem]">
@@ -222,13 +222,13 @@ export function ContactPage() {
             {trust.map((t) => (
               <li
                 key={t.k}
-                className="flex items-start gap-3 rounded-xl2 border border-temple-800/10 bg-cream-50 p-5"
+                className="flex items-start gap-3 rounded-xl2 border border-temple-800/10 bg-cream-50 p-5 dark:border-white/8 dark:bg-ink-floating/80"
               >
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-peacock-500/10 text-peacock-600 ring-1 ring-peacock-500/15">
                   <t.icon size={16} aria-hidden="true" />
                 </span>
                 <div>
-                  <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+                  <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
                     {t.k}
                   </div>
                   <p className="mt-1 text-sm text-temple-700/90">{t.v}</p>
@@ -276,7 +276,7 @@ export function ContactPage() {
                         onClick={() =>
                           setGeneralState({ status: 'idle', message: '' })
                         }
-                        className="mt-4 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 underline-offset-4 hover:underline"
+                        className="mt-4 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 underline-offset-4 hover:underline"
                       >
                         Send another
                       </button>
@@ -375,7 +375,7 @@ export function ContactPage() {
                         onClick={() =>
                           setVolunteerState({ status: 'idle', message: '' })
                         }
-                        className="mt-4 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 underline-offset-4 hover:underline"
+                        className="mt-4 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 underline-offset-4 hover:underline"
                       >
                         Sign up another
                       </button>
@@ -452,7 +452,7 @@ export function ContactPage() {
       <Section variant="muted">
         <Container>
           <RevealOnScroll>
-            <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+            <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
               Direct lines
             </div>
             <h2 className="mt-3 max-w-xl font-display text-display-md text-temple-800">
@@ -462,7 +462,7 @@ export function ContactPage() {
               One of these will land in front of a human within minutes.
             </p>
           </RevealOnScroll>
-          <ul className="mt-8 max-w-2xl overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50 shadow-soft">
+          <ul className="mt-8 max-w-2xl overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50 shadow-soft dark:border-white/8 dark:bg-ink-floating/85 dark:shadow-lift">
             <DirectRow
               icon={Phone}
               k="Phone"
@@ -502,7 +502,7 @@ export function ContactPage() {
         <Container>
           <div className="grid gap-10 md:grid-cols-12">
             <RevealOnScroll className="md:col-span-4">
-              <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+              <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
                 Frequently asked
               </div>
               <h2 className="mt-3 font-display text-display-md text-temple-800">

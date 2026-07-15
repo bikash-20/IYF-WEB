@@ -67,7 +67,7 @@ export function GalleryPage() {
                   </div>
                 )}
                 {g.caption && (
-                  <span className="block bg-cream-50 px-4 py-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-temple-700/70 transition-colors duration-300 ease-divine group-hover:text-saffron-600">
+                  <span className="block bg-cream-50 px-4 py-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-temple-700/70 transition-colors duration-300 ease-divine group-hover:text-saffron-700">
                     {g.caption}
                   </span>
                 )}

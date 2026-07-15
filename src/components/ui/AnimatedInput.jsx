@@ -115,7 +115,7 @@ export function AnimatedInput({
         }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
-          'pointer-events-none absolute left-4 z-10 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 transition-colors duration-300 motion-reduce:transition-none',
+          'pointer-events-none absolute left-4 z-10 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 transition-colors duration-300 motion-reduce:transition-none',
           LeadingIcon ? 'left-11' : 'left-4',
           'top-3.5',
         )}

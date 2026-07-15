@@ -47,7 +47,7 @@ export function ScheduleTimeline() {
                 variants={fadeUpSm}
                 className="flex flex-col gap-2 md:flex-row md:items-baseline md:gap-10"
               >
-                <div className="font-mono text-xs uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft md:w-24 md:shrink-0">
+                <div className="font-mono text-xs uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft md:w-24 md:shrink-0">
                   {row.time}
                 </div>
                 <div>

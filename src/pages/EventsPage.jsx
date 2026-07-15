@@ -34,7 +34,7 @@ export function EventsPage() {
       <Section>
         <Container>
           <SectionHeading eyebrow="Upcoming" title="What's next" />
-          <ul className="divide-y divide-temple-800/10 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50">
+          <ul className="divide-y divide-temple-800/10 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50 dark:divide-white/8 dark:border-white/8 dark:bg-ink-floating/85">
             {upcomingEvents.map((ev) => {
               const d = formatDate(ev.start);
               const [day, mon] = d ? d.split(' ') : [ev.recurring?.split(' ')[1] ?? '', ''];
@@ -44,7 +44,7 @@ export function EventsPage() {
                     <span className="font-display text-2xl text-temple-800">
                       {day === 'every' ? '·' : day}
                     </span>
-                    <span className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-600">
+                    <span className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-700">
                       {ev.recurring ? ev.recurring.split(' ')[0] : mon}
                     </span>
                   </div>

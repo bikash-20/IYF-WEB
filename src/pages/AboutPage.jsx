@@ -110,8 +110,8 @@ export function AboutPage() {
           <ol className="mt-10 grid gap-6 md:grid-cols-2">
             {timeline.map((t, i) => (
               <RevealOnScroll key={t.year} delay={i * 0.05}>
-                <li className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6">
-                  <div className="font-mono text-xs uppercase tracking-eyebrow text-saffron-600">
+                <li className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
+                  <div className="font-mono text-xs uppercase tracking-eyebrow text-saffron-700">
                     {t.year}
                   </div>
                   <p className="mt-3 text-base leading-relaxed text-temple-700">{t.body}</p>

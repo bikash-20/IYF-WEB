@@ -30,7 +30,7 @@ export function CoordinatorMessage() {
             {/* Eyebrow */}
             <motion.div
               variants={fadeUp}
-              className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft"
+              className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft"
             >
               A personal letter
             </motion.div>
@@ -112,7 +112,7 @@ export function CoordinatorMessage() {
               >
                 Devarshi Srivas Dasa
               </div>
-              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                 <span>— Coordinator</span>
                 <span className="text-temple-700/40 dark:text-fg-muted/60">·</span>
                 <span className="text-temple-700/70 dark:text-fg-muted">
@@ -145,7 +145,7 @@ export function CoordinatorMessage() {
               />
               <figcaption className="mt-5 text-center font-display text-base italic text-temple-700/70 dark:text-fg-muted md:text-left">
                 &mdash; Devarshi Srivas Dasa
-                <span className="mt-0.5 block font-mono text-[0.62rem] not-italic uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+                <span className="mt-0.5 block font-mono text-[0.62rem] not-italic uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                   Coordinator, IYF Sylhet
                 </span>
               </figcaption>

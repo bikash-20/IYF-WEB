@@ -309,7 +309,7 @@ export function InstallBanner() {
                 <div className="min-w-0 flex-1">
                   {phase === 'install' ? (
                     <>
-                      <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
+                      <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700">
                         PWA · Install
                       </div>
                       <h3 className="mt-1 font-display text-lg leading-snug text-temple-900">
@@ -335,7 +335,7 @@ export function InstallBanner() {
                     </>
                   ) : (
                     <>
-                      <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
+                      <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700">
                         Installed
                       </div>
                       <h3 className="mt-1 font-display text-lg leading-snug text-temple-900">

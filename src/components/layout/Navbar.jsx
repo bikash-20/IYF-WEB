@@ -128,7 +128,7 @@ export function Navbar() {
               // shadow. In dark mode the same saffron reads as oil-lamp
               // warmth — text stays dark for contrast against the
               // bright fill.
-              'group/cta inline-flex items-center gap-2 rounded-full bg-saffron-500 px-5 py-2 text-xs font-medium uppercase tracking-eyebrow text-temple-800 shadow-soft transition-[background-color,color,box-shadow,transform] duration-300 ease-divine will-change-transform',
+              'group/cta inline-flex items-center gap-2 rounded-full bg-saffron-500 px-5 py-2 text-xs font-medium uppercase tracking-eyebrow text-temple-800 shadow-soft transition-[background-color,color,box-shadow,transform] duration-300 ease-divine will-change-transform dark:text-ink-900',
               'hover:-translate-y-0.5 hover:bg-saffron-400 hover:shadow-saffron motion-reduce:transition-none motion-reduce:hover:translate-y-0',
               isDark && 'glow-gold-soft',
             )}

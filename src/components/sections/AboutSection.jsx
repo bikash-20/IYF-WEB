@@ -100,7 +100,7 @@ export function AboutSection() {
                 interactive
               />
               <figure className="absolute -bottom-6 -left-6 hidden max-w-[180px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift dark:border-white/10 dark:bg-ink-floating/95 dark:shadow-lift md:block">
-                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                   Est.
                 </div>
                 <div className="mt-1 font-display text-2xl text-temple-900 dark:text-fg-main">

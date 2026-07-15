@@ -59,7 +59,7 @@ export function TodaysDarshan() {
                   <p className="mt-4 max-w-prose text-base leading-relaxed text-temple-700/85 dark:text-fg-body dark:leading-dark">
                     {current.note}
                   </p>
-                  <div className="mt-6 flex flex-wrap items-center gap-4 font-mono text-[0.72rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+                  <div className="mt-6 flex flex-wrap items-center gap-4 font-mono text-[0.72rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                     <span className="inline-flex items-center gap-2">
                       <Clock size={12} />
                       Began {current.time}
@@ -100,7 +100,7 @@ export function TodaysDarshan() {
               <p className="mt-2 text-sm leading-relaxed text-temple-700/80 dark:text-fg-body dark:leading-dark">
                 {next?.note}
               </p>
-              <div className="mt-5 font-mono text-xs uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+              <div className="mt-5 font-mono text-xs uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                 {next?.time}
               </div>
             </div>
@@ -109,7 +109,7 @@ export function TodaysDarshan() {
               to="/schedule"
               className="group inline-flex items-center justify-between gap-3 rounded-editorial border border-saffron-500/40 bg-saffron-500/[0.06] p-5 text-sm transition-all duration-500 hover:bg-saffron-500/[0.12]"
             >
-              <span className="font-mono text-xs uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+              <span className="font-mono text-xs uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                 See the full day
               </span>
               <Sparkles size={14} className="text-saffron-500 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-saffron-400" />

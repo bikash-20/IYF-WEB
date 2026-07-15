@@ -107,14 +107,14 @@ function ContactRow({ icon, k, v, href }) {
           rel={isExternal ? 'noopener noreferrer' : undefined}
           className="flex items-center justify-between gap-4 px-5 py-4 outline-none"
         >
-          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
             {icon} {k}
           </span>
           {content}
         </a>
       ) : (
         <div className="flex items-center justify-between gap-4 px-5 py-4">
-          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
             {icon} {k}
           </span>
           {content}

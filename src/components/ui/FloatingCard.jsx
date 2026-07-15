@@ -39,7 +39,7 @@ export function FloatingCard({
         </div>
       )}
       {eyebrow && (
-        <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+        <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
           {eyebrow}
         </div>
       )}
@@ -48,7 +48,7 @@ export function FloatingCard({
       {(to || href) && (
         <>
           <div className="mt-5 hr-soft dark:bg-fg-body/30" />
-          <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium uppercase tracking-eyebrow text-saffron-600 dark:text-saffron-400 dark:glow-gold-soft">
+          <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
             Open <ArrowUpRight size={12} className="row-arrow transition-transform duration-300 ease-divine" />
           </div>
         </>

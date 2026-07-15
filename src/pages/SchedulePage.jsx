@@ -41,7 +41,7 @@ export function SchedulePage() {
                     <div
                       className={cn(
                         'font-mono text-sm uppercase tracking-eyebrow md:w-28 md:shrink-0',
-                        isClosed ? 'text-peacock-600/80' : 'text-saffron-600',
+                        isClosed ? 'text-peacock-600/80 dark:text-peacock-400' : 'text-saffron-700 dark:text-saffron-400',
                       )}
                     >
                       {row.time}
@@ -74,8 +74,8 @@ export function SchedulePage() {
               { k: 'Public holidays', v: 'Only on rare occasions — check the events page.' },
             ].map((b) => (
               <RevealOnScroll key={b.k}>
-                <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6">
-                  <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+                <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
+                  <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
                     {b.k}
                   </div>
                   <p className="mt-2 text-sm text-temple-700/85">{b.v}</p>

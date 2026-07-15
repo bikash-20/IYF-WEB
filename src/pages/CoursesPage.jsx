@@ -36,7 +36,7 @@ export function CoursesPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {meta.map((m) => (
               <div key={m.k} className="rounded-xl2 border border-temple-800/10 bg-cream-100/60 p-5">
-                <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">{m.k}</div>
+                <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">{m.k}</div>
                 <div className="mt-1 font-display text-lg text-temple-800">{m.v}</div>
               </div>
             ))}
@@ -51,7 +51,7 @@ export function CoursesPage() {
           <ul className="grid gap-4 md:grid-cols-2">
             {smartCourse.modules.map((m, i) => (
               <RevealOnScroll as="li" key={m.letter} delay={i * 0.05}>
-                <div className="grid grid-cols-[auto_1fr] items-start gap-5 rounded-xl2 border border-temple-800/10 bg-cream-50 p-6">
+                <div className="grid grid-cols-[auto_1fr] items-start gap-5 rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full border border-saffron-500/40 font-display text-2xl text-saffron-600">
                     {m.letter}
                   </div>
