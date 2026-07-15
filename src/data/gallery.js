@@ -7,6 +7,7 @@
 export const galleryItems = [
   { id: 'little-1', kind: 'image', src: '/little-1.jpg', alt: 'Krishna deity in dramatic lamplight', caption: 'Sri Sri Radh Madhava', aspect: '4/5' },
   { id: 'little-2', kind: 'image', src: '/little-2.jpg', alt: 'Soft daylight at the mandir', caption: 'Inside the temple', aspect: '4/5' },
+  { id: 'radha-madhav', kind: 'image', src: '/radha madhav.jpg', alt: 'Sri Sri Radha Madhava deities on the altar', caption: 'Sri Sri Radha Madhava', aspect: '4/5' },
   { id: 'g3', kind: 'placeholder', label: 'Janmashtami 2025', aspect: '4/5' },
   { id: 'g4', kind: 'placeholder', label: 'Youth Kirtan Night', aspect: '3/4' },
   { id: 'g5', kind: 'placeholder', label: 'Krishna Leela Mela — stage', aspect: '4/3' },

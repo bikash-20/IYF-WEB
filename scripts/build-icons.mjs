@@ -137,9 +137,27 @@ async function makeSmallIcon(size) {
     .toBuffer();
 }
 
+// Apple touch icon — no wordmark (iOS adds its own corner radius and
+// the icon is small enough that text would be illegible). The Jagannath
+// eye sits dead-centre inside the icon's safe area.
 async function makeAppleIcon() {
   const size = 180;
-  const svg = wordmarkSVG(size);
+  const innerW = size;
+  const eyeR = Math.round(size * 0.38);
+  const eyeCY = Math.round(size * 0.50);
+  const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="${innerW}" height="${innerW}" viewBox="0 0 ${innerW} ${innerW}">
+  <rect width="100%" height="100%" fill="${CREAM_50}"/>
+  <circle cx="${innerW / 2}" cy="${eyeCY}" r="${eyeR + Math.round(size * 0.03)}"
+          fill="none" stroke="${SAFFRON}" stroke-width="${Math.max(2, Math.round(size * 0.012))}" opacity="0.55"/>
+  <defs>
+    <clipPath id="eyec">
+      <circle cx="${innerW / 2}" cy="${eyeCY}" r="${eyeR}"/>
+    </clipPath>
+  </defs>
+  <image href="file://${SOURCE}" x="${innerW / 2 - eyeR}" y="${eyeCY - eyeR}"
+         width="${eyeR * 2}" height="${eyeR * 2}" preserveAspectRatio="xMidYMid slice" clip-path="url(#eyec)"/>
+</svg>`.trim();
   return sharp(Buffer.from(svg))
     .png()
     .toBuffer();
@@ -227,16 +245,19 @@ async function main() {
   const maskable = await makeMaskable();
   await writeFile(join(PUBLIC, 'pwa-maskable-512.png'), maskable);
 
-  // 6. SVG favicon (modern browsers, scales crisply)
+  // 6. SVG favicon (modern browsers, scales crisply). Eye is dead-centre
+  //    inside a saffron ring; the wordmark sits below. Browsers that
+  //    rasterise this (most do) will see the same composition as the
+  //    small PNG favicons.
   const svgFav = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#FBF7F0"/>
-  <circle cx="32" cy="28" r="18" fill="none" stroke="#D98A2B" stroke-width="2"/>
+  <circle cx="32" cy="32" r="20" fill="none" stroke="#D98A2B" stroke-width="2"/>
   <defs>
-    <clipPath id="c"><circle cx="32" cy="28" r="16"/></clipPath>
+    <clipPath id="c"><circle cx="32" cy="32" r="18"/></clipPath>
   </defs>
-  <image href="jagannath%20eye.jpeg" x="16" y="12" width="32" height="32" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>
-  <text x="50%" y="56" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="9" fill="#15131A" letter-spacing="0.5">IYF SYLHET</text>
+  <image href="jagannath%20eye.jpeg" x="14" y="14" width="36" height="36" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>
+  <text x="50%" y="58" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="7" fill="#15131A" letter-spacing="0.5">IYF SYLHET</text>
 </svg>`;
   await writeFile(join(PUBLIC, 'favicon.svg'), svgFav);
 
