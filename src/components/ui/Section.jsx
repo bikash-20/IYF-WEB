@@ -19,12 +19,18 @@ import { cn } from '@/lib/cn.js';
 // override the body's .dark bg-ink-page in dark mode and leave every
 // section stuck on cream paper. The pair below keeps the editorial
 // rhythm intact: light = morning darshan, dark = evening arati.
+//
+// v0.8.1 fix: every non-deep variant now uses `dark:bg-ink-page` so the
+// dark background is reliably emitted by Tailwind (no dependency on
+// less-frequently-referenced tokens like `ink-section` / `ink-charcoal`
+// that could be tree-shaken out of the CSS bundle). The body already
+// paints `bg-ink-page`, so sections blend seamlessly with the page.
 const variants = {
   default: 'bg-cream-50 text-temple-800 dark:bg-ink-page dark:text-fg-main',
-  warm: 'bg-beige-50 text-temple-800 dark:bg-ink-section dark:text-fg-main',
-  soft: 'bg-cream-100 text-temple-800 dark:bg-ink-charcoal dark:text-fg-main',
+  warm: 'bg-beige-50 text-temple-800 dark:bg-ink-page dark:text-fg-main',
+  soft: 'bg-cream-100 text-temple-800 dark:bg-ink-page dark:text-fg-main',
   pure: 'bg-pure-cream text-temple-800 dark:bg-ink-page dark:text-fg-main',
-  haze: 'bg-cream-100 text-temple-800 dark:bg-ink-charcoal dark:text-fg-main',
+  haze: 'bg-cream-100 text-temple-800 dark:bg-ink-page dark:text-fg-main',
   deep: 'bg-ink-900 text-cream-50 dark:bg-ink-deep dark:text-fg-main',
   transparent: 'bg-transparent',
 };
