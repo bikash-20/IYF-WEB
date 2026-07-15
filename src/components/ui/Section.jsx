@@ -14,13 +14,18 @@ import { cn } from '@/lib/cn.js';
  *   "tight"   — used between Hero and the first interior section ("Arrival")
  *   "tightest"— minimum spacing
  */
+// Each variant maps a light mood to its dark counterpart. Without the
+// dark: pair, a section hardcoded bg-cream-50 (warm cream) would
+// override the body's .dark bg-ink-page in dark mode and leave every
+// section stuck on cream paper. The pair below keeps the editorial
+// rhythm intact: light = morning darshan, dark = evening arati.
 const variants = {
-  default: 'bg-cream-50 text-temple-800',
-  warm: 'bg-beige-50 text-temple-800',
-  soft: 'bg-cream-100 text-temple-800',
-  pure: 'bg-pure-cream text-temple-800',
-  haze: 'bg-cream-100 text-temple-800',
-  deep: 'bg-ink-900 text-cream-50',
+  default: 'bg-cream-50 text-temple-800 dark:bg-ink-page dark:text-fg-main',
+  warm: 'bg-beige-50 text-temple-800 dark:bg-ink-section dark:text-fg-main',
+  soft: 'bg-cream-100 text-temple-800 dark:bg-ink-charcoal dark:text-fg-main',
+  pure: 'bg-pure-cream text-temple-800 dark:bg-ink-page dark:text-fg-main',
+  haze: 'bg-cream-100 text-temple-800 dark:bg-ink-charcoal dark:text-fg-main',
+  deep: 'bg-ink-900 text-cream-50 dark:bg-ink-deep dark:text-fg-main',
   transparent: 'bg-transparent',
 };
 

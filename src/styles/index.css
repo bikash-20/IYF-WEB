@@ -20,6 +20,76 @@
     color-scheme: dark;
   }
 
+  /* ----- Dark-mode text remap -------------------------------------
+   * The codebase still has many `text-temple-500/600/700/800/85`
+   * usages from the light-only era. Adding `dark:text-fg-*` to
+   * every one of them would mean 80+ edits and ongoing maintenance
+   * pressure. Instead, in dark mode we globally remap those classes
+   * to the warm cream tones so the entire site flips consistently.
+   * This is purely a *swap*, not a redesign — the components keep
+   * the same opacity ratios (85 / 70 / 60) so contrast hierarchy
+   * is preserved. Saffron + maroon accents stay brand-correct.
+   * --------------------------------------------------------------- */
+  .dark {
+    --tw-text-opacity: 1;
+  }
+  .dark .text-temple-800,
+  .dark .text-temple-900 {
+    color: rgb(242 238 231 / var(--tw-text-opacity, 1));
+  }
+  .dark .text-temple-700 {
+    color: rgb(228 222 211 / var(--tw-text-opacity, 1));
+  }
+  .dark .text-temple-600 {
+    color: rgb(199 191 177 / var(--tw-text-opacity, 1));
+  }
+  .dark .text-temple-500 {
+    color: rgb(170 162 155 / var(--tw-text-opacity, 1));
+  }
+  .dark .text-temple-400 {
+    color: rgb(199 170 130 / var(--tw-text-opacity, 1));
+  }
+  /* Saffron 500/600 in dark = oil-lamp warmth (saffron-400),
+     saffron-300 stays luminous. */
+  .dark .text-saffron-500,
+  .dark .text-saffron-600 {
+    color: rgb(229 162 74 / var(--tw-text-opacity, 1));
+  }
+  /* Maroon drop-quote in dark = muted plum, never fully bright. */
+  .dark .text-maroon-600,
+  .dark .text-maroon-700 {
+    color: rgb(184 130 145 / var(--tw-text-opacity, 1));
+  }
+  /* The temple color is the brand voice; opacity suffixes (.text-temple-800\/85
+     etc.) need to also flip. We address them by re-declaring the
+     exact rgba tokens so any opacity modifier resolves correctly. */
+  .dark .text-temple-800\/85 { color: rgba(242, 238, 231, 0.85); }
+  .dark .text-temple-800\/80 { color: rgba(242, 238, 231, 0.80); }
+  .dark .text-temple-800\/75 { color: rgba(242, 238, 231, 0.75); }
+  .dark .text-temple-800\/70 { color: rgba(242, 238, 231, 0.70); }
+  .dark .text-temple-800\/60 { color: rgba(242, 238, 231, 0.60); }
+  .dark .text-temple-700\/85 { color: rgba(228, 222, 211, 0.85); }
+  .dark .text-temple-700\/80 { color: rgba(228, 222, 211, 0.80); }
+  .dark .text-temple-700\/70 { color: rgba(228, 222, 211, 0.70); }
+  .dark .text-temple-700\/60 { color: rgba(228, 222, 211, 0.60); }
+  .dark .text-temple-700\/50 { color: rgba(228, 222, 211, 0.50); }
+  .dark .text-temple-600\/85 { color: rgba(199, 191, 177, 0.85); }
+  .dark .text-temple-600\/80 { color: rgba(199, 191, 177, 0.80); }
+  .dark .text-temple-600\/70 { color: rgba(199, 191, 177, 0.70); }
+  .dark .text-temple-600\/60 { color: rgba(199, 191, 177, 0.60); }
+  .dark .text-temple-500\/70 { color: rgba(170, 162, 155, 0.70); }
+  .dark .text-temple-500\/60 { color: rgba(170, 162, 155, 0.60); }
+  .dark .text-cream-50,
+  .dark .text-cream-100,
+  .dark .text-cream-200,
+  .dark .text-cream-300 {
+    color: rgb(242 238 231 / var(--tw-text-opacity, 1));
+  }
+  .dark .text-cream-100\/80 { color: rgba(242, 238, 231, 0.80); }
+  .dark .text-cream-100\/85 { color: rgba(242, 238, 231, 0.85); }
+  .dark .text-cream-50\/70  { color: rgba(242, 238, 231, 0.70); }
+  .dark .text-cream-50\/60  { color: rgba(242, 238, 231, 0.60); }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
