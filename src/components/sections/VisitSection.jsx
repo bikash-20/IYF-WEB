@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
@@ -36,19 +37,22 @@ export function VisitSection() {
                   </span>
                 </div>
               </div>
-              <a
+              <motion.a
                 href="https://maps.google.com/?q=Jugaltila+Kajalshah+Sylhet"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-4 right-4 rounded-full border border-temple-800/20 bg-cream-50/80 px-4 py-1.5 text-xs uppercase tracking-eyebrow text-temple-800 backdrop-blur hover:border-saffron-500 hover:text-saffron-600"
+                whileHover={{ y: -2, scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 360, damping: 26 }}
+                className="absolute bottom-4 right-4 rounded-full border border-temple-800/20 bg-cream-50/80 px-4 py-1.5 text-xs uppercase tracking-eyebrow text-temple-800 backdrop-blur transition-colors duration-300 hover:border-saffron-500 hover:text-saffron-600 motion-reduce:transition-none"
               >
-                Open in Maps
-              </a>
+                Open in Maps →
+              </motion.a>
             </div>
           </RevealOnScroll>
 
           <RevealOnScroll className="md:col-span-5" delay={0.1}>
-            <ul className="divide-y divide-temple-800/10 rounded-xl2 border border-temple-800/10 bg-cream-50">
+            <ul className="divide-y divide-temple-800/10 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50">
               <ContactRow icon={<Phone size={14} />} k="Phone" v={site.contacts.phoneDisplay} href={`tel:${site.contacts.phone}`} />
               <ContactRow
                 icon={<MessageCircle size={14} />}
@@ -83,17 +87,45 @@ export function VisitSection() {
 }
 
 function ContactRow({ icon, k, v, href }) {
-  return (
-    <li className="flex items-center justify-between gap-4 px-5 py-4">
-      <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
-        {icon} {k}
+  const isExternal = href?.startsWith('http');
+  const content = (
+    <motion.span
+      className="flex items-center gap-2"
+      whileHover={{ x: 3 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+    >
+      <span className="transition-colors duration-300 group-hover/row:text-saffron-600">
+        {v}
       </span>
+      <span
+        aria-hidden="true"
+        className="text-saffron-500 transition-transform duration-300 group-hover/row:translate-x-1 motion-reduce:transition-none"
+      >
+        →
+      </span>
+    </motion.span>
+  );
+  return (
+    <li className="group/row border-b border-temple-800/10 transition-colors duration-300 last:border-0 hover:bg-cream-100/60 motion-reduce:transition-none">
       {href ? (
-        <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="text-sm text-temple-800 hover:text-saffron-600">
-          {v}
+        <a
+          href={href}
+          target={isExternal ? '_blank' : undefined}
+          rel={isExternal ? 'noopener noreferrer' : undefined}
+          className="flex items-center justify-between gap-4 px-5 py-4 outline-none"
+        >
+          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+            {icon} {k}
+          </span>
+          {content}
         </a>
       ) : (
-        <span className="text-sm text-temple-800">{v}</span>
+        <div className="flex items-center justify-between gap-4 px-5 py-4">
+          <span className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
+            {icon} {k}
+          </span>
+          {content}
+        </div>
       )}
     </li>
   );
