@@ -2,10 +2,17 @@ import { useEffect, useRef } from 'react';
 import { site } from '@/lib/site.js';
 
 /**
- * The mantra ticker is a single, intentionally-slow strip that sits
- * below the navbar. It reads as a continuous rhythm — never a banner.
- * The actual duplication happens once via `aria-hidden`, not in JS,
- * so the announcement list stays clean for screen readers.
+ * The mantra ticker — v0.7.2: raw floating inscription.
+ *
+ * No box, no background fill, no border. The mantra text floats
+ * directly on top of whatever sits beneath (hero photo on home,
+ * cream sections on other pages). The visual weight comes from
+ * generous vertical space + reduced opacity (~60%) so the words
+ * read as ambient engraving rather than UI chrome.
+ *
+ * Two passes via `aria-hidden` keep the announcement clean for
+ * screen readers and produce a seamless infinite loop without any
+ * JS-side duplication.
  */
 const mantra = [
   'Hare Kṛṣṇa Hare Kṛṣṇa',
@@ -33,22 +40,29 @@ export function Ticker() {
 
   return (
     <div
-      className="border-y border-white/5 bg-ink-900/95"
+      className="relative bg-transparent"
       role="region"
       aria-label={`${site.name} mantra`}
     >
-      <div className="overflow-hidden">
+      {/* Single hairline below the inscription so it has an anchor
+         when it floats over very dark sections of the hero. 1px,
+         no fill, ~8% white. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/[0.08]"
+      />
+      <div className="overflow-hidden py-7 md:py-8">
         <div
           ref={trackRef}
-          className="flex w-max animate-ticker gap-12 whitespace-nowrap py-2.5 font-mono text-[0.78rem] uppercase tracking-eyebrow text-saffron-400"
+          className="flex w-max animate-ticker gap-16 whitespace-nowrap font-mono text-[0.72rem] uppercase tracking-[0.32em]"
         >
           {/* Two passes for a seamless loop. */}
           {[0, 1].map((pass) => (
-            <div key={pass} className="flex shrink-0 gap-12" aria-hidden={pass === 1}>
+            <div key={pass} className="flex shrink-0 gap-16" aria-hidden={pass === 1}>
               {mantra.map((line, i) => (
                 <span
                   key={`${pass}-${i}`}
-                  className={i % 2 === 0 ? 'text-saffron-400' : 'text-cream-100/85'}
+                  className={i % 2 === 0 ? 'text-saffron-400/70' : 'text-cream-100/65'}
                 >
                   {line}
                 </span>
