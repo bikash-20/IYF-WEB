@@ -5,6 +5,6 @@
   <defs>
     <clipPath id="c"><circle cx="32" cy="32" r="18"/></clipPath>
   </defs>
-  <image href="jagannath%20eye.jpeg" x="14" y="14" width="36" height="36" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>
+  <image href="jagannath-eye.jpeg" x="14" y="14" width="36" height="36" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>
   <text x="50%" y="58" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="7" fill="#15131A" letter-spacing="0.5">IYF SYLHET</text>
 </svg>

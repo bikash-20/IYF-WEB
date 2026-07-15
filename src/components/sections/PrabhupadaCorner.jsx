@@ -56,7 +56,7 @@ export function PrabhupadaCorner() {
                 className="!absolute -left-10 -top-10 hidden md:block"
               />
               <EditorialImage
-                src="/srila%20prabhupada.jpg"
+                src="/srila-prabhupada.jpg"
                 alt="His Divine Grace A. C. Bhaktivedanta Swami Prabhupāda, founder-ācārya of ISKCON"
                 aspect="4/5"
                 caption="1 September 1896 — 14 November 1977"

@@ -1,7 +1,7 @@
 // scripts/build-icons.mjs
 //
 // Generates every icon we need for the PWA + favicons from a single
-// source: public/jagannath eye.jpeg. We output:
+// source: public/jagannath-eye.jpeg. We output:
 //
 //   public/favicon.ico             — 32x32, 16x16 multi-size
 //   public/favicon-32.png          — 32x32 PNG (modern browsers)
@@ -23,7 +23,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 const PUBLIC = join(ROOT, 'public');
 
-const SOURCE = join(PUBLIC, 'jagannath eye.jpeg');
+const SOURCE = join(PUBLIC, 'jagannath-eye.jpeg');
 
 // Saffron + cream palette — mirrors tailwind.config.js.
 const SAFFRON = '#D98A2B';
@@ -256,7 +256,7 @@ async function main() {
   <defs>
     <clipPath id="c"><circle cx="32" cy="32" r="18"/></clipPath>
   </defs>
-  <image href="jagannath%20eye.jpeg" x="14" y="14" width="36" height="36" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>
+  <image href="jagannath-eye.jpeg" x="14" y="14" width="36" height="36" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>
   <text x="50%" y="58" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="7" fill="#15131A" letter-spacing="0.5">IYF SYLHET</text>
 </svg>`;
   await writeFile(join(PUBLIC, 'favicon.svg'), svgFav);

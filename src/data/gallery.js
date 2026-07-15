@@ -1,8 +1,8 @@
 /**
  * Gallery items. Real temple photos sit in the first three slots:
- *   - `little-1.jpg`     — dramatic deity shot (Krishna lamplight)
- *   - `little-2.jpg`     — soft daylight at the mandir
- *   - `radha madhav.jpg` — Sri Sri Radha Madhava on the altar
+ *   - `little-1.jpg`        — dramatic deity shot (Krishna lamplight)
+ *   - `little-2.jpg`        — soft daylight at the mandir
+ *   - `radha-madhav.jpg`    — Sri Sri Radha Madhava on the altar
  *
  * Each annual festival has its own masonry tile below — these remain
  * placeholders until real photography is provided (see docs/PHOTO_BRIEF.md).
@@ -10,7 +10,7 @@
 export const galleryItems = [
   { id: 'little-1', kind: 'image', src: '/little-1.jpg', alt: 'Lord Krishna in dramatic lamplight', caption: 'LORD KRISHNA', aspect: '4/5', tag: 'Daily Darshan' },
   { id: 'little-2', kind: 'image', src: '/little-2.jpg', alt: 'Soft daylight at the mandir', caption: 'Inside the mandir', aspect: '4/5', tag: 'Daily Darshan' },
-  { id: 'radha-madhav', kind: 'image', src: '/radha madhav.jpg', alt: 'Sri Sri Radha Madhava deities on the altar', caption: 'Sri Sri Radha Madhava', aspect: '4/5', tag: 'Daily Darshan' },
+  { id: 'radha-madhav', kind: 'image', src: '/radha-madhav.jpg', alt: 'Sri Sri Radha Madhava deities on the altar', caption: 'Sri Sri Radha Madhava', aspect: '4/5', tag: 'Daily Darshan' },
   { id: 'rathayatra',     kind: 'placeholder', label: 'Rathayatra',            aspect: '4/5', tag: 'Festival' },
   { id: 'prabhupada',     kind: 'placeholder', label: 'Srila Prabhupada Vyasapuja', aspect: '3/4', tag: 'Vyasapuja' },
   { id: 'jayapataka',     kind: 'placeholder', label: 'Jayapataka Swami Vyasapuja', aspect: '4/5', tag: 'Vyasapuja' },

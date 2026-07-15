@@ -6,7 +6,10 @@
   "installCommand": "npm install",
   "devCommand": "npm run dev",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/((?!sw\\.js|manifest\\.webmanifest|favicon\\.ico|favicon\\.svg|favicon-16\\.png|favicon-32\\.png|apple-touch-icon\\.png|pwa-192\\.png|pwa-512\\.png|pwa-maskable-512\\.png|.*\\.(?:jpg|jpeg|png|gif|webp|svg|ico|webmanifest|js|css|woff2?|ttf|otf)).*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {

@@ -138,7 +138,7 @@ export function CoordinatorMessage() {
                 className="!absolute -right-12 -top-12 hidden md:block"
               />
               <EditorialImage
-                src="/Devarshi%20Srivas%20Dasa.jpg"
+                src="/devarshi-srivas-dasa.jpg"
                 alt="Devarshi Srivas Dasa, Coordinator of ISKCON Youth Forum Sylhet"
                 aspect="4/5"
                 interactive
