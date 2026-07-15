@@ -74,6 +74,7 @@ export default {
         sans: ['"Work Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
         serifBn: ['"Tiro Bangla"', 'Noto Serif Bengali', 'Fraunces', 'serif'],
+        handwriting: ['"Pinyon Script"', '"Allura"', '"Dancing Script"', 'cursive'],
       },
       fontSize: {
         'display-xl': ['clamp(3.25rem, 7vw, 5.5rem)', { lineHeight: '0.95', letterSpacing: '-0.025em' }],
