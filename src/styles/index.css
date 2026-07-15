@@ -111,11 +111,13 @@
     border-bottom: 1px solid rgba(46, 33, 24, 0.08);
   }
 
-  /* Dark glass — used when navbar is over the hero (the hero is dark) */
+  /* Dark glass — used when navbar is over the hero (the hero is dark)
+     v0.7: increased blur (24px) + slightly more transparent so the
+     hero image shows through and the navbar never reads as a band. */
   .glass-deep {
     background: var(--glass-bg-deep);
-    -webkit-backdrop-filter: saturate(180%) blur(18px);
-            backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+            backdrop-filter: saturate(180%) blur(24px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--cream-50);
   }
@@ -123,6 +125,99 @@
   /* Editorial page container — narrower than the standard container */
   .editorial {
     @apply mx-auto w-full max-w-editorial px-6;
+  }
+
+  /* ---- v0.7 global hover system ----------------------------------
+   * One set of classes so every CTA across the site feels the same.
+   * Token-driven (uses --accent / --accent-soft), respects reduced
+   * motion, and degrades gracefully on touch (only :hover; :active
+   * mirrors the final state).
+   * --------------------------------------------------------------- */
+
+  /* Row tint — list rows (phone / whatsapp / email / messenger)
+     get a warm saffron wash when hovered, and the trailing arrow
+     nudges right by 4px. Pair with .row-arrow on the icon. */
+  .row-tint {
+    @apply transition-colors duration-300 ease-divine;
+  }
+  .row-tint:hover {
+    background-color: color-mix(in srgb, var(--accent) 6%, transparent);
+  }
+  .row-arrow {
+    @apply transition-transform duration-300 ease-divine;
+  }
+  .group\/row:hover .row-arrow,
+  .row-tint:hover .row-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Outline/ghost CTA — fills with accent-soft on hover, border
+     brightens, text goes saffron. Keeps dark text for contrast. */
+  .cta-ghost {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full border border-temple-800/25 bg-transparent px-5 py-2.5 text-sm font-medium uppercase tracking-eyebrow text-temple-800 transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-divine;
+  }
+  .cta-ghost:hover {
+    background-color: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--temple-800);
+  }
+  .cta-ghost:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* Solid CTA — saffron fill, lifts 2px, saffron shadow on hover.
+     Used by the navbar Contact pill and any other primary action. */
+  .cta-solid {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-saffron-500 px-5 py-2 text-xs font-medium uppercase tracking-eyebrow text-temple-800 shadow-soft transition-[background-color,color,box-shadow,transform] duration-300 ease-divine will-change-transform;
+  }
+  .cta-solid:hover {
+    transform: translateY(-2px);
+    background-color: var(--saffron-400);
+    box-shadow: var(--shadow-saffron);
+  }
+  .cta-solid:focus-visible {
+    outline: 2px solid var(--saffron-500);
+    outline-offset: 3px;
+  }
+  .cta-solid {
+    @apply motion-reduce:transition-none;
+  }
+  .cta-solid:hover {
+    @apply motion-reduce:translate-y-0;
+  }
+
+  /* Lift card — for plain cards without our HoverCard/FloatingCard
+     primitives. 4px lift + saffron shadow. */
+  .lift-card {
+    @apply transition-[transform,box-shadow,border-color] duration-500 ease-divine;
+  }
+  .lift-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Underline-in nav link — width 0 → 100% from the left. Used on
+     nav items and any inline link where we want an animated
+     underline on hover rather than a color snap. */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 400ms var(--ease-divine);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
   }
 }
 

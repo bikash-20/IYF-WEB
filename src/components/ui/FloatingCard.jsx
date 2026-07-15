@@ -49,7 +49,7 @@ export function FloatingCard({
         <>
           <div className="mt-5 hr-soft" />
           <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium uppercase tracking-eyebrow text-saffron-600">
-            Open <ArrowUpRight size={12} className="transition-transform duration-300 ease-divine group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            Open <ArrowUpRight size={12} className="row-arrow transition-transform duration-300 ease-divine" />
           </div>
         </>
       )}

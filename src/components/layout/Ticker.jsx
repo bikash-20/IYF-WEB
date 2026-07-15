@@ -33,14 +33,14 @@ export function Ticker() {
 
   return (
     <div
-      className="border-y border-temple-800/10 bg-cream-100/60"
+      className="border-y border-white/5 bg-ink-900/95"
       role="region"
       aria-label={`${site.name} mantra`}
     >
       <div className="overflow-hidden">
         <div
           ref={trackRef}
-          className="flex w-max animate-ticker gap-12 whitespace-nowrap py-2.5 font-mono text-[0.78rem] uppercase tracking-eyebrow text-temple-700"
+          className="flex w-max animate-ticker gap-12 whitespace-nowrap py-2.5 font-mono text-[0.78rem] uppercase tracking-eyebrow text-saffron-400"
         >
           {/* Two passes for a seamless loop. */}
           {[0, 1].map((pass) => (
@@ -48,7 +48,7 @@ export function Ticker() {
               {mantra.map((line, i) => (
                 <span
                   key={`${pass}-${i}`}
-                  className={i % 2 === 0 ? 'text-saffron-600' : 'text-temple-700'}
+                  className={i % 2 === 0 ? 'text-saffron-400' : 'text-cream-100/85'}
                 >
                   {line}
                 </span>

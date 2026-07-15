@@ -109,33 +109,26 @@ function DirectRow({ icon: Icon, k, v, href }) {
       <span className="flex items-center gap-2.5 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
         <Icon size={14} aria-hidden="true" /> {k}
       </span>
-      <motion.span
-        className="flex items-center gap-2 text-sm text-temple-800"
-        whileHover={{ x: 3 }}
-        transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-      >
-        <span className="group-hover/row:text-saffron-600 transition-colors duration-300 ease-divine">
+      <span className="flex items-center gap-2 text-sm text-temple-800">
+        <span className="transition-colors duration-300 ease-divine group-hover/row:text-saffron-700">
           {v}
         </span>
-        <span
-          aria-hidden="true"
-          className="text-saffron-500 transition-transform duration-300 ease-divine group-hover/row:translate-x-1 motion-reduce:transition-none"
-        >
+        <span aria-hidden="true" className="row-arrow text-saffron-500">
           →
         </span>
-      </motion.span>
+      </span>
     </>
   );
 
   if (!href) {
     return (
-      <li className="group/row flex items-center justify-between gap-4 border-b border-temple-800/10 px-5 py-4 last:border-0">
+      <li className="group/row row-tint flex items-center justify-between gap-4 border-b border-temple-800/10 px-5 py-4 last:border-0">
         {inner}
       </li>
     );
   }
   return (
-    <li className="group/row border-b border-temple-800/10 last:border-0 transition-colors duration-300 hover:bg-cream-50 motion-reduce:transition-none">
+    <li className="group/row row-tint border-b border-temple-800/10 last:border-0">
       <a
         href={href}
         target={isExternal ? '_blank' : undefined}

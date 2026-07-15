@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Youtube, Facebook, MessageCircle } from 'lucide-react';
 import { site } from '@/lib/site.js';
 import { easeDivine } from '@/lib/motion.js';
+import { MadeByBikash } from '@/components/ui/MadeByBikash.jsx';
 
 const groups = [
   {
@@ -165,7 +166,7 @@ export function Footer() {
           className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-cream-100/10 pt-6 text-xs text-cream-100/60 md:flex-row md:items-center"
         >
           <p>Hare Krishna 🙏 — {site.name}</p>
-          <p className="font-mono uppercase tracking-eyebrow">UI concept · v0.6</p>
+          <MadeByBikash />
         </motion.div>
       </div>
     </motion.footer>

@@ -64,8 +64,19 @@
   /* Glass tokens — for the navbar over content */
   --glass-bg: rgba(255, 252, 245, 0.72);
   --glass-bg-tinted: rgba(255, 252, 245, 0.86);
-  --glass-bg-deep: rgba(21, 19, 26, 0.55);
+  /* v0.7: deeper, more transparent — blends into the hero instead of
+     reading as a separate olive-gray band. */
+  --glass-bg-deep: rgba(10, 8, 14, 0.46);
   --glass-border: rgba(255, 255, 255, 0.4);
+
+  /* Mantra ticker — dark, runs across every page beneath the nav.
+     Reads as part of the dark hero rhythm on home, then carries the
+     same dark warmth into every other page so there's never a cream
+     break right under the navbar. */
+  --ticker-bg: var(--ink-900);
+  --ticker-fg: var(--saffron-400);
+  --ticker-fg-alt: var(--cream-100);
+  --ticker-border: rgba(255, 255, 255, 0.06);
   --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 8px 32px rgba(20, 16, 24, 0.06);
 
   /* Shadow scale — depth, not decoration */

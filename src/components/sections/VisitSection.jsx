@@ -41,10 +41,10 @@ export function VisitSection() {
                 href="https://maps.google.com/?q=Jugaltila+Kajalshah+Sylhet"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -2, scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0, scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 360, damping: 26 }}
-                className="absolute bottom-4 right-4 rounded-full border border-temple-800/20 bg-cream-50/80 px-4 py-1.5 text-xs uppercase tracking-eyebrow text-temple-800 backdrop-blur transition-colors duration-300 hover:border-saffron-500 hover:text-saffron-600 motion-reduce:transition-none"
+                className="cta-solid absolute bottom-4 right-4 backdrop-blur-sm"
               >
                 Open in Maps →
               </motion.a>
@@ -89,24 +89,17 @@ export function VisitSection() {
 function ContactRow({ icon, k, v, href }) {
   const isExternal = href?.startsWith('http');
   const content = (
-    <motion.span
-      className="flex items-center gap-2"
-      whileHover={{ x: 3 }}
-      transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-    >
-      <span className="transition-colors duration-300 group-hover/row:text-saffron-600">
+    <span className="flex items-center gap-2">
+      <span className="transition-colors duration-300 group-hover/row:text-saffron-700">
         {v}
       </span>
-      <span
-        aria-hidden="true"
-        className="text-saffron-500 transition-transform duration-300 group-hover/row:translate-x-1 motion-reduce:transition-none"
-      >
+      <span aria-hidden="true" className="row-arrow text-saffron-500">
         →
       </span>
-    </motion.span>
+    </span>
   );
   return (
-    <li className="group/row border-b border-temple-800/10 transition-colors duration-300 last:border-0 hover:bg-cream-100/60 motion-reduce:transition-none">
+    <li className="group/row row-tint border-b border-temple-800/10 last:border-0">
       {href ? (
         <a
           href={href}

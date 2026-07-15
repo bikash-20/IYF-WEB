@@ -161,10 +161,12 @@ export function Hero() {
               : `translate3d(${parallax.x}px, ${parallax.y}px, 0)`,
           }}
         >
+          {/* v0.7: extra padding via scale-down + re-centering so the
+             peacock feather and folded hands don't touch the frame edge. */}
           <img
             src="/little-1.jpg"
             alt=""
-            className="h-full w-full object-cover object-center opacity-90"
+            className="h-full w-full scale-[0.92] object-cover object-center opacity-90"
           />
         </div>
       </motion.div>
@@ -176,6 +178,17 @@ export function Hero() {
 
       {/* ----- Layer 4: breathing radial lights -------------------- */}
       <div className="absolute inset-0 -z-10">
+        {/* v0.7: subtle top-left glow — fills the empty dark space
+           above the eyebrow text. Soft saffron→peacock mix at ~18%
+           opacity, no animation, fades gracefully on reduce-motion. */}
+        <div
+          aria-hidden
+          className="absolute -left-24 -top-32 h-[520px] w-[520px] rounded-full opacity-[0.18] blur-3xl motion-reduce:hidden"
+          style={{
+            background:
+              'radial-gradient(circle at 50% 50%, rgba(229,162,74,0.55) 0%, rgba(27,94,122,0.25) 55%, transparent 75%)',
+          }}
+        />
         <div
           className="absolute inset-0 anim-breathe"
           style={{ opacity: 0.6 + 0.3 * lampIntensity }}
@@ -223,7 +236,7 @@ export function Hero() {
               </motion.span>
               <motion.span
                 variants={wordRise}
-                className="block anim-shimmer text-saffron-gradient"
+                className="block font-display italic anim-shimmer text-saffron-gradient"
               >
                 Sylhet
               </motion.span>

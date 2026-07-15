@@ -66,7 +66,9 @@ export function Navbar() {
               to={item.to}
               className={({ isActive }) =>
                 cn(
-                  'relative rounded-full px-4 py-2 text-sm transition-colors duration-300',
+                  // v0.7: animated underline grows from the left instead
+                  // of an abrupt color snap. Saffron on light, cream on dark.
+                  'link-underline rounded-full px-4 py-2 text-sm transition-colors duration-300',
                   dark
                     ? isActive
                       ? 'text-saffron-300'
@@ -77,17 +79,7 @@ export function Navbar() {
                 )
               }
             >
-              {({ isActive }) => (
-                <>
-                  {item.label}
-                  {isActive && (
-                    <span
-                      aria-hidden
-                      className="absolute inset-x-4 -bottom-0.5 h-px bg-saffron-500/70"
-                    />
-                  )}
-                </>
-              )}
+              {item.label}
             </NavLink>
           ))}
         </div>
@@ -96,10 +88,11 @@ export function Navbar() {
           <Link
             to="/contact"
             className={cn(
-              'inline-flex items-center gap-2 rounded-full border px-5 py-2 text-xs font-medium uppercase tracking-eyebrow transition-all duration-300',
-              dark
-                ? 'border-cream-50/30 text-cream-50 hover:border-saffron-400 hover:text-saffron-300'
-                : 'border-temple-800/20 text-temple-800 hover:border-saffron-500 hover:text-saffron-600',
+              // v0.7: solid saffron fill, lifts on hover, soft saffron
+              // shadow. Same look whether we're over the dark hero or
+              // over a cream page — dark text reads on the bright fill.
+              'group/cta inline-flex items-center gap-2 rounded-full bg-saffron-500 px-5 py-2 text-xs font-medium uppercase tracking-eyebrow text-temple-800 shadow-soft transition-[background-color,color,box-shadow,transform] duration-300 ease-divine will-change-transform',
+              'hover:-translate-y-0.5 hover:bg-saffron-400 hover:shadow-saffron motion-reduce:transition-none motion-reduce:hover:translate-y-0',
             )}
           >
             Contact
@@ -149,7 +142,7 @@ export function Navbar() {
               ))}
               <Link
                 to="/contact"
-                className="mt-4 inline-flex items-center justify-center rounded-full bg-saffron-500 px-5 py-3 text-sm font-medium uppercase tracking-eyebrow text-cream-50"
+                className="cta-solid mt-4 px-5 py-3 text-sm"
               >
                 Contact
               </Link>
