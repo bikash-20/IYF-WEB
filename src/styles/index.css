@@ -165,6 +165,25 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /* ----- v0.8 Reveal safety net --------------------------------
+   * Belt-and-braces: if Framer Motion / IntersectionObserver ever
+   * fails to fire (slow hydration, lazy chunk still loading, ad
+   * blocker, dev-tools throttling) the elements below would stay
+   * at opacity:0 forever. We force them back to visible after a
+   * short delay so a broken animation can never hide real text.
+   *
+   * Applied to every motion element on the page; the trigger is
+   * `data-reveal="1"` set by App.jsx once mounted (so SSR/initial
+   * render isn't affected). If JS never runs, the rule below never
+   * matches — but we also ship a noscript fallback in index.html
+   * for that case.
+   * --------------------------------------------------------------- */
+  html[data-reveal="ready"] [data-reveal-target] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
 
 @layer components {
@@ -436,16 +455,21 @@
 
   /* Film-grain noise — uses an inline SVG data URL so it's offline-safe
      and adds ~600 bytes total. Two layered radial patterns give a tactile,
-     devotional feel. */
+     devotional feel.
+     v0.8: alpha lowered from 0.55 → 0.18. The old value read as
+     visible TV static on warm-cream surfaces; the new value feels
+     like fine paper fibre. Pages that need a heavier texture should
+     layer it on top of a dark base, where the noise reads as grain. */
   .grain {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     background-size: 160px 160px;
     background-repeat: repeat;
   }
 
-  /* Heavier grain for hero / quote overlays */
+  /* Heavier grain for hero / quote overlays — used sparingly, on
+     dark or photographic bases where noise reads as film grain. */
   .grain-heavy {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     background-size: 220px 220px;
     background-repeat: repeat;
   }
@@ -475,41 +499,46 @@
    * Multiply-blend behaves best on warm beige (no banding).
    * ------------------------------------------------------------------- */
 
-  /* Paper grain — warm, soft. Default choice for cards + large blocks. */
+  /* Paper grain — warm, soft. Default choice for cards + large blocks.
+     v0.8: alpha 0.18 → 0.06, SVG noise alpha 0.5 → 0.28. The texture
+     now reads as felt paper fibre rather than visible static. */
   .tex-paper {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.28 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
     background-size: 220px 220px;
     background-repeat: repeat;
     mix-blend-mode: multiply;
-    opacity: 0.18;
+    opacity: 0.06;
   }
 
-  /* Linen — woven cross-hatch. Soft on warm-cream surfaces. */
+  /* Linen — woven cross-hatch. Soft on warm-cream surfaces.
+     v0.8: alpha 0.13 → 0.05, SVG noise 0.6 → 0.32. */
   .tex-linen {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='l'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23l)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='l'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.32 0'/></filter><rect width='100%' height='100%' filter='url(%23l)'/></svg>");
     background-size: 180px 180px;
     background-repeat: repeat;
     mix-blend-mode: multiply;
-    opacity: 0.13;
+    opacity: 0.05;
   }
 
-  /* Stone — coarser, mineral. Use on dark deep-in atmosphere blocks. */
+  /* Stone — coarser, mineral. Use on dark deep-in atmosphere blocks.
+     v0.8: alpha 0.10 → 0.05. */
   .tex-stone {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.3 0'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>");
     background-size: 320px 320px;
     background-repeat: repeat;
     mix-blend-mode: screen;
-    opacity: 0.10;
+    opacity: 0.05;
   }
 
   /* Cloth — soft directional weave, classic silk/warp feel.
-     Slightly higher contrast than linen, for special surfaces. */
+     Slightly higher contrast than linen, for special surfaces.
+     v0.8: alpha 0.12 → 0.05, SVG noise 0.55 → 0.3. */
   .tex-cloth {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.7 1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23c)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.7 1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.3 0'/></filter><rect width='100%' height='100%' filter='url(%23c)'/></svg>");
     background-size: 240px 240px;
     background-repeat: repeat;
     mix-blend-mode: multiply;
-    opacity: 0.12;
+    opacity: 0.05;
   }
 
   /* Texture overlay wrapper — use with one of tex-* above.

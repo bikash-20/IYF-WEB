@@ -83,7 +83,7 @@ export function TodaysTemple() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: true, amount: 0.05 }}
           variants={stagger(0.05)}
           className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/85 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift md:p-10"
         >
@@ -167,7 +167,7 @@ export function TodaysTemple() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.9, ease: easeDivine, delay: 0.05 }}
             className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/75 dark:shadow-lift md:p-10"
           >
@@ -186,7 +186,7 @@ export function TodaysTemple() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.9, ease: easeDivine, delay: 0.12 }}
             className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/75 dark:shadow-lift md:p-10"
           >
@@ -213,7 +213,7 @@ export function TodaysTemple() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: true, amount: 0.05 }}
           transition={{ duration: 1.0, ease: easeDivine, delay: 0.15 }}
           className="relative mt-6 overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/75 p-7 shadow-soft md:p-10"
         >

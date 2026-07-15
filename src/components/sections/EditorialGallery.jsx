@@ -56,7 +56,7 @@ export function EditorialGallery() {
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.99 }}
-              viewport={{ once: true, margin: '-60px' }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{
                 duration: 0.7,
                 ease: easeDivine,

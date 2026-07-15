@@ -35,7 +35,7 @@ export function ThemeToggle({ className }) {
       className={cn(
         'relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border transition-colors duration-500 ease-divine will-change-transform',
         'border-temple-800/15 bg-cream-50/60 text-temple-800 hover:border-saffron-500 hover:text-saffron-600',
-        'dark:border-white/8 dark:bg-ink-card/60 dark:text-fg-body dark:hover:border-saffron-gold-dark dark:hover:text-saffron-gold-dark',
+        'dark:border-white/8 dark:bg-ink-card/60 dark:text-fg-body dark:hover:border-saffron-[#E0AA4C] dark:hover:text-saffron-[#E0AA4C]',
         'backdrop-blur-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-ink-page',
         className,
       )}

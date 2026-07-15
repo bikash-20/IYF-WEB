@@ -40,7 +40,7 @@ export function AboutPage() {
 
       <Section variant="warm">
         <Container>
-          <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
+          <div className="grid items-center gap-10 md:grid-cols-12 md:gap-12">
             <RevealOnScroll className="md:col-span-6">
               <img
                 src="/little-2.jpg"
@@ -54,7 +54,7 @@ export function AboutPage() {
               <h2 className="mt-3 font-display text-display-md text-balance">
                 From a small group of college students to a daily programme.
               </h2>
-              <div className="mt-6 space-y-4 text-base leading-relaxed text-temple-700">
+              <div className="mt-5 space-y-3.5 text-base leading-relaxed text-temple-700">
                 <p>
                   IYF Sylhet began as a small group of students who wanted more than a Sunday
                   programme — they wanted a daily rhythm of practice, study, and service, and a
@@ -107,7 +107,7 @@ export function AboutPage() {
           <h2 className="mt-3 max-w-2xl font-display text-display-md text-balance">
             A line from Prabhupada to Sylhet.
           </h2>
-          <ol className="mt-10 grid gap-6 md:grid-cols-2">
+          <ol className="mt-8 grid gap-5 md:grid-cols-2">
             {timeline.map((t, i) => (
               <RevealOnScroll key={t.year} delay={i * 0.05}>
                 <li className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">

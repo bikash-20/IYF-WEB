@@ -54,6 +54,36 @@ export default function App() {
     }
   }, [location.pathname, location.search, navigate]);
 
+  // v0.8 Reveal safety net — Framer Motion's `whileInView` relies on
+  // an IntersectionObserver that, on rare occasions (slow hydration,
+  // heavy bundle, dev tools throttling), can leave elements stuck at
+  // opacity:0. We schedule a one-shot global release: after 1500ms,
+  // any element still at opacity:0 inside the app shell is forced to
+  // opacity:1, transform:none. This guarantees no content is ever
+  // permanently hidden by a broken animation.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const release = () => {
+      const root = document.getElementById('app-root') || document.body;
+      const stuck = root.querySelectorAll('[style*="opacity: 0"], [style*="opacity:0"]');
+      stuck.forEach((el) => {
+        // Only release on-screen elements — off-screen ones may
+        // legitimately be in their pre-reveal state waiting to scroll.
+        const r = el.getBoundingClientRect();
+        const onScreen =
+          r.bottom > 0 && r.right > 0 && r.top < window.innerHeight && r.left < window.innerWidth;
+        if (onScreen) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.style.filter = 'none';
+        }
+      });
+      document.documentElement.setAttribute('data-reveal', 'ready');
+    };
+    const timer = window.setTimeout(release, 1500);
+    return () => window.clearTimeout(timer);
+  }, [location.pathname]);
+
   return (
     <Layout>
       <ScrollToTop />

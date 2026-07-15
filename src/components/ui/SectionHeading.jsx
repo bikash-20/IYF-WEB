@@ -11,7 +11,7 @@ export function SectionHeading({ eyebrow, title, lede, className, align = 'left'
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={fadeUp}
       className={cn(
         'mb-12 max-w-2xl',

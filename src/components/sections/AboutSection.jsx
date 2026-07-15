@@ -25,7 +25,7 @@ export function AboutSection() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, amount: 0.05 }}
             variants={stagger(0.1)}
             className="md:col-span-7 md:pt-2"
           >
@@ -82,7 +82,7 @@ export function AboutSection() {
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
               className="relative"
             >
@@ -99,7 +99,7 @@ export function AboutSection() {
                 priority
                 interactive
               />
-              <figure className="absolute -bottom-6 -left-6 hidden max-w-[180px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift dark:border-white/10 dark:bg-ink-floating/95 dark:shadow-lift md:block">
+              <figure className="absolute bottom-4 left-4 hidden max-w-[180px] rounded-editorial border border-cream-50/30 bg-cream-50/95 p-4 shadow-lift backdrop-blur-sm dark:border-white/15 dark:bg-ink-floating/95 md:block">
                 <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                   Est.
                 </div>

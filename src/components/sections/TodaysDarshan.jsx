@@ -35,7 +35,7 @@ export function TodaysDarshan() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 1.1, ease: easeDivine }}
             className="md:col-span-7"
           >
@@ -86,7 +86,7 @@ export function TodaysDarshan() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 1.1, ease: easeDivine, delay: 0.1 }}
             className="flex flex-col gap-4 md:col-span-5"
           >

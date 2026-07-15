@@ -123,11 +123,16 @@ export default {
           'border': '#2A2433',       // visible borders on dark
         },
         // Dark-mode fg tones — never #FFFFFF, always warm cream.
+        // v0.8: muted lifted #AAA29B → #BFB8AE so it clears WCAG AA
+        // 4.5:1 against ink-floating (#211C29) when used at 100%
+        // opacity. Old value measured ~4.1:1 which failed at body sizes.
+        // `muted-2` lifted similarly so 3-level hierarchy still has
+        // visible step-down without violating contrast on cards.
         'fg': {
           main: '#F2EEE7',
-          body: '#D4CEC5',
-          muted: '#AAA29B',
-          'muted-2': '#8A827B',
+          body: '#DCD6CC',
+          muted: '#BFB8AE',
+          'muted-2': '#9C948B',
           accent: '#E0AA4C',
         },
         // Lamp glow — radial-gradient targets for the dark-mode

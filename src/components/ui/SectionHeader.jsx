@@ -15,7 +15,7 @@ export function SectionHeader({ eyebrow, title, lede, align = 'left', className 
     <motion.header
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={variants}
       className={cn(
         'mb-16 max-w-2xl md:mb-20',

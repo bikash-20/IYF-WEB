@@ -62,7 +62,7 @@ export function Footer() {
     <motion.footer
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={stagger}
       className="relative overflow-hidden border-t border-temple-800/10 bg-ink-900 text-cream-100 dark:border-white/8"
     >

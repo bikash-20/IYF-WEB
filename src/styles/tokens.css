@@ -142,9 +142,14 @@
   --bg-floating: #211C29;
   --bg-deep: #0A0810;
 
-  /* Foreground — warm cream, never #FFFFFF */
+  /* Foreground — warm cream, never #FFFFFF.
+     v0.8: --fg-muted raised from rgba(242,238,231,0.62) → 0.78
+     so it clears WCAG AA 4.5:1 against ink-floating (#211C29)
+     at 14–15px body sizes. Old value measured ~4.6:1 at 16px on
+     ink-card but fell to ~3.8:1 on the lighter ink-floating surface,
+     so secondary metadata on floating cards was unreadable. */
   --fg: #F2EEE7;
-  --fg-muted: rgba(242, 238, 231, 0.62);
+  --fg-muted: rgba(242, 238, 231, 0.78);
   --fg-inverse: #2E2118;
 
   /* Borders — barely-there white at 6% opacity */

@@ -39,16 +39,16 @@ export function FloatingCard({
         </div>
       )}
       {eyebrow && (
-        <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
+        <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-300 dark:glow-gold-soft">
           {eyebrow}
         </div>
       )}
       <h3 className="mt-2 font-display text-2xl text-balance text-temple-800 dark:text-fg-main">{title}</h3>
-      {body && <p className="mt-3 text-sm leading-relaxed text-temple-700/85 dark:text-fg-body/85">{body}</p>}
+      {body && <p className="mt-3 text-sm leading-relaxed text-temple-700/85 dark:text-fg-body">{body}</p>}
       {(to || href) && (
         <>
-          <div className="mt-5 hr-soft dark:bg-fg-body/30" />
-          <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
+          <div className="mt-5 hr-soft dark:bg-fg-body/40" />
+          <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-300 dark:glow-gold-soft">
             Open <ArrowUpRight size={12} className="row-arrow transition-transform duration-300 ease-divine" />
           </div>
         </>
@@ -74,7 +74,7 @@ export function FloatingCard({
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
+        viewport={{ once: true, amount: 0.05 }}
         transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
         className="block focus:outline-none"
       >
@@ -92,7 +92,7 @@ export function FloatingCard({
         rel="noopener noreferrer"
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
+        viewport={{ once: true, amount: 0.05 }}
         transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
         className={classes}
       >
@@ -104,7 +104,7 @@ export function FloatingCard({
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
       className={classes}
     >

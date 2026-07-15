@@ -45,7 +45,7 @@ export function PrabhupadaCorner() {
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="relative"
             >
@@ -62,7 +62,7 @@ export function PrabhupadaCorner() {
                 caption="1 September 1896 — 14 November 1977"
                 interactive
               />
-              <figure className="absolute -bottom-6 -right-6 hidden max-w-[210px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift dark:border-white/10 dark:bg-ink-floating/95 md:block">
+              <figure className="absolute bottom-4 right-4 hidden max-w-[210px] rounded-editorial border border-cream-50/30 bg-cream-50/95 p-4 shadow-lift backdrop-blur-sm dark:border-white/15 dark:bg-ink-floating/95 md:block">
                 <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                   Founder-ācārya
                 </div>
@@ -82,7 +82,7 @@ export function PrabhupadaCorner() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, amount: 0.05 }}
             variants={stagger(0.08)}
             className="md:col-span-7 md:order-2 md:pt-2"
           >

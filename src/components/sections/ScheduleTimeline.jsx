@@ -28,7 +28,7 @@ export function ScheduleTimeline() {
               key={row.id}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
+              viewport={{ once: true, amount: 0.05 }}
               variants={stagger(0.05)}
               custom={i}
               transition={{ delay: i * 0.04 }}

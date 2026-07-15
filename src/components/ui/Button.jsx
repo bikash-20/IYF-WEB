@@ -14,7 +14,7 @@ const variants = {
   // flat fill, and the soft saffron shadow stays so the button
   // lifts off the page.
   primary:
-    'bg-saffron-500 text-temple-900 hover:bg-saffron-400 shadow-soft hover:shadow-saffron dark:text-ink-900 dark:hover:bg-saffron-gold-dark dark:hover:shadow-saffron dark:glow-gold-soft',
+    'bg-saffron-500 text-temple-900 hover:bg-saffron-400 shadow-soft hover:shadow-saffron dark:text-ink-900 dark:hover:bg-saffron-[#E0AA4C] dark:hover:shadow-saffron dark:glow-gold-soft',
   // Ghost / outline. Light: warm temple border, gold on hover.
   // Dark: barely-there white border (8% opacity), warm gold on
   // hover — the "Apple-glass" pattern the brief asks for.

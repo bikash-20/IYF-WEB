@@ -48,7 +48,7 @@ export function FestivalCountdown() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: true, amount: 0.05 }}
           transition={{ duration: 1.0, ease: easeDivine }}
           className="relative overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/60 p-8 dark:border-saffron-400/15 dark:bg-ink-deep md:p-14"
         >
