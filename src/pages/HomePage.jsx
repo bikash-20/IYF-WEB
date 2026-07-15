@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
 import { Hero } from '@/components/sections/Hero.jsx';
-import { TodaysDarshan } from '@/components/sections/TodaysDarshan.jsx';
+import { TodaysTemple } from '@/components/sections/TodaysTemple.jsx';
 import { AboutSection } from '@/components/sections/AboutSection.jsx';
 import { QuickCards } from '@/components/sections/QuickCards.jsx';
 import { ScheduleTimeline } from '@/components/sections/ScheduleTimeline.jsx';
 import { SacredQuote } from '@/components/ui/SacredQuote.jsx';
 import { TempleDivider } from '@/components/ui/TempleDivider.jsx';
-import { FestivalCountdown } from '@/components/sections/FestivalCountdown.jsx';
 import { EditorialGallery } from '@/components/sections/EditorialGallery.jsx';
 import { MediaSection } from '@/components/sections/MediaSection.jsx';
 import { VisitSection } from '@/components/sections/VisitSection.jsx';
@@ -15,16 +14,16 @@ import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
 
 /**
- * Home composition — v0.2 storytelling flow.
+ * Home composition — v0.3 storytelling flow.
  *
- * Hero → TodaysDarshan (arrival moment) → About → QuickCards
- *   → TempleDivider (breathing) → SacredQuote
- *   → ScheduleTimeline → FestivalCountdown → EditorialGallery
- *   → MediaSection → VisitSection
+ * Hero → TodaysTemple (live schedule + thought + verse + festival
+ *   countdown, all in one editorial layer) → About → QuickCards
+ *   → TempleDivider → SacredQuote → ScheduleTimeline
+ *   → EditorialGallery → Media → Visit
  *
- * Rhythm: section-pad-default (big breath) wraps everything except
- * QuickCards (tight). The user scrolls through a sequenced story,
- * not a list.
+ * Rhythm: section-pad-default wraps everything except QuickCards
+ * (tight). The festival countdown is collapsed inside TodaysTemple
+ * so the page reads as a single temple day, not a list of sections.
  */
 export function HomePage() {
   useMeta({
@@ -34,7 +33,7 @@ export function HomePage() {
   return (
     <motion.div {...pageEnter}>
       <Hero />
-      <TodaysDarshan />
+      <TodaysTemple />
       <AboutSection />
       <QuickCards />
 
@@ -48,7 +47,6 @@ export function HomePage() {
       />
 
       <ScheduleTimeline />
-      <FestivalCountdown />
       <EditorialGallery />
       <MediaSection />
       <VisitSection />
