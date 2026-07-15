@@ -4,7 +4,7 @@ import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Badge } from '@/components/ui/Badge.jsx';
 import { Button } from '@/components/ui/Button.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { CalendarSection } from '@/components/sections/CalendarSection.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
 import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
@@ -64,19 +64,12 @@ export function EventsPage() {
 
       <Section variant="muted">
         <Container>
-          <SectionHeading eyebrow="Calendar" title="Annual festivals" />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {annualFestivals.map((f, i) => (
-              <RevealOnScroll key={f.id} delay={i * 0.04}>
-                <div className="flex items-center justify-between rounded-xl border border-temple-800/10 bg-cream-50 px-5 py-4">
-                  <span className="font-display text-lg text-temple-800">{f.name}</span>
-                  <span className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600">
-                    {f.month}
-                  </span>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+          <SectionHeading
+            eyebrow="Calendar"
+            title="The Vaishnava year at the mandir"
+            description="From daily darshan to month-long observances — every festival at Sri Sri Radha Madhava Mandir is open to all, and prasadam is served free."
+          />
+          <CalendarSection festivals={annualFestivals} />
         </Container>
       </Section>
 
