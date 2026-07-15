@@ -1,73 +1,53 @@
-import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
-import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
-import { Card, CardEyebrow } from '@/components/ui/Card.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { SectionHeader } from '@/components/ui/SectionHeader.jsx';
+import { FloatingCard } from '@/components/ui/FloatingCard.jsx';
 
+/**
+ * QuickCards — three handcrafted cards, not SaaS tiles.
+ *
+ * v0.2: each card is a FloatingCard with an eyebrow, title, body,
+ * an animated arrow, and a saffron hr. Three cards is intentional —
+ * four was a stretch. The fourth visit-leaning invitation lives in
+ * VisitSection below.
+ */
 const cards = [
   {
-    n: '01 — Daily',
-    title: 'Daily Programs',
-    body: 'Mangal Arati, kirtan, and scripture study run every day at the mandir.',
-    to: null,
+    eyebrow: 'Today',
+    title: 'Daily Schedule',
+    body: 'Six arati and class times across the day, from Mangal Arati before sunrise to Bhagavad-gita in the evening.',
+    href: '/schedule',
+    cta: 'Open the schedule',
   },
   {
-    n: '02 — Seasonal',
-    title: 'Upcoming Events',
-    body: 'Krishna Leela Mela during Janmashtami, and festival gatherings through the year.',
-    to: '/events',
+    eyebrow: 'Featured',
+    title: 'Upcoming Festivals',
+    body: 'Janmashtami, Gaura Purnima, Ratha Yatra, and a half-year of youth programmes at the temple.',
+    href: '/events',
+    cta: 'See the calendar',
   },
   {
-    n: '03 — Course',
+    eyebrow: 'Course',
     title: 'Be SMART',
-    body: 'A life-skills course for youth built on Simplicity, Modesty, Awareness, Regularity, Truthfulness.',
-    to: '/courses',
-  },
-  {
-    n: '04 — In person',
-    title: 'Visit Us',
-    body: 'Opposite Osmani Medical College, Gate No. 1 — everyone is welcome at the mandir, every day.',
-    to: '/visit',
+    body: 'A two-weekend foundational course in spiritual psychology — for young adults 17 and above.',
+    href: '/courses',
+    cta: 'Explore Be SMART',
   },
 ];
 
 export function QuickCards() {
   return (
-    <Section>
+    <Section variant="default" pad="tight">
       <Container>
-        <SectionHeading
-          eyebrow="Start here"
-          title="Four ways in"
-          lede="Whether you have five minutes or a whole festival day to give, there's a place to begin."
+        <SectionHeader
+          eyebrow="Where to begin"
+          title="A few good doors in"
+          lede="Pick the one that fits the moment you're in."
         />
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {cards.map((c, i) => {
-            const inner = (
-              <>
-                <CardEyebrow>{c.n}</CardEyebrow>
-                <h3 className="mt-1 font-display text-2xl text-temple-800">{c.title}</h3>
-                <p className="text-sm leading-relaxed text-temple-700/80">{c.body}</p>
-                {c.to && (
-                  <span className="mt-2 inline-flex items-center gap-1 text-xs font-medium uppercase tracking-eyebrow text-saffron-600">
-                    Open <ArrowUpRight size={12} />
-                  </span>
-                )}
-              </>
-            );
-            return (
-              <RevealOnScroll key={c.title} delay={i * 0.06}>
-                {c.to ? (
-                  <Link to={c.to} className="block focus:outline-none">
-                    <Card interactive>{inner}</Card>
-                  </Link>
-                ) : (
-                  <Card>{inner}</Card>
-                )}
-              </RevealOnScroll>
-            );
-          })}
+        <div className="grid gap-5 md:grid-cols-3 md:gap-6">
+          {cards.map((c, i) => (
+            <FloatingCard key={c.title} index={i} {...c} />
+          ))}
         </div>
       </Container>
     </Section>

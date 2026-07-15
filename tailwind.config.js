@@ -27,14 +27,19 @@ export default {
     },
     extend: {
       colors: {
-        // Warm cream / ivory / sand — primary surfaces
         cream: {
           50: '#FBF7F0',
           100: '#F5EFE3',
           200: '#EDE3CE',
           300: '#E0D2B3',
         },
-        // Temple brown / muted copper — secondary
+        // New for v0.2 — warm-beige atmosphere
+        beige: {
+          50: '#F7F0E2',
+          100: '#EFE6D2',
+        },
+        // New for v0.2 — pure-cream atmosphere (almost white, still warm)
+        'pure-cream': '#FEFBF5',
         temple: {
           400: '#B08664',
           500: '#8E6849',
@@ -42,8 +47,8 @@ export default {
           700: '#4E3825',
           800: '#2E2118',
         },
-        // Accents — used sparingly
         saffron: {
+          300: '#F1B96B',
           400: '#E5A24A',
           500: '#D98A2B',
           600: '#B86E1E',
@@ -58,7 +63,6 @@ export default {
           700: '#5C1620',
           800: '#3F0E16',
         },
-        // Neutrals (deep ink, not pure black — keeps the palette warm)
         ink: {
           900: '#15131A',
           800: '#1E1A24',
@@ -66,36 +70,52 @@ export default {
         },
       },
       fontFamily: {
-        // Display: Fraunces (variable serif) — headings, em-dashes
         display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
-        // Body: Work Sans — calm, neutral, readable
         sans: ['"Work Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        // Mono: IBM Plex Mono — small labels, time tags
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
-        // Bengali / Sanskrit fallback chain
         serifBn: ['"Tiro Bangla"', 'Noto Serif Bengali', 'Fraunces', 'serif'],
       },
       fontSize: {
-        // Tighter, more deliberate scale than the default
         'display-xl': ['clamp(3.25rem, 7vw, 5.5rem)', { lineHeight: '0.95', letterSpacing: '-0.025em' }],
         'display-lg': ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.02', letterSpacing: '-0.02em' }],
         'display-md': ['clamp(1.75rem, 3vw, 2.5rem)', { lineHeight: '1.1', letterSpacing: '-0.01em' }],
+        // New for v0.2 — editorial-size quotes
+        'quote': ['clamp(2rem, 4.5vw, 3.75rem)', { lineHeight: '1.15', letterSpacing: '-0.015em' }],
       },
       letterSpacing: {
         eyebrow: '0.18em',
       },
       maxWidth: {
         prose: '68ch',
+        editorial: '52ch',
       },
+      // New for v0.2 — full soft-shadow scale
       boxShadow: {
-        soft: '0 1px 2px rgba(20, 16, 24, 0.04), 0 8px 24px rgba(20, 16, 24, 0.06)',
-        ring: '0 0 0 1px rgba(217, 138, 43, 0.35)',
+        soft: '0 1px 2px rgba(20,16,24,0.04), 0 8px 24px rgba(20,16,24,0.06)',
+        lift: '0 2px 4px rgba(20,16,24,0.05), 0 16px 40px rgba(20,16,24,0.08)',
+        temple: '0 4px 8px rgba(20,16,24,0.06), 0 24px 56px rgba(20,16,24,0.10)',
+        saffron: '0 8px 28px rgba(217,138,43,0.22)',
+        // Inner highlight used on glass surfaces
+        'inset-top-light': 'inset 0 1px 0 rgba(255,255,255,0.6)',
       },
       borderRadius: {
         xl2: '1.25rem',
+        // New for v0.2
+        '2xl2': '2.5rem',
+        'editorial': '1.75rem',
+      },
+      // New for v0.2 — backdrop blur scale
+      backdropBlur: {
+        xs: '2px',
+        glass: '14px',
       },
       transitionTimingFunction: {
         divine: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
+      transitionDuration: {
+        450: '450ms',
+        700: '700ms',
+        900: '900ms',
       },
       keyframes: {
         ticker: {
@@ -110,11 +130,23 @@ export default {
           '0%, 100%': { opacity: '0.55' },
           '50%': { opacity: '0.9' },
         },
+        // New for v0.2 — slow, ambient radial-light drift
+        'ambient-drift': {
+          '0%, 100%': { transform: 'translate3d(0,0,0) scale(1)' },
+          '50%': { transform: 'translate3d(2%, -1%, 0) scale(1.05)' },
+        },
+        // Subtle vertical breathing used inside editorial images
+        'breathe': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.02)' },
+        },
       },
       animation: {
         ticker: 'ticker 60s linear infinite',
         'fade-up': 'fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
         glow: 'glow 4s ease-in-out infinite',
+        'ambient-drift': 'ambient-drift 18s ease-in-out infinite',
+        'breathe': 'breathe 12s ease-in-out infinite',
       },
     },
   },

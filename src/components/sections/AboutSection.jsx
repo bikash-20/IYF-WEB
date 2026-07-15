@@ -1,56 +1,116 @@
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { EditorialImage } from '@/components/ui/EditorialImage.jsx';
+import { RadialLight } from '@/components/ui/RadialLight.jsx';
+import { stagger, fadeUp } from '@/lib/motion.js';
+import { site } from '@/lib/site.js';
 
 /**
- * About section. `little-2.jpg` — the soft daylight photo — sits
- * here. Its warm, calm mood pairs with the cream wash on the
- * surrounding section.
+ * AboutSection — the temple's story.
+ *
+ * v0.2 changes:
+ *   - Floating image with EditorialImage (saffron glow, soft shadow)
+ *   - Text column intentionally starts at top, image is offset down —
+ *     creates the "offset" the user asked for so the layout has rhythm
+ *   - Replaces ad-hoc styles with Section + Radials + design system
  */
 export function AboutSection() {
   return (
-    <Section variant="warm" id="about">
+    <Section variant="soft" pad="default">
       <Container>
-        <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
-          <RevealOnScroll className="md:col-span-6">
-            <figure className="relative">
-              <div
-                className="absolute -inset-3 -z-10 rounded-xl2 bg-saffron-500/15 blur-2xl"
-                aria-hidden
-              />
-              <img
-                src="/little-2.jpg"
-                alt="Soft daylight at Sri Sri Radh Madhava Mandir"
-                className="aspect-[4/5] w-full rounded-xl2 object-cover shadow-soft"
-                loading="lazy"
-              />
-              <figcaption className="mt-3 font-mono text-[0.7rem] uppercase tracking-eyebrow text-temple-700/70">
-                Inside the mandir
-              </figcaption>
-            </figure>
-          </RevealOnScroll>
+        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
+          {/* Text column — starts higher (items-start) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={stagger(0.1)}
+            className="md:col-span-7 md:pt-2"
+          >
+            <motion.div variants={fadeUp} className="eyebrow">
+              About the mandir
+            </motion.div>
+            <motion.h2
+              variants={fadeUp}
+              className="mt-4 font-display text-display-lg text-balance text-temple-900"
+            >
+              A quiet place to remember{' '}
+              <span className="text-saffron-gradient italic">Krishna</span>.
+            </motion.h2>
+            <motion.p
+              variants={fadeUp}
+              className="mt-6 max-w-prose text-lg leading-relaxed text-temple-800/85"
+            >
+              ISKCON Youth Forum is the youth community of Sri Sri Radha Madhava
+              Mandir in Jugaltila. Since 2007, this temple has hosted daily darshan,
+                           scripture classes, the Be SMART course, and a youth kirtan movement
+              that has carried across Sylhet and beyond.
+            </motion.p>
+            <motion.p
+              variants={fadeUp}
+              className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/70"
+            >
+              We are non-sectarian within the Vaishnava tradition, and the doors
+              of the mandir are open to everyone — to chant, to hear, to sit for
+              a moment in peace. Children, students, working professionals, and
+              seekers from every walk sit together at every programme.
+            </motion.p>
+            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/about"
+                className="group inline-flex items-center gap-2 rounded-full bg-temple-900 px-5 py-2.5 text-xs font-medium uppercase tracking-eyebrow text-cream-50 transition-all duration-300 hover:bg-temple-800"
+              >
+                Read the temple&apos;s story
+                <ArrowUpRight
+                  size={12}
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
+              <Link
+                to="/visit"
+                className="inline-flex items-center gap-2 rounded-full border border-temple-800/30 px-5 py-2.5 text-xs font-medium uppercase tracking-eyebrow text-temple-900 transition-all duration-300 hover:border-saffron-500 hover:text-saffron-600"
+              >
+                Plan your visit
+              </Link>
+            </motion.div>
+          </motion.div>
 
-          <RevealOnScroll className="md:col-span-6" delay={0.1}>
-            <div className="eyebrow">About IYF</div>
-            <h2 className="mt-3 font-display text-display-md text-balance">
-              Youth wing of ISKCON Sylhet
-            </h2>
-            <div className="mt-6 space-y-4 text-base leading-relaxed text-temple-700">
-              <p>
-                The ISKCON Youth Forum gathers young people around the teachings of Srila Prabhupada,
-                founder-acharya of the International Society for Krishna Consciousness, at Sri Sri
-                Radha Madhava Mandir in Jugaltila, Kajalshah.
-              </p>
-              <p>
-                Through daily devotional practice, scripture classes, and hands-on festival service,
-                IYF gives youth in Sylhet a structured, supportive path into Krishna consciousness —
-                and a community to walk it with.
-              </p>
-              <p>
-                The deities worshipped at the mandir include Sri Sri Radh Madhava and Sri Sri Gaura
-                Nitai, honored each day through arati and offering.
-              </p>
-            </div>
-          </RevealOnScroll>
+          {/* Image column — offset down for the staggered rhythm */}
+          <div className="md:col-span-5 md:pt-16">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              className="relative"
+            >
+              <RadialLight
+                color="rgba(217,138,43,0.18)"
+                size="60%"
+                pos="100% 100%"
+                className="!absolute -right-10 -top-10 hidden md:block"
+              />
+              <EditorialImage
+                src="/little-2.jpg"
+                alt="Soft daylight inside the temple"
+                aspect="4/5"
+                priority
+              />
+              <figure className="absolute -bottom-6 -left-6 hidden max-w-[180px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift md:block">
+                <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
+                  Est.
+                </div>
+                <div className="mt-1 font-display text-2xl text-temple-900">
+                  2007
+                </div>
+                <div className="mt-2 text-[11px] leading-relaxed text-temple-700/80">
+                  {site.address.city}, Bangladesh
+                </div>
+              </figure>
+            </motion.div>
+          </div>
         </div>
       </Container>
     </Section>
