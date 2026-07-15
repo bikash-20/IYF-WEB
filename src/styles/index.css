@@ -216,4 +216,42 @@
     pointer-events: none;
     z-index: 0;
   }
+
+  /* Keyframes used by the hero atmosphere.
+     `drift` powers DustField particles — slow upward drift with
+     subtle horizontal sway. The actual displacement per particle
+     is supplied via inline `--dx` / `--dy` custom properties. */
+  @keyframes drift {
+    from { transform: translate3d(0, 0, 0); opacity: var(--drift-o-from, 0.2); }
+    to   { transform: translate3d(var(--dx, 0), var(--dy, -4vh), 0); opacity: var(--drift-o-to,   0.6); }
+  }
+
+  /* `breathe` — the slow radial-light pulse behind the deity.
+     A 24-second cycle that just barely changes opacity + scale. */
+  @keyframes breathe {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 0.78; transform: scale(1.05); }
+  }
+
+  /* `shimmer` — slow background-position sweep on the Sylhet
+     gradient word. Looks like silk being lit from different angles. */
+  @keyframes shimmer {
+    0%   { background-position:   0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position:   0% 50%; }
+  }
+
+  .anim-breathe {
+    animation: breathe 24s ease-in-out infinite;
+    transform-origin: center;
+    will-change: opacity, transform;
+  }
+  .anim-shimmer {
+    background-size: 200% 200%;
+    animation: shimmer 25s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-breathe, .anim-shimmer { animation: none !important; }
+  }
 }
