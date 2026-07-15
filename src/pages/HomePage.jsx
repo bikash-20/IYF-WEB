@@ -3,8 +3,10 @@ import { Hero } from '@/components/sections/Hero.jsx';
 import { TodaysTemple } from '@/components/sections/TodaysTemple.jsx';
 import { AboutSection } from '@/components/sections/AboutSection.jsx';
 import { QuickCards } from '@/components/sections/QuickCards.jsx';
-import { ScheduleTimeline } from '@/components/sections/ScheduleTimeline.jsx';
+import { PrabhupadaCorner } from '@/components/sections/PrabhupadaCorner.jsx';
 import { SacredQuote } from '@/components/ui/SacredQuote.jsx';
+import { CoordinatorMessage } from '@/components/sections/CoordinatorMessage.jsx';
+import { ScheduleTimeline } from '@/components/sections/ScheduleTimeline.jsx';
 import { TempleDivider } from '@/components/ui/TempleDivider.jsx';
 import { EditorialGallery } from '@/components/sections/EditorialGallery.jsx';
 import { MediaSection } from '@/components/sections/MediaSection.jsx';
@@ -14,17 +16,21 @@ import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
 
 /**
- * Home composition — v0.4 storytelling flow.
+ * Home composition — v0.5 storytelling flow.
  *
  * Hero → TodaysTemple (live schedule + thought + verse + festival
  *   countdown, all in one editorial layer) → About → QuickCards
- *   → TempleDivider(bell) → SacredQuote → ScheduleTimeline
+ *   → TempleDivider(bell) → SacredQuote → PrabhupadaCorner
+ *   → CoordinatorMessage → ScheduleTimeline
  *   → TempleDivider(lotus) → EditorialGallery
  *   → TempleDivider(peacock) → Media → Visit
  *
  * Three different divider motifs give each transition its own
  * micro-personality so visitors feel they're moving through
- * different rooms rather than the same hall on repeat.
+ * different rooms rather than the same hall on repeat. The
+ * PrabhupadaCorner and CoordinatorMessage sit between scripture
+ * and the day-of-arati rhythm — the founder's life and the
+ * coordinator's letter frame the schedule as something alive.
  */
 export function HomePage() {
   useMeta({
@@ -46,6 +52,10 @@ export function HomePage() {
         imageSrc="/little-1.jpg"
         imageAlt="Sri Sri Radh Madhava in lamplight"
       />
+
+      <PrabhupadaCorner />
+
+      <CoordinatorMessage />
 
       <ScheduleTimeline />
 
