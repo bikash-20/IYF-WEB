@@ -1,0 +1,66 @@
+/* ---------------------------------------------------------------
+ * Design Tokens — CSS custom properties
+ *
+ * These tokens are the canonical color/spacing values used by the
+ * non-Tailwind parts of the app (Framer Motion, inline gradients,
+ * SVG fill, custom keyframes). The Tailwind config mirrors them
+ * for utility-class usage.
+ *
+ * If you change a value here, change it in tailwind.config.js too.
+ * --------------------------------------------------------------- */
+
+:root {
+  /* Cream / ivory / sand — primary surfaces */
+  --cream-50: #fbf7f0;
+  --cream-100: #f5efe3;
+  --cream-200: #ede3ce;
+  --cream-300: #e0d2b3;
+
+  /* Temple brown / muted copper — secondary */
+  --temple-400: #b08664;
+  --temple-500: #8e6849;
+  --temple-600: #6e4f36;
+  --temple-700: #4e3825;
+  --temple-800: #2e2118;
+
+  /* Accents — used sparingly */
+  --saffron-400: #e5a24a;
+  --saffron-500: #d98a2b;
+  --saffron-600: #b86e1e;
+
+  --peacock-500: #1b5e7a;
+  --peacock-600: #134a60;
+  --peacock-700: #0d3a4c;
+
+  --maroon-600: #7a1f2b;
+  --maroon-700: #5c1620;
+  --maroon-800: #3f0e16;
+
+  /* Neutrals (warm, never pure black) */
+  --ink-900: #15131a;
+  --ink-800: #1e1a24;
+  --ink-700: #27212e;
+
+  /* Semantic tokens */
+  --bg: var(--cream-50);
+  --bg-elevated: #ffffff;
+  --bg-deep: var(--ink-900);
+  --fg: var(--temple-800);
+  --fg-muted: rgba(46, 33, 24, 0.65);
+  --fg-inverse: var(--cream-50);
+  --border: rgba(46, 33, 24, 0.12);
+  --border-strong: rgba(46, 33, 24, 0.22);
+  --accent: var(--saffron-500);
+  --accent-soft: rgba(217, 138, 43, 0.12);
+
+  /* Motion */
+  --ease-divine: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-slow: 700ms;
+  --duration-base: 450ms;
+
+  /* Radii */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+}
