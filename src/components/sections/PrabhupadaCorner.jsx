@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
 import { BookOpen } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { EditorialImage } from '@/components/ui/EditorialImage.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { Badge } from '@/components/ui/Badge.jsx';
-import { stagger, fadeUp } from '@/lib/motion.js';
+import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 
 /**
  * PrabhupadaCorner — a small biographical section honouring His
@@ -16,6 +16,10 @@ import { stagger, fadeUp } from '@/lib/motion.js';
  * — dates, places, books, milestones. The component itself is purely
  * presentational: photo on the left, body on the right, with a
  * saffron radial to echo the warmth of the lamplight in the photo.
+ *
+ * v0.8.1: replaced Framer Motion `whileInView` variants with the
+ * CSS-driven reveal system (RevealOnScroll + Reveal with inline
+ * delays) to be robust against theme toggle re-renders.
  */
 
 const KEY_FACTS = [
@@ -42,13 +46,7 @@ export function PrabhupadaCorner() {
           {/* Image column — image on the left to break rhythm with the
               About and Coordinator sections above. */}
           <div className="md:col-span-5 md:order-1">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative"
-            >
+            <Reveal className="relative">
               <RadialLight
                 color="rgba(217,138,43,0.22)"
                 size="60%"
@@ -75,35 +73,33 @@ export function PrabhupadaCorner() {
                   Krishna Consciousness
                 </div>
               </figure>
-            </motion.div>
+            </Reveal>
           </div>
 
-          {/* Body column */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-            variants={stagger(0.08)}
-            className="md:col-span-7 md:order-2 md:pt-2"
-          >
-            <motion.div variants={fadeUp} className="eyebrow">
+          {/* Body column — RevealOnScroll triggers the column as a
+              whole; each child uses Reveal with an inline delay for
+              the stagger effect. */}
+          <RevealOnScroll className="md:col-span-7 md:order-2 md:pt-2">
+            <Reveal className="eyebrow" delay={0.0}>
               Śrīla Prabhupāda corner
-            </motion.div>
+            </Reveal>
 
-            <motion.h2
-              variants={fadeUp}
+            <Reveal
+              as="h2"
+              delay={0.08}
               className="mt-4 font-display text-display-lg text-balance text-temple-900 dark:text-fg-main dark:glow-gold-soft"
             >
               One man. One trunk of books.{' '}
               <span className="text-saffron-gradient italic">A world awakened.</span>
-            </motion.h2>
+            </Reveal>
 
-            <motion.div variants={fadeUp} className="mt-4">
+            <Reveal delay={0.16} className="mt-4">
               <Badge tone="saffron">Founder-ācārya · ISKCON</Badge>
-            </motion.div>
+            </Reveal>
 
-            <motion.p
-              variants={fadeUp}
+            <Reveal
+              as="p"
+              delay={0.24}
               className="mt-6 max-w-prose text-base leading-relaxed text-temple-800/80 dark:text-fg-body dark:leading-dark"
             >
               His Divine Grace A. C. Bhaktivedanta Swami Prabhupāda was born
@@ -114,10 +110,11 @@ export function PrabhupadaCorner() {
               1965, at the age of sixty-nine, he sailed alone from Kolkata to
               New York aboard the cargo ship <em>Jaladuta</em>, carrying only
               a few trunks of books and an unshakable conviction.
-            </motion.p>
+            </Reveal>
 
-            <motion.p
-              variants={fadeUp}
+            <Reveal
+              as="p"
+              delay={0.32}
               className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/75 dark:text-fg-body dark:leading-dark"
             >
               In July 1966 he incorporated the International Society for
@@ -128,10 +125,11 @@ export function PrabhupadaCorner() {
               bringing the Bhagavad-gītā, the Śrīmad-Bhāgavatam, and the
               teachings of Śrī Caitanya Mahāprabhu to readers across the
               world for the first time.
-            </motion.p>
+            </Reveal>
 
-            <motion.p
-              variants={fadeUp}
+            <Reveal
+              as="p"
+              delay={0.40}
               className="mt-5 max-w-prose text-base leading-relaxed text-temple-800/75 dark:text-fg-body dark:leading-dark"
             >
               He left this world in Vrindavan on 14 November 1977. The
@@ -139,11 +137,12 @@ export function PrabhupadaCorner() {
               countless centres that continue his work — including this
               mandir in Sylhet — are his lasting gift to every generation
               that comes after.
-            </motion.p>
+            </Reveal>
 
             {/* Key facts — compact data strip */}
-            <motion.dl
-              variants={fadeUp}
+            <Reveal
+              as="dl"
+              delay={0.48}
               className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-temple-800/10 pt-6 dark:border-white/8 sm:grid-cols-4"
             >
               {KEY_FACTS.map((f) => (
@@ -156,10 +155,10 @@ export function PrabhupadaCorner() {
                   </dd>
                 </div>
               ))}
-            </motion.dl>
+            </Reveal>
 
             {/* Selected writings */}
-            <motion.div variants={fadeUp} className="mt-8">
+            <Reveal delay={0.56} className="mt-8">
               <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/70 dark:text-fg-muted">
                 <BookOpen size={12} aria-hidden="true" />
                 Selected writings
@@ -178,8 +177,8 @@ export function PrabhupadaCorner() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
-          </motion.div>
+            </Reveal>
+          </RevealOnScroll>
         </div>
       </Container>
     </Section>

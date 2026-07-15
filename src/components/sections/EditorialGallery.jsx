@@ -1,10 +1,9 @@
-import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeader } from '@/components/ui/SectionHeader.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { galleryItems } from '@/data/gallery.js';
 import { site } from '@/lib/site.js';
-import { easeDivine } from '@/lib/motion.js';
 import { cn } from '@/lib/cn.js';
 
 /**
@@ -13,6 +12,9 @@ import { cn } from '@/lib/cn.js';
  * v0.6: each tile is wrapped in a motion link with hover lift +
  * saffron glow + arrow nudge in the corner. Tiles now link to their
  * full-size asset so the affordance matches the styling.
+ *
+ * v0.8.1: replaced Framer Motion `whileInView` with Reveal. Hover
+ * lift + tap are preserved via plain CSS (group-hover + active:scale).
  */
 const spans = [
   'md:col-span-8 md:row-span-2',
@@ -46,91 +48,84 @@ export function EditorialGallery() {
 
         <div className="grid auto-rows-[180px] grid-cols-1 gap-4 md:auto-rows-[200px] md:grid-cols-12 md:gap-5">
           {galleryItems.slice(0, 8).map((item, i) => (
-            <motion.a
+            <Reveal
               key={item.id}
-              href={item.src || site.contacts.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={item.caption || item.label}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -3 }}
-              whileTap={{ scale: 0.99 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{
-                duration: 0.7,
-                ease: easeDivine,
-                delay: i * 0.04,
-              }}
+              delay={i * 0.04}
               className={cn(
                 'group relative overflow-hidden rounded-editorial shadow-soft outline-none ring-cream-50/0 transition-shadow duration-500 ease-divine hover:shadow-temple focus-visible:ring-2 focus-visible:ring-saffron-500/60 motion-reduce:transition-none dark:shadow-lift dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.6),0_0_30px_rgba(224,170,76,0.18)] dark:focus-visible:ring-saffron-400/70',
                 spans[i],
                 'min-h-[260px] md:min-h-0',
+                'transition-transform duration-300 ease-divine will-change-transform hover:-translate-y-[3px] active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100',
               )}
             >
-              {item.kind === 'image' ? (
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-divine group-hover:scale-[1.06] dark:cinematic"
-                />
-              ) : (
+              <a
+                href={item.src || site.contacts.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.caption || item.label}
+                className="absolute inset-0 block"
+              >
+                {item.kind === 'image' ? (
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-divine group-hover:scale-[1.06] dark:cinematic"
+                  />
+                ) : (
+                  <div
+                    className={cn(
+                      'absolute inset-0 bg-gradient-to-br transition-transform duration-1000 ease-divine group-hover:scale-[1.06]',
+                      gradients[(i - 2) % gradients.length],
+                    )}
+                    aria-hidden
+                  />
+                )}
                 <div
-                  className={cn(
-                    'absolute inset-0 bg-gradient-to-br transition-transform duration-1000 ease-divine group-hover:scale-[1.06]',
-                    gradients[(i - 2) % gradients.length],
-                  )}
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      'linear-gradient(to top, rgba(15,13,20,0.65) 0%, rgba(15,13,20,0) 60%)',
+                  }}
                   aria-hidden
                 />
-              )}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    'linear-gradient(to top, rgba(15,13,20,0.65) 0%, rgba(15,13,20,0) 60%)',
-                }}
-                aria-hidden
-              />
-              {/* hover saffron sweep */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-saffron-500/0 via-saffron-500/10 to-saffron-500/0 opacity-0 transition-opacity duration-500 ease-divine group-hover:opacity-100 motion-reduce:transition-none"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-cream-50/90 text-temple-800 opacity-0 transition-all duration-500 ease-divine group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-100 scale-90 -translate-x-1 motion-reduce:transition-none"
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 17L17 7M9 7h8v8" />
-                </svg>
-              </span>
-              <figcaption className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:glow-gold-soft">
-                  {item.tag || 'IYF Sylhet'}
-                </div>
-                <div className="mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-hover:text-saffron-200 dark:group-hover:text-saffron-300">
-                  {item.caption || item.label}
-                </div>
-              </figcaption>
-            </motion.a>
+                {/* hover saffron sweep */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-saffron-500/0 via-saffron-500/10 to-saffron-500/0 opacity-0 transition-opacity duration-500 ease-divine group-hover:opacity-100 motion-reduce:transition-none"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-cream-50/90 text-temple-800 opacity-0 transition-all duration-500 ease-divine group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-100 scale-90 -translate-x-1 motion-reduce:transition-none"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17L17 7M9 7h8v8" />
+                  </svg>
+                </span>
+                <figcaption className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+                  <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300/90 dark:text-saffron-400 dark:glow-gold-soft">
+                    {item.tag || 'IYF Sylhet'}
+                  </div>
+                  <div className="mt-1 font-display text-lg text-cream-50 md:text-xl transition-colors duration-300 ease-divine group-hover:text-saffron-200 dark:group-hover:text-saffron-300">
+                    {item.caption || item.label}
+                  </div>
+                </figcaption>
+              </a>
+            </Reveal>
           ))}
         </div>
 
         <div className="mt-12 flex justify-center">
-          <motion.a
+          <a
             href={site.contacts.youtube}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 360, damping: 24 }}
-            className="group inline-flex items-center gap-3 rounded-full border border-temple-800/20 bg-cream-50 px-6 py-3 text-xs font-medium uppercase tracking-eyebrow text-temple-800 transition-all duration-300 hover:border-saffron-500 hover:bg-saffron-500/5 hover:text-saffron-600 motion-reduce:transition-none dark:border-white/10 dark:bg-ink-floating/85 dark:text-fg-main dark:hover:border-saffron-400 dark:hover:bg-saffron-400/10 dark:hover:text-saffron-300"
+            className="group inline-flex items-center gap-3 rounded-full border border-temple-800/20 bg-cream-50 px-6 py-3 text-xs font-medium uppercase tracking-eyebrow text-temple-800 transition-all duration-300 hover:-translate-y-[2px] hover:border-saffron-500 hover:bg-saffron-500/5 hover:text-saffron-600 motion-reduce:hover:translate-y-0 motion-reduce:transition-none active:scale-[0.97] dark:border-white/10 dark:bg-ink-floating/85 dark:text-fg-main dark:hover:border-saffron-400 dark:hover:bg-saffron-400/10 dark:hover:text-saffron-300"
           >
             <Play size={12} className="text-saffron-500 transition-transform duration-300 group-hover:scale-110" />
             Watch on Gauradesh TV
-          </motion.a>
+          </a>
         </div>
       </Container>
     </Section>

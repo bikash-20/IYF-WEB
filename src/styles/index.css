@@ -166,23 +166,52 @@
     }
   }
 
-  /* ----- v0.8 Reveal safety net --------------------------------
-   * Belt-and-braces: if Framer Motion / IntersectionObserver ever
-   * fails to fire (slow hydration, lazy chunk still loading, ad
-   * blocker, dev-tools throttling) the elements below would stay
-   * at opacity:0 forever. We force them back to visible after a
-   * short delay so a broken animation can never hide real text.
+  /* ----- v0.8.1 Reveal system ----------------------------------
+   * Pure-CSS fade-up reveal driven by a single global
+   * IntersectionObserver (mounted in App.jsx). The design has two
+   * safety properties:
    *
-   * Applied to every motion element on the page; the trigger is
-   * `data-reveal="1"` set by App.jsx once mounted (so SSR/initial
-   * render isn't affected). If JS never runs, the rule below never
-   * matches — but we also ship a noscript fallback in index.html
-   * for that case.
+   *   1. The DEFAULT state of any [data-reveal-target] is fully
+   *      visible (opacity:1, no transform). The element only
+   *      becomes hidden AFTER JS sets data-reveal="no" on it. If
+   *      JS never runs, no element is ever hidden — graceful
+   *      degradation to "no animation, fully visible".
+   *
+   *   2. The App.jsx observer + a 2s hard fallback timer both flip
+   *      data-reveal="yes" once the element enters the viewport
+   *      (or after 2s, whichever comes first). The fallback is the
+   *      layer that catches theme-toggle re-renders — the per-element
+   *      observer may briefly re-attach during a parent re-render
+   *      and read "out of view", but the 2s fallback guarantees
+   *      release even in that case.
+   *
+   * Reduced motion: the `prefers-reduced-motion` block short-circuits
+   * the transition so reveals are instantaneous and content is
+   * visible immediately.
    * --------------------------------------------------------------- */
-  html[data-reveal="ready"] [data-reveal-target] {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
+  .reveal[data-reveal="no"] {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal[data-reveal="yes"] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal[data-reveal="no"],
+    .reveal[data-reveal="yes"] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 }
 

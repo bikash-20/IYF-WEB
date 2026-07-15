@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/cn.js';
-import { easeDivine } from '@/lib/motion.js';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 
 /**
  * FloatingCard — a handcrafted surface used for the editorial card
@@ -11,6 +10,9 @@ import { easeDivine } from '@/lib/motion.js';
  *
  * Has nothing to do with "SaaS dashboard" cards — feels paper-like,
  * with quiet depth.
+ *
+ * v0.8.1: replaced Framer Motion `whileInView` with Reveal. The
+ * index-driven stagger now lives on the Reveal `delay` prop.
  */
 export function FloatingCard({
   eyebrow,
@@ -69,46 +71,27 @@ export function FloatingCard({
     className,
   );
 
+  const revealDelay = (index || 0) * 0.05;
+
   if (to) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.05 }}
-        transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
-        className="block focus:outline-none"
-      >
+      <Reveal delay={revealDelay} className="block focus:outline-none">
         <Link to={to} className={classes}>
           {inner}
         </Link>
-      </motion.div>
+      </Reveal>
     );
   }
   if (href) {
     return (
-      <motion.a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.05 }}
-        transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
-        className={classes}
-      >
+      <Reveal as="a" delay={revealDelay} href={href} target="_blank" rel="noopener noreferrer" className={classes}>
         {inner}
-      </motion.a>
+      </Reveal>
     );
   }
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
-      className={classes}
-    >
+    <Reveal delay={revealDelay} className={classes}>
       {inner}
-    </motion.div>
+    </Reveal>
   );
 }

@@ -1,44 +1,41 @@
-import { Children, cloneElement, isValidElement } from 'react';
-import { motion } from 'framer-motion';
-import { stagger, fadeUp } from '@/lib/motion.js';
+import { Children, isValidElement } from 'react';
+import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { cn } from '@/lib/cn.js';
 
 /**
  * RevealStagger — sweeps its children in one after another when the
- * viewport reaches them. Each child should already be a node (ideally
- * a `motion.*`); we inject `variants={fadeUp}` so the parent's
- * stagger variant triggers each child's `hidden` → `visible`
- * transition in turn.
+ * viewport reaches them. Each child is wrapped in a Reveal with a
+ * cascading `delay` prop so the children fade up in sequence.
  *
- * Pass `wrapClassName` to control how the parent is laid out.
+ * v0.8.1: replaced the Framer Motion variants-based stagger with the
+ * CSS-driven reveal system (RevealOnScroll + Reveal with inline
+ * delays) to be robust against theme toggle re-renders. Existing
+ * consumers (e.g. ContactPage) continue to work as a drop-in
+ * replacement.
  */
 export function RevealStagger({
   children,
   delay = 0.08,
   as = 'div',
   className,
-  viewportMargin = '-80px',
-  once = true,
 }) {
-  const Parent = motion[as] || motion.div;
   return (
-    <Parent
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: viewportMargin }}
-      variants={stagger(delay)}
-      className={className}
-    >
+    <RevealOnScroll as={as} className={cn(className)}>
       {Children.map(children, (child, i) => {
         if (!isValidElement(child)) return child;
-        // If child has its own variants (e.g. a stronger fadeUpSm on the
-        // schedule timeline), respect them; otherwise inject our default.
-        const childVariants = child.props.variants || fadeUp;
-        return cloneElement(child, {
-          key: child.key ?? i,
-          variants: childVariants,
-        });
+        // Wrap each child in Reveal with an index-based delay for the
+        // cascade. Preserve the child's own className and key.
+        return (
+          <Reveal
+            key={child.key ?? i}
+            delay={i * delay}
+            className={child.props.className}
+          >
+            {child.props.children ?? child}
+          </Reveal>
+        );
       })}
-    </Parent>
+    </RevealOnScroll>
   );
 }

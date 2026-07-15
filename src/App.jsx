@@ -54,34 +54,73 @@ export default function App() {
     }
   }, [location.pathname, location.search, navigate]);
 
-  // v0.8 Reveal safety net — Framer Motion's `whileInView` relies on
-  // an IntersectionObserver that, on rare occasions (slow hydration,
-  // heavy bundle, dev tools throttling), can leave elements stuck at
-  // opacity:0. We schedule a one-shot global release: after 1500ms,
-  // any element still at opacity:0 inside the app shell is forced to
-  // opacity:1, transform:none. This guarantees no content is ever
-  // permanently hidden by a broken animation.
+  // v0.8.1 Reveal system — single global IntersectionObserver.
+  //
+  // The old design (Framer Motion whileInView + safety timer) had a
+  // theme-toggle bug: a parent re-render during theme toggle would
+  // detach Framer's per-element observer; on reattach the observer
+  // read "out of view" for one frame; with `once: true` that was
+  // permanent, so the element stayed at opacity:0.
+  //
+  // The new design:
+  //   1. RevealOnScroll renders plain <div data-reveal-target> nodes.
+  //      No Framer Motion. CSS handles the fade.
+  //   2. ONE IntersectionObserver, mounted here, watches every
+  //      [data-reveal-target] node in the app shell.
+  //   3. When a target enters the viewport, the observer sets
+  //      data-reveal="yes" on it. CSS transitions handle the fade.
+  //   4. A 2-second hard fallback timer sets data-reveal="yes" on
+  //      every still-hidden target so nothing is ever stuck.
+  //   5. The observer is set up once (top-level App effect), and is
+  //      resilient to re-renders because it watches a parent
+  //      subtree, not individual element instances.
+  //   6. The observer is re-created on route change so newly-mounted
+  //      pages get a fresh scan.
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const release = () => {
-      const root = document.getElementById('app-root') || document.body;
-      const stuck = root.querySelectorAll('[style*="opacity: 0"], [style*="opacity:0"]');
-      stuck.forEach((el) => {
-        // Only release on-screen elements — off-screen ones may
-        // legitimately be in their pre-reveal state waiting to scroll.
-        const r = el.getBoundingClientRect();
-        const onScreen =
-          r.bottom > 0 && r.right > 0 && r.top < window.innerHeight && r.left < window.innerWidth;
-        if (onScreen) {
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-          el.style.filter = 'none';
-        }
-      });
-      document.documentElement.setAttribute('data-reveal', 'ready');
+    if (typeof window === 'undefined') return undefined;
+    const root = document.getElementById('app-root') || document.body;
+
+    const reveal = (el) => {
+      if (el.getAttribute('data-reveal') === 'yes') return;
+      el.setAttribute('data-reveal', 'yes');
     };
-    const timer = window.setTimeout(release, 1500);
-    return () => window.clearTimeout(timer);
+
+    // Hard fallback: after 2s, reveal everything regardless of scroll
+    // position. This is the layer that catches theme-toggle orphans
+    // and any IntersectionObserver misfires.
+    const fallback = window.setTimeout(() => {
+      root.querySelectorAll('[data-reveal-target][data-reveal="no"]').forEach(reveal);
+    }, 2000);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) reveal(entry.target);
+        });
+      },
+      // amount: 0.01 = "fire as soon as 1% of the element peeks into
+      // the viewport". Generous rootMargin so reveals fire BEFORE the
+      // user actually scrolls past them — feels proactive, not late.
+      { threshold: 0.01, rootMargin: '0px 0px -10% 0px' },
+    );
+
+    // Observe existing + future targets. MutationObserver picks up
+    // targets that mount after this effect runs (route changes,
+    // lazy-loaded pages, theme-triggered re-renders).
+    const scan = () => {
+      root.querySelectorAll('[data-reveal-target]').forEach((el) => {
+        if (el.getAttribute('data-reveal') !== 'yes') observer.observe(el);
+      });
+    };
+    scan();
+    const mutationObserver = new MutationObserver(scan);
+    mutationObserver.observe(root, { childList: true, subtree: true });
+
+    return () => {
+      window.clearTimeout(fallback);
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
   }, [location.pathname]);
 
   return (

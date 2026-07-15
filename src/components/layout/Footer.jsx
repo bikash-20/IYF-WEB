@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Youtube, Facebook, MessageCircle } from 'lucide-react';
 import { site } from '@/lib/site.js';
-import { easeDivine } from '@/lib/motion.js';
 import { MadeByBikash } from '@/components/ui/MadeByBikash.jsx';
 import { Mantra } from '@/components/ui/Mantra.jsx';
+import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 
 const groups = [
   {
@@ -43,27 +43,18 @@ const social = [
   },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.9, ease: easeDivine },
-  },
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
-};
-
+/**
+ * Footer — root footer with mantra band, link groups, social icons,
+ * and credit line.
+ *
+ * v0.8.1: replaced Framer Motion `whileInView` variants with the
+ * CSS-driven reveal system (RevealOnScroll + Reveal). Hover and tap
+ * transforms on social icons became CSS-driven hover scale + tap.
+ */
 export function Footer() {
   return (
-    <motion.footer
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.05 }}
-      variants={stagger}
+    <RevealOnScroll
+      as="footer"
       className="relative overflow-hidden border-t border-temple-800/10 bg-ink-900 text-cream-100 dark:border-white/8"
     >
       {/* Corner glow — saffron halo behind the footer in light mode;
@@ -98,7 +89,7 @@ export function Footer() {
 
       <div className="container relative py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
-          <motion.div variants={fadeUp} className="md:col-span-5">
+          <Reveal className="md:col-span-5" delay={0.0}>
             <div className="flex items-center gap-2.5">
               <span className="grid h-7 w-7 place-items-center rounded-full bg-saffron-500/15 ring-1 ring-saffron-500/25">
                 <span className="h-2 w-2 rounded-full bg-saffron-500 animate-glow" />
@@ -139,29 +130,22 @@ export function Footer() {
 
             <div className="mt-7 flex items-center gap-2">
               {social.map(({ icon: Icon, label, href }) => (
-                <motion.a
+                <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  whileHover={{ y: -2, scale: 1.06 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: 'spring', stiffness: 380, damping: 24 }}
-                  className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/15 text-cream-100/80 transition-colors duration-300 hover:border-saffron-500/60 hover:bg-saffron-500/10 hover:text-saffron-400 motion-reduce:transition-none"
+                  className="grid h-9 w-9 place-items-center rounded-full border border-cream-100/15 text-cream-100/80 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.06] hover:border-saffron-500/60 hover:bg-saffron-500/10 hover:text-saffron-400 active:scale-95 motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 motion-reduce:transition-none"
                 >
                   <Icon size={15} aria-hidden="true" />
-                </motion.a>
+                </a>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
 
-          {groups.map((g) => (
-            <motion.div
-              key={g.heading}
-              variants={fadeUp}
-              className="md:col-span-2"
-            >
+          {groups.map((g, gi) => (
+            <Reveal key={g.heading} className="md:col-span-2" delay={0.07 + gi * 0.05}>
               <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-400">
                 {g.heading}
               </div>
@@ -183,18 +167,18 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
 
-        <motion.div
-          variants={fadeUp}
+        <Reveal
+          delay={0.24}
           className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-cream-100/10 pt-6 text-xs text-cream-100/60 md:flex-row md:items-center"
         >
           <p>Hare Krishna 🙏 — {site.name}</p>
           <MadeByBikash />
-        </motion.div>
+        </Reveal>
       </div>
-    </motion.footer>
+    </RevealOnScroll>
   );
 }

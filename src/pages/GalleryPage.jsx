@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import { PageHero } from '@/components/layout/PageHero.jsx';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
 import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
 import { galleryItems } from '@/data/gallery.js';
-import { easeDivine } from '@/lib/motion.js';
 
 export function GalleryPage() {
   useMeta({
@@ -29,23 +29,15 @@ export function GalleryPage() {
           <SectionHeading eyebrow="Deity darshan" title="From the altar" />
           <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
             {galleryItems.map((g, i) => (
-              <motion.a
-                key={g.id}
-                href={g.src || site.contacts.facebook}
-                target={g.src ? undefined : '_blank'}
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.05 }}
-                transition={{
-                  duration: 0.7,
-                  ease: easeDivine,
-                  delay: (i % 6) * 0.04,
-                }}
-                whileHover={{ y: -3 }}
-                className="group block overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-100 shadow-soft outline-none transition-all duration-500 ease-divine hover:border-saffron-500/40 hover:shadow-temple motion-reduce:transition-none"
-                style={{ aspectRatio: g.aspect }}
-              >
+              <Reveal key={g.id} delay={(i % 6) * 0.04} className="block">
+                <motion.a
+                  href={g.src || site.contacts.facebook}
+                  target={g.src ? undefined : '_blank'}
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3 }}
+                  className="group block overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-100 shadow-soft outline-none transition-all duration-500 ease-divine hover:border-saffron-500/40 hover:shadow-temple motion-reduce:transition-none"
+                  style={{ aspectRatio: g.aspect }}
+                >
                 {g.kind === 'image' ? (
                   <img
                     src={g.src}
@@ -71,7 +63,8 @@ export function GalleryPage() {
                     {g.caption}
                   </span>
                 )}
-              </motion.a>
+                </motion.a>
+              </Reveal>
             ))}
           </div>
         </Container>

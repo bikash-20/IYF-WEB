@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { EditorialImage } from '@/components/ui/EditorialImage.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
-import { stagger, fadeUp } from '@/lib/motion.js';
+import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 
 /**
  * CoordinatorMessage — a personal letter from the youth forum's
@@ -13,6 +13,10 @@ import { stagger, fadeUp } from '@/lib/motion.js';
  * a comfortable measure, a maroon drop-quote to open, and a script
  * signature at the foot. Image mirrors the editorial About section but
  * is offset and unframed so the letter is the protagonist.
+ *
+ * v0.8.1: replaced Framer Motion `whileInView` variants with the
+ * CSS-driven reveal system. RevealOnScroll triggers the column as a
+ * whole; children stagger via inline delays.
  */
 export function CoordinatorMessage() {
   return (
@@ -20,42 +24,35 @@ export function CoordinatorMessage() {
       <Container>
         <div className="grid items-start gap-14 md:grid-cols-12 md:gap-20">
           {/* Letter column */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-            variants={stagger(0.08)}
-            className="md:col-span-7"
-          >
+          <RevealOnScroll className="md:col-span-7">
             {/* Eyebrow */}
-            <motion.div
-              variants={fadeUp}
-              className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft"
-            >
+            <Reveal className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft" delay={0.0}>
               A personal letter
-            </motion.div>
+            </Reveal>
 
             {/* Display headline */}
-            <motion.h2
-              variants={fadeUp}
+            <Reveal
+              as="h2"
+              delay={0.08}
               className="mt-4 font-display text-display-lg text-balance text-temple-900 dark:text-fg-main dark:glow-gold-soft"
             >
               Connecting with your{' '}
               <span className="text-saffron-gradient italic">own heart</span>.
-            </motion.h2>
+            </Reveal>
 
             {/* Salutation */}
-            <motion.p
-              variants={fadeUp}
+            <Reveal
+              as="p"
+              delay={0.16}
               className="mt-10 font-display text-2xl italic text-temple-800 dark:text-fg-main"
             >
               Dear friend,
-            </motion.p>
+            </Reveal>
 
             {/* Letter body — serif prose, generous spacing, narrow measure */}
             <div className="mt-8 space-y-7 max-w-[34rem] text-[1.075rem] leading-[1.85] text-temple-800/85 dark:text-fg-body dark:leading-dark">
               {/* Opening paragraph with drop quote */}
-              <motion.p variants={fadeUp} className="relative">
+              <Reveal as="p" delay={0.24} className="relative">
                 <span
                   aria-hidden="true"
                   className="float-left mr-3 mt-1 font-display text-[5rem] leading-[0.85] text-maroon-600/85 select-none dark:text-maroon-400"
@@ -70,16 +67,16 @@ export function CoordinatorMessage() {
                 The Bhagavad-gītā reminds us that lasting peace is not found
                 by chasing temporary achievements, but by awakening our
                 eternal relationship with Śrī Kṛṣṇa.
-              </motion.p>
+              </Reveal>
 
-              <motion.p variants={fadeUp}>
+              <Reveal as="p" delay={0.32}>
                 Through sincere chanting of the Holy Name, hearing
                 transcendental wisdom, serving others with humility, and
                 keeping the company of devotees, the heart gradually becomes
                 peaceful, joyful, and filled with purpose.
-              </motion.p>
+              </Reveal>
 
-              <motion.p variants={fadeUp}>
+              <Reveal as="p" delay={0.40}>
                 ISKCON Youth Forum Sylhet is more than a gathering &mdash; it
                 is a spiritual family where young people grow together in
                 devotion, character, and compassion. Whether you are taking
@@ -88,19 +85,19 @@ export function CoordinatorMessage() {
                 with an open heart, ask questions, chant with us, study the
                 timeless wisdom of the Bhagavad-gītā, and experience the
                 happiness that comes from serving the Supreme Lord with love.
-              </motion.p>
+              </Reveal>
 
-              <motion.p variants={fadeUp}>
+              <Reveal as="p" delay={0.48}>
                 May Lord Śrī Kṛṣṇa bless you with wisdom to choose the right
                 path, strength to walk it with determination, and devotion to
                 remember Him in every moment of life. We look forward to
                 welcoming you to ISKCON Youth Forum Sylhet.
-              </motion.p>
+              </Reveal>
             </div>
 
             {/* Signature block */}
-            <motion.div
-              variants={fadeUp}
+            <Reveal
+              delay={0.56}
               className="mt-12 max-w-[34rem] border-t border-saffron-500/30 pt-8 dark:border-saffron-400/25"
             >
               <div className="font-mono text-[0.65rem] uppercase tracking-eyebrow text-temple-700/60 dark:text-fg-muted">
@@ -119,18 +116,12 @@ export function CoordinatorMessage() {
                   ISKCON Youth Forum, Sylhet
                 </span>
               </div>
-            </motion.div>
-          </motion.div>
+            </Reveal>
+          </RevealOnScroll>
 
           {/* Portrait column — offset for editorial rhythm, unframed */}
           <div className="md:col-span-5 md:pt-20">
-            <motion.figure
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-              className="relative"
-            >
+            <Reveal delay={0.15} as="figure" className="relative">
               <RadialLight
                 color="rgba(92,22,32,0.16)"
                 size="65%"
@@ -149,7 +140,7 @@ export function CoordinatorMessage() {
                   Coordinator, IYF Sylhet
                 </span>
               </figcaption>
-            </motion.figure>
+            </Reveal>
           </div>
         </div>
       </Container>

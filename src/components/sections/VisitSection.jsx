@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
@@ -37,17 +36,14 @@ export function VisitSection() {
                   </span>
                 </div>
               </div>
-              <motion.a
+              <a
                 href="https://maps.google.com/?q=Jugaltila+Kajalshah+Sylhet"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0, scale: 0.97 }}
-                transition={{ type: 'spring', stiffness: 360, damping: 26 }}
-                className="cta-solid absolute bottom-4 right-4 backdrop-blur-sm"
+                className="cta-solid absolute bottom-4 right-4 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97]"
               >
                 Open in Maps →
-              </motion.a>
+              </a>
             </div>
           </RevealOnScroll>
 

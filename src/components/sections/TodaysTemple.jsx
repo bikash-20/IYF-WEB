@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ArrowUpRight, Check, Clock } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeader } from '@/components/ui/SectionHeader.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { useCurrentProgram, useNow } from '@/hooks/useNow.js';
 import { featuredFestival } from '@/data/featuredFestival.js';
 import { todaysThought } from '@/content/thoughtOfTheDay.js';
 import { todaysVerse } from '@/content/verseOfTheDay.js';
-import { easeDivine, stagger, fadeUp } from '@/lib/motion.js';
 
 /**
  * TodaysTemple — the home-page "what is alive at the mandir right now"
@@ -21,6 +20,10 @@ import { easeDivine, stagger, fadeUp } from '@/lib/motion.js';
  *   - RadialLight removed from inside cards — it bled visibly on
  *     bright surfaces. The atmosphere itself carries the warmth now.
  *   - Festival countdown memoized so the page is steady.
+ *
+ * v0.8.1: replaced Framer Motion `whileInView` with Reveal. Each row
+ * has its own delay; the live-schedule list items use Reveal with an
+ * index-based stagger.
  */
 
 function minutesUntil(timeStr, now) {
@@ -80,13 +83,7 @@ export function TodaysTemple() {
         />
 
         {/* ---- Row 1: Live schedule (full width) --------------------- */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.05 }}
-          variants={stagger(0.05)}
-          className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/85 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift md:p-10"
-        >
+        <Reveal className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/85 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift md:p-10">
           <div className="tex-overlay tex-paper" aria-hidden />
 
           <div className="relative">
@@ -112,13 +109,14 @@ export function TodaysTemple() {
             )}
 
             <ul className="mt-7 divide-y divide-temple-800/[0.08]">
-              {schedule.map((p) => {
+              {schedule.map((p, i) => {
                 const isLive = p.status === 'live';
                 const isDone = p.status === 'done';
                 return (
-                  <motion.li
+                  <Reveal
+                    as="li"
                     key={p.id}
-                    variants={fadeUp}
+                    delay={i * 0.04}
                     className={`grid grid-cols-[auto_1fr_auto] items-baseline gap-4 py-3 md:gap-6 ${
                       isDone ? 'opacity-55' : ''
                     }`}
@@ -148,7 +146,7 @@ export function TodaysTemple() {
                         </span>
                       )}
                     </span>
-                  </motion.li>
+                  </Reveal>
                 );
               })}
             </ul>
@@ -160,15 +158,12 @@ export function TodaysTemple() {
               Full day & weekly rotation <ArrowUpRight size={12} />
             </Link>
           </div>
-        </motion.div>
+        </Reveal>
 
         {/* ---- Row 2: Thought + Verse -------------------------------- */}
         <div className="mt-6 grid gap-5 md:grid-cols-2 md:gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.9, ease: easeDivine, delay: 0.05 }}
+          <Reveal
+            delay={0.05}
             className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/75 dark:shadow-lift md:p-10"
           >
             <div className="tex-overlay tex-linen" aria-hidden />
@@ -181,13 +176,10 @@ export function TodaysTemple() {
                 — {thought.author}
               </div>
             </div>
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.9, ease: easeDivine, delay: 0.12 }}
+          <Reveal
+            delay={0.12}
             className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-7 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/75 dark:shadow-lift md:p-10"
           >
             <div className="tex-overlay tex-cloth" aria-hidden />
@@ -206,15 +198,12 @@ export function TodaysTemple() {
                 {verse.reference}
               </div>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
 
         {/* ---- Row 3: Festival countdown (full width) --------------- */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 1.0, ease: easeDivine, delay: 0.15 }}
+        <Reveal
+          delay={0.15}
           className="relative mt-6 overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/75 p-7 shadow-soft md:p-10"
         >
           <div className="tex-overlay tex-stone" aria-hidden />
@@ -246,7 +235,7 @@ export function TodaysTemple() {
               </Link>
             </div>
           </div>
-        </motion.div>
+        </Reveal>
 
         <div className="mt-8 flex items-center gap-2 text-xs text-temple-700/70 dark:text-fg-muted">
           <Clock size={12} className="text-temple-500 dark:text-fg-muted" />

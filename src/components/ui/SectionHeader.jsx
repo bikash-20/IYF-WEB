@@ -1,45 +1,45 @@
-import { motion } from 'framer-motion';
-import { fadeUp, stagger } from '@/lib/motion.js';
 import { cn } from '@/lib/cn.js';
+import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 
 /**
  * SectionHeader — the standard section header. Eyebrow, h2, lede,
  * all with staggered fade-up on viewport entry. Use this instead of
- * building one inline. The internal motion variants are staggered
- * children so the eyebrow lands first, then the title, then the lede.
+ * building one inline. RevealOnScroll triggers the column; each
+ * child uses Reveal with an inline delay for the cascade.
+ *
+ * v0.8.1: replaced Framer Motion `whileInView` + variants with
+ * CSS-driven Reveal to be robust against theme toggle re-renders.
  */
-const variants = stagger(0.12);
-
 export function SectionHeader({ eyebrow, title, lede, align = 'left', className }) {
   return (
-    <motion.header
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.05 }}
-      variants={variants}
+    <RevealOnScroll
+      as="header"
       className={cn(
         'mb-16 max-w-2xl md:mb-20',
         align === 'center' && 'mx-auto text-center',
         className,
       )}
     >
-      <motion.div variants={fadeUp} className="eyebrow">
+      <Reveal className="eyebrow" delay={0.0}>
         {eyebrow}
-      </motion.div>
-      <motion.h2
-        variants={fadeUp}
+      </Reveal>
+      <Reveal
+        as="h2"
+        delay={0.12}
         className="mt-4 font-display text-display-md text-balance"
       >
         {title}
-      </motion.h2>
+      </Reveal>
       {lede && (
-        <motion.p
-          variants={fadeUp}
+        <Reveal
+          as="p"
+          delay={0.24}
           className="mt-5 max-w-xl text-base leading-relaxed text-temple-700/80 md:text-lg"
         >
           {lede}
-        </motion.p>
+        </Reveal>
       )}
-    </motion.header>
+    </RevealOnScroll>
   );
 }

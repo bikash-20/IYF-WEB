@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { featuredFestival } from '@/data/featuredFestival.js';
-import { easeDivine } from '@/lib/motion.js';
 
 /**
  * FestivalCountdown — the next-featured festival with a live
@@ -45,13 +44,7 @@ export function FestivalCountdown() {
   return (
     <Section variant="deep" pad="default">
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 1.0, ease: easeDivine }}
-          className="relative overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/60 p-8 dark:border-saffron-400/15 dark:bg-ink-deep md:p-14"
-        >
+        <Reveal className="relative overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/60 p-8 dark:border-saffron-400/15 dark:bg-ink-deep md:p-14">
           <RadialLight
             color="rgba(217,138,43,0.22)"
             size="55%"
@@ -105,7 +98,7 @@ export function FestivalCountdown() {
               </p>
             </div>
           </div>
-        </motion.div>
+        </Reveal>
       </Container>
     </Section>
   );

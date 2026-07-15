@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/Badge.jsx';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { UtensilsCrossed, Sparkles, CalendarRange } from 'lucide-react';
 
 /**
@@ -124,7 +124,7 @@ function TimelineStrip({ festivals }) {
 
         {rows.map(({ f, start, span }) => (
           <div key={f.id} className="grid grid-cols-12 items-center gap-2">
-            <div key={i} className="col-span-12 md:col-span-3 md:pr-3 text-sm text-temple-800 dark:text-fg-main">
+            <div className="col-span-12 md:col-span-3 md:pr-3 text-sm text-temple-800 dark:text-fg-main">
               {f.name}
             </div>
             <div className="col-span-12 md:col-span-9 grid grid-cols-12 gap-2">
@@ -178,14 +178,9 @@ export function CalendarSection({ festivals }) {
 
   return (
     <div className="space-y-10">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <Reveal>
         <TimelineStrip festivals={festivals} />
-      </motion.div>
+      </Reveal>
 
       {grouped.map((band) => (
         <section key={band.id}>

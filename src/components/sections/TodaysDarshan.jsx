@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Clock, Sparkles } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { useCurrentProgram } from '@/hooks/useNow.js';
-import { easeDivine } from '@/lib/motion.js';
 
 /**
  * TodaysDarshan — the "Arrival" moment after the hero.
@@ -15,6 +14,8 @@ import { easeDivine } from '@/lib/motion.js';
  *   - Generous padding (section-pad) so it feels like a breathing moment,
  *     not a busy next-section
  *   - "Next" program shown to the right of the card
+ *
+ * v0.8.1: replaced Framer Motion `whileInView` with Reveal.
  */
 export function TodaysDarshan() {
   const { current, next, bdMinutes } = useCurrentProgram();
@@ -32,13 +33,7 @@ export function TodaysDarshan() {
     <Section variant="warm" pad="default">
       <Container>
         <div className="grid items-stretch gap-6 md:grid-cols-12">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 1.1, ease: easeDivine }}
-            className="md:col-span-7"
-          >
+          <Reveal className="md:col-span-7">
             <div className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-8 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift md:p-10">
               <RadialLight
                 color="rgba(217,138,43,0.18)"
@@ -81,15 +76,9 @@ export function TodaysDarshan() {
                 </>
               )}
             </div>
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 1.1, ease: easeDivine, delay: 0.1 }}
-            className="flex flex-col gap-4 md:col-span-5"
-          >
+          <Reveal delay={0.1} className="flex flex-col gap-4 md:col-span-5">
             <div className="rounded-editorial border border-temple-800/10 bg-cream-50/60 p-7 dark:border-white/8 dark:bg-ink-floating/65">
               <div className="eyebrow">Up next</div>
               {next && (
@@ -114,7 +103,7 @@ export function TodaysDarshan() {
               </span>
               <Sparkles size={14} className="text-saffron-500 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-saffron-400" />
             </Link>
-          </motion.div>
+          </Reveal>
         </div>
       </Container>
     </Section>

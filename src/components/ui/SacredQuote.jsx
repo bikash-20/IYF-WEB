@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { easeDivine } from '@/lib/motion.js';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 
 /**
  * SacredQuote — a quiet, full-bleed quote block. Sits between heavier
@@ -61,13 +60,7 @@ export function SacredQuote({
         style={{ background: 'radial-gradient(closest-side, rgba(229,162,74,0.45), rgba(229,162,74,0) 70%)' }}
       />
       <div className="container section-pad text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 1.4, ease: easeDivine }}
-          className="relative mx-auto max-w-3xl"
-        >
+        <Reveal className="relative mx-auto max-w-3xl">
           {/* Glowing quotation glyph — large, faded into the dark */}
           <div
             aria-hidden
@@ -88,7 +81,7 @@ export function SacredQuote({
               — {quoteSource}
             </div>
           )}
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

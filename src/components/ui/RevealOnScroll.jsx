@@ -1,62 +1,72 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { fadeUp } from '@/lib/motion.js';
+import { useRef, useEffect } from 'react';
+import { cn } from '@/lib/cn.js';
 
 /**
- * RevealOnScroll — wraps children in a viewport-aware fade-up. Use
- * sparingly; whole pages should not animate, only key elements.
+ * RevealOnScroll — CSS-driven fade-up reveal.
  *
- * v0.8 safety net:
- *   - No negative viewport margin — sections that start above the
- *     fold used to stay at opacity:0 because the IntersectionObserver
- *     trigger box never overlapped them. We trigger as soon as any
- *     pixel of the element enters the viewport (default amount: 0).
- *   - `once: true` keeps the element visible after the first reveal.
- *   - A short IntersectionObserver fallback (covers the rare case
- *     where Framer Motion's intersection observer hasn't fired yet)
- *     forces the element to opacity:1 if it sits on-screen for more
- *     than 800ms. This guarantees no content is ever stuck invisible.
+ * Why this is NOT a Framer Motion whileInView:
+ *   Framer Motion's `whileInView` + `viewport.once: true` couples the
+ *   "revealed" state to an IntersectionObserver that is *attached to
+ *   the motion element instance*. When a parent re-renders (and theme
+ *   toggle triggers a parent re-render through the Navbar), Framer's
+ *   controller briefly detaches and reattaches the observer. On
+ *   reattach the observer may read "out of view" for one frame
+ *   because the layout just shifted a pixel from a transition or
+ *   scrollbar change. With `once: true`, that single out-of-view
+ *   reading is permanent — the element stays at opacity:0 forever.
+ *
+ * The fix is to remove the per-element coupling entirely:
+ *   1. We render a plain <div> with `data-reveal-target`.
+ *   2. A *single* global IntersectionObserver (mounted in App.jsx)
+ *      flips `data-reveal="yes"` on every target that intersects.
+ *   3. CSS transitions handle the fade. There is no `initial` state
+ *      in JS — the default for `data-reveal-target` is opacity:1,
+ *      and the "hidden" state only applies when `data-reveal="no"`
+ *      has been set by JS. If JS never runs, no element is ever
+ *      hidden.
+ *   4. After 2s, a hard fallback clears `data-reveal="no"` on every
+ *      element so nothing is permanently stuck.
+ *
+ * `delay` is preserved as an inline `transitionDelay` so staggered
+ * sequences still feel staggered.
+ *
+ * Reduced motion: CSS short-circuits the transition to `none` and
+ * leaves opacity at 1, so reveals are instantaneous and visible.
  */
-export function RevealOnScroll({ children, delay = 0, className, as = 'div' }) {
-  const MotionTag = motion[as] || motion.div;
+export function RevealOnScroll({
+  as: Tag = 'div',
+  delay = 0,
+  className,
+  children,
+  ...rest
+}) {
   const ref = useRef(null);
 
-  // Defensive: even if `whileInView` somehow never fires, force the
-  // element visible after a brief delay if it is already on screen.
   useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
     const el = ref.current;
-    if (!el || typeof window === 'undefined') return;
-
-    const reveal = () => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      el.style.filter = 'none';
-    };
-
-    // If the element is already intersecting at mount, Framer Motion
-    // will handle it; but also schedule a safety release so the
-    // content never sits invisible if anything in the chain breaks.
-    const safetyTimer = window.setTimeout(() => {
-      const r = el.getBoundingClientRect();
-      const onScreen =
-        r.bottom > 0 && r.right > 0 && r.top < window.innerHeight && r.left < window.innerWidth;
-      if (onScreen) reveal();
-    }, 1200);
-
-    return () => window.clearTimeout(safetyTimer);
+    if (!el) return undefined;
+    // Tell the global observer this element needs to be revealed.
+    // The observer lives in App.jsx (one instance, shared across the
+    // entire app) and listens for `data-reveal-target` nodes.
+    el.setAttribute('data-reveal-target', 'yes');
+    el.setAttribute('data-reveal', 'no');
+    return undefined;
   }, []);
 
+  const style = {
+    transitionDelay: `${delay}s`,
+    ...(rest.style || {}),
+  };
+
   return (
-    <MotionTag
+    <Tag
       ref={ref}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.05 }}
-      variants={fadeUp}
-      transition={{ delay }}
-      className={className}
+      className={cn('reveal', className)}
+      style={style}
+      {...rest}
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }
