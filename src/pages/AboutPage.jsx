@@ -4,6 +4,7 @@ import { Section, Container } from '@/components/ui/Section.jsx';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
 import { Card, CardEyebrow } from '@/components/ui/Card.jsx';
 import { Button } from '@/components/ui/Button.jsx';
+import { Mantra } from '@/components/ui/Mantra.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
 import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
@@ -73,6 +74,16 @@ export function AboutPage() {
           </div>
         </Container>
       </Section>
+
+      {/* Mantra band — v0.7.3: moved here from the global header.
+          Sits between the warm story section and the values grid as
+          a quiet full-width inscription; reads as ambient engraving
+          rather than UI chrome. */}
+      <div className="border-y border-temple-800/10 bg-cream-100/40">
+        <Container>
+          <Mantra tone="warm" />
+        </Container>
+      </div>
 
       <Section>
         <Container>

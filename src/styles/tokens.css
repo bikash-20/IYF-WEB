@@ -71,14 +71,11 @@
   --glass-blur: 12px;
   --glass-border: rgba(255, 255, 255, 0.4);
 
-  /* Mantra ticker — dark, runs across every page beneath the nav.
-     Reads as part of the dark hero rhythm on home, then carries the
-     same dark warmth into every other page so there's never a cream
-     break right under the navbar. */
-  --ticker-bg: var(--ink-900);
+  /* Mantra inscription tokens — used by Mantra.jsx (About + Footer).
+     The mantra is no longer a global chrome strip; it lives where it
+     belongs in the editorial flow. */
   --ticker-fg: var(--saffron-400);
   --ticker-fg-alt: var(--cream-100);
-  --ticker-border: rgba(255, 255, 255, 0.06);
   --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 8px 32px rgba(20, 16, 24, 0.06);
 
   /* Shadow scale — depth, not decoration */

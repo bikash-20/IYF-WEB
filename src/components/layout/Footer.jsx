@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Youtube, Facebook, MessageCircle } from 'lucide-re
 import { site } from '@/lib/site.js';
 import { easeDivine } from '@/lib/motion.js';
 import { MadeByBikash } from '@/components/ui/MadeByBikash.jsx';
+import { Mantra } from '@/components/ui/Mantra.jsx';
 
 const groups = [
   {
@@ -70,6 +71,24 @@ export function Footer() {
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-32 left-1/2 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-saffron-500/10 blur-3xl"
       />
+
+      {/* Mantra inscription — v0.7.3. Lives here (and on About) so
+          every page closes with the mahā-mantra without needing a
+          global ticker under the navbar. Single hairline above and
+          below frames it on the dark footer without giving it a
+          visible box. */}
+      <div className="relative">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-cream-100/8"
+        />
+        <Mantra tone="deep" />
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-cream-100/8"
+        />
+      </div>
+
       <div className="container relative py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
           <motion.div variants={fadeUp} className="md:col-span-5">
