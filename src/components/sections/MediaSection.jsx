@@ -24,7 +24,7 @@ const links = [
 
 export function MediaSection() {
   return (
-    <Section variant="muted" id="media">
+    <Section variant="haze" id="media" pad="default">
       <Container>
         <SectionHeading eyebrow="Watch & follow" title="Live Darshan & Media" />
 

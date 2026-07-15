@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { DustField } from '@/components/ui/DustField.jsx';
 import { Embers } from '@/components/ui/Embers.jsx';
+import { IncenseDust } from '@/components/ui/IncenseDust.jsx';
 import { useHeroTime } from '@/hooks/useHeroTime.js';
 import { useCurrentProgram } from '@/hooks/useNow.js';
 import { site } from '@/lib/site.js';
@@ -91,17 +92,18 @@ export function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  // Deity photo: lifts upward, sways slightly left, scales a touch,
-  // and only fades once the user is most of the way past the hero.
-  const photoY = useTransform(scrollYProgress, [0, 1], [0, -72]);
-  const photoX = useTransform(scrollYProgress, [0, 1], [0, -24]);
-  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+  // Deity photo: gentle parallax on scroll — anchored rather than
+  // flying away. The text and dust fields carry the eye upward; the
+  // photo only shifts enough to suggest depth.
+  const photoY = useTransform(scrollYProgress, [0, 1], [0, -32]);
+  const photoX = useTransform(scrollYProgress, [0, 1], [0, -12]);
+  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 1.03]);
   const photoOpacity = useTransform(
     scrollYProgress,
     [0, 0.55, 0.92, 1],
     [1, 1, 0.55, 0.2],
   );
-  const photoRotate = useTransform(scrollYProgress, [0, 1], [0, -1.2]);
+  const photoRotate = useTransform(scrollYProgress, [0, 1], [0, -0.6]);
 
   // Foreground mist thins on scroll so the next section reveals
   // through it instead of being hidden until the hero's last frame.
@@ -218,17 +220,20 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* ----- Layer 3: dust field --------------------------------- */}
+      {/* ----- Layer 3a: dust field — illuminated motes around lamp - */}
       <div className="absolute inset-0 -z-10">
         <DustField count={44} />
       </div>
 
+      {/* ----- Layer 3b: incense dust — full-field, almost invisible,
+                  drifting 60–110s. Reads as "still air with movement". */}
+      <div className="absolute inset-0 -z-10">
+        <IncenseDust count={32} />
+      </div>
+
       {/* ----- Layer 4: ambient radial lights (breathing) ---------- */}
       <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0 anim-breathe"
-          style={{ opacity: 0.6 + 0.3 * lampIntensity }}
-        >
+        <div className="absolute inset-0 anim-breathe">
           <RadialLight color={saffronLight} size="62%" pos="50% 22%" />
           <RadialLight color={peacockLight} size="55%" pos="82% 88%" />
         </div>
@@ -290,7 +295,7 @@ export function Hero() {
               {site.legalName} · Jugaltila, Kajalshah
             </motion.div>
 
-            <h1 className="mt-5 font-display text-display-xl text-cream-50 text-balance leading-[0.92]">
+            <h1 className="mt-5 font-display text-display-xl text-cream-50 text-balance leading-[0.92] md:leading-[0.95]">
               <motion.span variants={wordRise} className="block">
                 {headline[0]}
               </motion.span>
@@ -307,7 +312,7 @@ export function Hero() {
 
             <motion.p
               variants={wordRise}
-              className="mt-8 max-w-xl text-base leading-relaxed text-cream-100/85 md:text-lg"
+              className="mt-8 max-w-xl text-[0.95rem] leading-relaxed text-cream-100/85 md:text-lg"
             >
               A home for young people to learn, chant, and grow together in
               Krishna consciousness — through scripture, kirtan, and festival

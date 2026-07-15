@@ -14,16 +14,17 @@ import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
 
 /**
- * Home composition — v0.3 storytelling flow.
+ * Home composition — v0.4 storytelling flow.
  *
  * Hero → TodaysTemple (live schedule + thought + verse + festival
  *   countdown, all in one editorial layer) → About → QuickCards
- *   → TempleDivider → SacredQuote → ScheduleTimeline
- *   → EditorialGallery → Media → Visit
+ *   → TempleDivider(bell) → SacredQuote → ScheduleTimeline
+ *   → TempleDivider(lotus) → EditorialGallery
+ *   → TempleDivider(peacock) → Media → Visit
  *
- * Rhythm: section-pad-default wraps everything except QuickCards
- * (tight). The festival countdown is collapsed inside TodaysTemple
- * so the page reads as a single temple day, not a list of sections.
+ * Three different divider motifs give each transition its own
+ * micro-personality so visitors feel they're moving through
+ * different rooms rather than the same hall on repeat.
  */
 export function HomePage() {
   useMeta({
@@ -37,7 +38,7 @@ export function HomePage() {
       <AboutSection />
       <QuickCards />
 
-      <TempleDivider label="On hearing the holy names" />
+      <TempleDivider label="On hearing the holy names" motif="bell" />
 
       <SacredQuote
         text="Chant the holy names of Krishna — Hare Krishna Hare Krishna, Krishna Krishna Hare Hare — and your heart will be purified."
@@ -47,7 +48,13 @@ export function HomePage() {
       />
 
       <ScheduleTimeline />
+
+      <TempleDivider label="Light, lotus, and the long road" motif="lotus" />
+
       <EditorialGallery />
+
+      <TempleDivider label="Come see for yourself" motif="peacock" />
+
       <MediaSection />
       <VisitSection />
     </motion.div>

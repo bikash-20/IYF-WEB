@@ -16,7 +16,7 @@ import { stagger, fadeUp } from '@/lib/motion.js';
  */
 export function CoordinatorMessage() {
   return (
-    <Section variant="default" pad="default" className="!py-28 md:!py-40">
+    <Section variant="default" pad="default" className="!py-20 md:!py-28">
       <Container>
         <div className="grid items-start gap-14 md:grid-cols-12 md:gap-20">
           {/* Letter column */}
@@ -128,7 +128,7 @@ export function CoordinatorMessage() {
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
               className="relative"
             >
               <RadialLight
@@ -141,6 +141,7 @@ export function CoordinatorMessage() {
                 src="/Devarshi%20Srivas%20Dasa.jpg"
                 alt="Devarshi Srivas Dasa, Coordinator of ISKCON Youth Forum Sylhet"
                 aspect="4/5"
+                interactive
               />
               <figcaption className="mt-5 text-center font-display text-base italic text-temple-700/70 md:text-left">
                 &mdash; Devarshi Srivas Dasa

@@ -70,7 +70,7 @@ export function FloatingCard({
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: easeDivine, delay: (index || 0) * 0.05 }}
+        transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
         className="block focus:outline-none"
       >
         <Link to={to} className={classes}>
@@ -88,7 +88,7 @@ export function FloatingCard({
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: easeDivine, delay: (index || 0) * 0.05 }}
+        transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
         className={classes}
       >
         {inner}
@@ -100,7 +100,7 @@ export function FloatingCard({
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.7, ease: easeDivine, delay: (index || 0) * 0.05 }}
+      transition={{ duration: 0.55, ease: easeDivine, delay: (index || 0) * 0.05 }}
       className={classes}
     >
       {inner}

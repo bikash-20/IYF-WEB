@@ -77,11 +77,11 @@ export default {
         handwriting: ['"Pinyon Script"', '"Allura"', '"Dancing Script"', 'cursive'],
       },
       fontSize: {
-        'display-xl': ['clamp(3.25rem, 7vw, 5.5rem)', { lineHeight: '0.95', letterSpacing: '-0.025em' }],
+        'display-xl': ['clamp(3rem, 7vw, 5.5rem)', { lineHeight: '0.92', letterSpacing: '-0.025em' }],
         'display-lg': ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.02', letterSpacing: '-0.02em' }],
         'display-md': ['clamp(1.75rem, 3vw, 2.5rem)', { lineHeight: '1.1', letterSpacing: '-0.01em' }],
         // New for v0.2 — editorial-size quotes
-        'quote': ['clamp(2rem, 4.5vw, 3.75rem)', { lineHeight: '1.15', letterSpacing: '-0.015em' }],
+        'quote': ['clamp(2.25rem, 5vw, 4.25rem)', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
       },
       letterSpacing: {
         eyebrow: '0.18em',

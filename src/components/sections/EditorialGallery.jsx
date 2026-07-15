@@ -36,7 +36,7 @@ const gradients = [
 
 export function EditorialGallery() {
   return (
-    <Section variant="default" pad="default">
+    <Section variant="warm" pad="default">
       <Container>
         <SectionHeader
           eyebrow="Inside the mandir"

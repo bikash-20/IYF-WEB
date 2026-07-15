@@ -79,18 +79,32 @@
     @apply font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-600;
   }
 
-  /* Larger breathing room than the default — editorial padding */
+  /* Editorial breathing room. Tightened from py-24/32/40 to keep the
+     page from feeling like gaps between disconnected sections. */
   .section-pad {
-    @apply py-24 md:py-32 lg:py-40;
+    @apply py-20 md:py-24 lg:py-28;
   }
 
   /* Tight rhythm — used between a hero and the next section to give "Arrival" */
   .section-pad-tight {
-    @apply py-16 md:py-24;
+    @apply py-12 md:py-16;
   }
 
   .hr-soft {
     @apply h-px w-12 bg-temple-400/60;
+  }
+
+  /* Editorial type rhythm — three sizes the eye can lock onto while
+     scrolling. Eyebrow ~28px = one line of small-caps; title ~38px =
+     one strong column; paragraph ~22px = roomy, never crowded. */
+  .type-eyebrow {
+    @apply font-mono text-[0.78rem] uppercase tracking-eyebrow text-saffron-600;
+  }
+  .type-title {
+    @apply font-display text-[2.1rem] leading-[1.06] text-temple-900 sm:text-[2.4rem];
+  }
+  .type-prose {
+    @apply text-[1.05rem] leading-[1.75] text-temple-700/85 sm:text-[1.1rem];
   }
 
   /* Glass surface — for the navbar over hero and other content */
@@ -347,11 +361,38 @@
     100% { transform: translate3d(var(--ember-dx, 0), -28vh, 0) scale(1.1); opacity: 0; }
   }
 
+  /* `incense-drift` — almost-invisible slow drift for the incense
+     dust field overlaid on DustField. Same per-particle `--dx` / `--dy`
+     pattern; runs for 60–110s so the air feels still-but-alive. */
+  @keyframes incense-drift {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(var(--dx, 0), var(--dy, -3vh), 0); }
+  }
+
+  /* `kenburns` — slow inward zoom + gentle pan for SacredQuote's
+     background image. 28s is long enough that visitors never see
+     the loop boundary; the effect is "living light" not "video". */
+  @keyframes kenburns {
+    0%   { transform: scale(1.05) translate3d(0, 0, 0); }
+    50%  { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+    100% { transform: scale(1.05) translate3d(0, 0, 0); }
+  }
+
+  /* `pulse-slow` — gentle brightness loop for the saffron divider
+     above SacredQuote. Syncs loosely with `breathe` (~5s) but the
+     amplitudes are tiny so it never reads as a flash. */
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
+
   /* `breathe` — the slow radial-light pulse behind the deity.
-     A 24-second cycle that just barely changes opacity + scale. */
+     Tuned to feel like a heartbeat: ~11s cycle, opacity barely
+     crossing 0.28 → 0.36 → 0.28. Visitors shouldn't notice it,
+     only the sense that the air is alive. */
   @keyframes breathe {
-    0%, 100% { opacity: 0.55; transform: scale(1); }
-    50%      { opacity: 0.78; transform: scale(1.05); }
+    0%, 100% { opacity: 0.28; transform: scale(1); }
+    50%      { opacity: 0.36; transform: scale(1.04); }
   }
 
   /* `lamp-flicker` — a subtle warm-light flicker on the saffron
@@ -392,9 +433,7 @@
   }
 
   .anim-breathe {
-    animation: breathe 24s ease-in-out infinite;
-    transform-origin: center;
-    will-change: opacity, transform;
+    animation: breathe 11s ease-in-out infinite;
   }
   .anim-shimmer {
     background-size: 200% 200%;
@@ -412,12 +451,21 @@
     animation: deity-breath 11s ease-in-out infinite;
     will-change: transform;
   }
+  .anim-kenburns {
+    animation: kenburns 28s ease-in-out infinite;
+    will-change: transform;
+  }
+  .anim-pulse-slow {
+    animation: pulse-slow 5s ease-in-out infinite;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .anim-breathe,
     .anim-shimmer,
     .anim-lamp-flicker,
     .anim-mist-drift,
-    .anim-deity-breath { animation: none !important; }
+    .anim-deity-breath,
+    .anim-kenburns,
+    .anim-pulse-slow { animation: none !important; }
   }
 }

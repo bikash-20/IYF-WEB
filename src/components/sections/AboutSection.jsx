@@ -83,7 +83,7 @@ export function AboutSection() {
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
               className="relative"
             >
               <RadialLight
@@ -97,6 +97,7 @@ export function AboutSection() {
                 alt="Soft daylight inside the temple"
                 aspect="4/5"
                 priority
+                interactive
               />
               <figure className="absolute -bottom-6 -left-6 hidden max-w-[180px] rounded-editorial border border-temple-800/10 bg-cream-50/95 p-4 shadow-lift md:block">
                 <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-600">
