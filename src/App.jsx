@@ -116,10 +116,32 @@ export default function App() {
     const mutationObserver = new MutationObserver(scan);
     mutationObserver.observe(root, { childList: true, subtree: true });
 
+    // নতুন: attribute-level watcher — যদি কোনো element ইতিমধ্যে viewport-এ থাকা
+    // অবস্থায় data-reveal="no"-তে regress করে (যেমন এই bug-টা), তাহলে সাথে সাথে
+    // আবার reveal করে দেবে, শুধু childList mutation-এর অপেক্ষায় থাকবে না।
+    const attributeObserver = new MutationObserver((mutations) => {
+      mutations.forEach((m) => {
+        if (m.type === 'attributes' && m.attributeName === 'data-reveal') {
+          const el = m.target;
+          const rect = el.getBoundingClientRect();
+          const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+          if (inViewport && el.getAttribute('data-reveal') === 'no') {
+            reveal(el);
+          }
+        }
+      });
+    });
+    attributeObserver.observe(root, {
+      attributes: true,
+      attributeFilter: ['data-reveal'],
+      subtree: true,
+    });
+
     return () => {
       window.clearTimeout(fallback);
       observer.disconnect();
       mutationObserver.disconnect();
+      attributeObserver.disconnect();
     };
   }, [location.pathname]);
 
