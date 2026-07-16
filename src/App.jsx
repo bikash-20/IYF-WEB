@@ -141,6 +141,15 @@ export default function App() {
       });
     };
     scan();
+    // Re-scan on the next paint so any targets that mounted in this
+    // same tick (lazy-loaded pages under <Suspense mode="wait">,
+    // whose children attach data-reveal-target *after* the initial
+    // scan runs) are picked up immediately, before the 1.4s
+    // fallback fires. Without this, a target that mounts at the same
+    // time as the route change could be observed with a stale
+    // getBoundingClientRect (parent layout still mid-transition) and
+    // miss its initial-inViewport window.
+    const raf = requestAnimationFrame(scan);
     const mutationObserver = new MutationObserver(scan);
     mutationObserver.observe(root, { childList: true, subtree: true });
 
@@ -167,6 +176,7 @@ export default function App() {
 
     return () => {
       window.clearTimeout(fallback);
+      cancelAnimationFrame(raf);
       observer.disconnect();
       mutationObserver.disconnect();
       attributeObserver.disconnect();

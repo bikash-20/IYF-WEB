@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import { Atmosphere } from '@/components/ui/Atmosphere.jsx';
 import { cn } from '@/lib/cn.js';
 
@@ -64,27 +63,23 @@ export function Section({
   children,
   ...rest
 }) {
-  // v0.9 premium arrival — every Section wrapper is a Reveal target
-  // so the section settles into view as a whole ("focus-pull" weight)
-  // instead of its child blocks each fading in independently. The
-  // children retain their own per-block RevealOnScroll staggers for
-  // detail motion; the section wrapper handles the chapter-level
-  // arrival.
-  const ref = useRef(null);
-  useEffect(() => {
-    if (typeof window === 'undefined' || !ref.current) return undefined;
-    const el = ref.current;
-    el.setAttribute('data-reveal-target', 'yes');
-    el.setAttribute('data-reveal', 'no');
-    return undefined;
-  }, []);
-
+  // The Section wrapper is intentionally NOT a reveal target. Earlier
+  // (v0.9.0) we tried making every Section a data-reveal-target so the
+  // whole band would settle in as a "chapter". That broke two pages
+  // (Contact, Donate) under <Suspense mode="wait"> lazy-loading: the
+  // Section's own opacity:0 fired before the lazy chunk finished
+  // hydrating, and the IntersectionObserver's MutationObserver saw
+  // the new target with a still-unsettled bounding rect (parent
+  // <motion.div {...pageEnter}> at y:8, opacity:0 hadn't animated
+  // yet). Net effect: scan() queued the target as out-of-view, the
+  // observer never fired for it, and the whole section stayed
+  // invisible. Chapter-level arrival is now the responsibility of
+  // each <RevealOnScroll> / <RevealStagger> block inside the section.
   return (
     <Tag
-      ref={ref}
       id={id}
       className={cn(
-        'relative isolate overflow-hidden reveal focus-pull',
+        'relative isolate overflow-hidden',
         variants[variant],
         padFor[pad],
         className,
