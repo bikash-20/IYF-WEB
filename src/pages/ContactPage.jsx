@@ -18,6 +18,7 @@ import { Section, Container } from '@/components/ui/Section.jsx';
 import { Button } from '@/components/ui/Button.jsx';
 import { AnimatedInput } from '@/components/ui/AnimatedInput.jsx';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { ChapterArrival } from '@/components/ui/ChapterArrival.jsx';
 import { FloatingPetals } from '@/components/ui/FloatingPetals.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
 import { pageEnter } from '@/lib/motion.js';
@@ -214,6 +215,11 @@ export function ContactPage() {
       {/* --- trust strip --------------------------------------------------------- */}
       <Section pad="tight">
         <Container>
+          <ChapterArrival className="mb-8">
+            <h2 className="font-display text-2xl text-temple-800 dark:text-fg-main md:text-3xl">
+              Three small reassurances before you write.
+            </h2>
+          </ChapterArrival>
           <RevealStagger
             className="grid gap-4 md:grid-cols-3"
             delay={0.07}
@@ -451,7 +457,7 @@ export function ContactPage() {
       {/* --- direct lines -------------------------------------------------------- */}
       <Section variant="muted">
         <Container>
-          <RevealOnScroll>
+          <ChapterArrival className="mb-8">
             <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
               Direct lines
             </div>
@@ -461,7 +467,7 @@ export function ContactPage() {
             <p className="mt-2 max-w-md text-sm text-temple-700/80">
               One of these will land in front of a human within minutes.
             </p>
-          </RevealOnScroll>
+          </ChapterArrival>
           <ul className="mt-8 max-w-2xl overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50 shadow-soft dark:border-white/8 dark:bg-ink-floating/85 dark:shadow-lift">
             <DirectRow
               icon={Phone}
@@ -501,7 +507,7 @@ export function ContactPage() {
       <Section>
         <Container>
           <div className="grid gap-10 md:grid-cols-12">
-            <RevealOnScroll className="md:col-span-4">
+            <ChapterArrival className="md:col-span-4">
               <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
                 Frequently asked
               </div>
@@ -513,7 +519,7 @@ export function ContactPage() {
                 If yours is not here, the form above will land directly with
                 the IYF secretary.
               </p>
-            </RevealOnScroll>
+            </ChapterArrival>
             <RevealOnScroll delay={0.08} className="md:col-span-8">
               <ul className="rounded-xl2 border border-temple-800/10 bg-cream-100/60 px-6">
                 {faqs.map((f) => (
