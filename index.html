@@ -24,20 +24,13 @@
     <meta name="background-color" content="#0F0D13" media="(prefers-color-scheme: dark)" />
 
     <!-- No-flash theme bootstrap: read localStorage + system preference,
-         apply .dark to <html> before React hydrates. Idempotent and tiny.
-         Default theme is dark — first-time visitors land on dark, and
-         they only switch to light by clicking the toggle (which writes
-         localStorage and overrides this script). -->
+         apply .dark to <html> before React hydrates. Idempotent and tiny. -->
     <script>
       (function () {
         try {
           var saved = localStorage.getItem('iyf-theme');
           var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          // Default = dark for both branches unless the user has saved
-          // an explicit 'light' choice.
-          var theme = (saved === 'light' || saved === 'dark')
-            ? saved
-            : (prefersDark ? 'dark' : 'dark');
+          var theme = saved || (prefersDark ? 'dark' : 'light');
           var root = document.documentElement;
           if (theme === 'dark') {
             root.classList.add('dark');
@@ -47,10 +40,7 @@
           root.setAttribute('data-theme', theme);
           root.style.colorScheme = theme;
         } catch (e) {
-          /* localStorage blocked — apply dark fallback */
-          document.documentElement.classList.add('dark');
-          document.documentElement.setAttribute('data-theme', 'dark');
-          document.documentElement.style.colorScheme = 'dark';
+          /* localStorage blocked — fall back to light */
         }
       })();
     </script>

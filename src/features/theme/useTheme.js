@@ -8,7 +8,8 @@ import { useEffect, useState, useCallback } from 'react';
  *
  *   1. localStorage('iyf-theme') — explicit user choice ('light' | 'dark')
  *   2. matchMedia('(prefers-color-scheme: dark)') — system preference
- *   3. 'dark' — fallback for first-time visitors (site defaults to dark)
+ *   3. 'light' — fallback (matches the project's editorial brand
+ *      baseline; we don't auto-snap to dark for first-time visitors)
  *
  * SSR-safe: guards `window` so the import can resolve in environments
  * where window isn't defined (Vite SSR, unit tests).
@@ -27,7 +28,7 @@ import { useEffect, useState, useCallback } from 'react';
 const STORAGE_KEY = 'iyf-theme';
 
 function readInitial() {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   try {
     const saved = window.localStorage.getItem(STORAGE_KEY);
     if (saved === 'light' || saved === 'dark') return saved;
@@ -35,8 +36,7 @@ function readInitial() {
     /* localStorage might be blocked — fall through */
   }
   const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  // No saved choice and no system preference: site defaults to dark.
-  return prefersDark ? 'dark' : 'dark';
+  return prefersDark ? 'dark' : 'light';
 }
 
 function applyTheme(theme) {
