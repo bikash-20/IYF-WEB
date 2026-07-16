@@ -107,9 +107,31 @@ export default function App() {
     // Observe existing + future targets. MutationObserver picks up
     // targets that mount after this effect runs (route changes,
     // lazy-loaded pages, theme-triggered re-renders).
+    //
+    // Important: IntersectionObserver only fires on FUTURE intersection
+    // events, not on the current state. If a <Reveal> mounts already
+    // inside the viewport (above-the-fold sections like the About
+    // page's CTA buttons), no callback will ever fire for it — the
+    // observer would wait forever. So scan() also synchronously
+    // reveals any target whose rect is currently in the viewport.
+    // This closes the "PLAN YOUR VISIT stays ghosted on /about" bug
+    // where users saw opacity:0 content within the first ~2s on
+    // initial page load before the hard fallback timer kicked in.
+    const isInViewport = (el) => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      // Account for the observer's rootMargin: '0px 0px -10% 0px'
+      // by treating anything above 10% from the bottom as in view.
+      return rect.top < vh * 0.9 && rect.bottom > 0;
+    };
     const scan = () => {
       root.querySelectorAll('[data-reveal-target]').forEach((el) => {
-        if (el.getAttribute('data-reveal') !== 'yes') observer.observe(el);
+        if (el.getAttribute('data-reveal') === 'yes') return;
+        if (isInViewport(el)) {
+          reveal(el);
+        } else {
+          observer.observe(el);
+        }
       });
     };
     scan();
