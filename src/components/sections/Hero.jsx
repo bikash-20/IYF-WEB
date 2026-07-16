@@ -16,43 +16,53 @@ import { cn } from '@/lib/cn.js';
 /**
  * Home hero — the signature moment.
  *
- * v0.4 (Living Hero) rewrite. v0.7.3 Living Hero pass 2 — the deity
- * reads as alive instead of pasted onto the page, and the hero now
- * responds to scroll with movement instead of just dimming.
+ * v0.9 (Living Hero) rewrite. The hero now reacts to the cursor as
+ * if it were a hand-held scene: the deity photo tilts with the eye,
+ * ambient lamp light tracks the gaze, and the CTAs magnetically
+ * follow the pointer when it's nearby. Scroll is no longer a flat
+ * slide — depth of field and motion blur carry the user into the
+ * next section.
+ *
+ * Cursor interaction (prefers-reduced-motion gates every effect):
+ *   - Deity photo: 3D tilt (rotateX/Y ±5°) anchored to the photo's
+ *     center, plus a translate up to ±22 px for hand-held parallax.
+ *     A back-glow radial follows the cursor so the figure is lit
+ *     from where the user is looking.
+ *   - Lamp bloom: drifts ±10 px toward cursor (smaller magnitude
+ *     than the deity so the parallax reads as depth, not glued).
+ *   - Saffron radial light: its origin shifts toward the cursor
+ *     so the room appears lit by oil lamps being aimed.
+ *   - CTA buttons: magnetic — primary drifts up to 8 px toward the
+ *     cursor within 220 px, secondary up to 5 px.
+ *
+ * Scroll interaction:
+ *   - Deity photo: eases upward and slightly off-axis with a
+ *     smoothstep curve (not linear) so the parallax feels organic.
+ *   - Headline + CTA stack: scales 1 → 0.94 and gains a 2 px blur
+ *     as it leaves, so the words read as receding into the room.
+ *   - Foreground mist pulls downward (not just thins) so the next
+ *     section reveals through it instead of under it.
+ *   - Photo contrast lifts 4% past 30% scroll so the deity feels
+ *     closer as you scroll past.
  *
  * Stack (bottom → top):
  *   1. Time-of-day base gradient (warm cream → deep amber → indigo)
- *   2. Deity photo, full-bleed, with intrinsic breath + scroll-driven
- *      parallax (vertical lift + horizontal sway) and mouse parallax
- *      (±6 px). Scale 1 → 1.06 across the hero, opacity holds at 1
- *      until the user is 70% out before fading.
- *   3. DustField — 44 drifting particles (cream + saffron embers,
+ *   2. Back-glow radial that follows the cursor (depth cue)
+ *   3. Deity photo, full-bleed, with 3D tilt + cursor parallax
+ *   4. DustField — 44 drifting particles (cream + saffron embers,
  *      ~half twinkling). Visible at all times.
- *   4. Two ambient radial lights, breathing (24 s loop): saffron
- *      upper-center, peacock lower-right.
- *   5. Lamp bloom — saffron, upper-right, with a slow flicker overlay
- *      so the diya feels lit instead of stable.
- *   6. Embers — 14 slow rising sparks above the lamp bloom.
- *   7. Foreground mist (drift loop + scroll-thinning) so the bottom
- *      of the hero never sits static.
- *   8. Grain overlay.
- *   9. Typography: eyebrow → headline (word-rise) → subhead → CTA →
- *      live "Next darshan" tag. Headline rises ~32 px and softens
- *      opacity as the user scrolls, so the text feels like it's
- *      pulling away with the page.
- *
- * Scroll-driven:
- *   - Deity photo lifts upward and to the side at a small angle
- *     (parallax tilt) instead of just scaling.
- *   - Foreground mist thins as the user scrolls so the next section
- *     reveals underneath instead of just appearing on top.
- *   - Headline rises a bit faster than the photo so the words read
- *     as "lifting away" rather than glued to the image.
- *
- * Reduced motion:
- *   - Mouse parallax and all custom CSS animations are gated behind
- *     `prefers-reduced-motion`. Scroll transforms remain but at
- *     their full-reduce scale (translate 0 → -8 px, scale 1 → 1.02).
+ *   5. IncenseDust — 32 slow motes for "still air with movement"
+ *   6. Two ambient radial lights, breathing (24 s loop): saffron
+ *      upper-center (cursor-tracking), peacock lower-right
+ *   7. Lamp bloom — saffron, upper-right, with slow flicker + cursor
+ *      drift, tracks where the user is looking
+ *   8. Embers — 14 slow rising sparks above the lamp bloom
+ *   9. Foreground mist (drift loop + scroll-pulled down) so the
+ *      bottom of the hero never sits static
+ *  10. Grain overlay
+ *  11. Typography: eyebrow → headline (word-rise) → subhead → CTA →
+ *      live "Next darshan" tag. Headline scales + blurs out on scroll
+ *      for a depth-of-field exit instead of a flat slide.
  */
 
 const headline = ['ISKCON', 'Youth', 'Forum'];
@@ -84,6 +94,8 @@ function prettyMinutes(diff) {
 
 export function Hero() {
   const ref = useRef(null);
+  const primaryBtnRef = useRef(null);
+  const ghostBtnRef = useRef(null);
   const prefersReduced = useReducedMotion();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -95,64 +107,179 @@ export function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  // Deity photo: gentle parallax on scroll — anchored rather than
-  // flying away. The text and dust fields carry the eye upward; the
-  // photo only shifts enough to suggest depth.
-  const photoY = useTransform(scrollYProgress, [0, 1], [0, -32]);
-  const photoX = useTransform(scrollYProgress, [0, 1], [0, -12]);
-  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 1.03]);
+  // Smoothstep-eased scroll curves — the photo doesn't slide linearly,
+  // it accelerates gently then settles, like a hand-held camera. This
+  // makes the parallax feel cinematic rather than mechanical.
+  const smooth = (t) => t * t * (3 - 2 * t); // smoothstep
+  const photoScroll = useTransform(scrollYProgress, (p) => {
+    const s = smooth(p);
+    return { y: -s * 48, x: -s * 18, scale: 1 + s * 0.05, rotate: -s * 1.1 };
+  });
+  // Photo contrast lifts slightly as the user scrolls past 30% so the
+  // deity feels closer as the eye passes — depth-of-field cue.
+  const photoFilter = useTransform(
+    scrollYProgress,
+    [0, 0.3, 1],
+    ['contrast(1) brightness(1)', 'contrast(1.04) brightness(1.02)', 'contrast(1.08) brightness(1.04)'],
+  );
   const photoOpacity = useTransform(
     scrollYProgress,
     [0, 0.55, 0.92, 1],
-    [1, 1, 0.55, 0.2],
+    [1, 1, 0.55, 0.18],
   );
-  const photoRotate = useTransform(scrollYProgress, [0, 1], [0, -0.6]);
 
-  // Foreground mist thins on scroll so the next section reveals
-  // through it instead of being hidden until the hero's last frame.
-  const mistOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.7, 0.25]);
-  const mistY = useTransform(scrollYProgress, [0, 1], [0, -28]);
+  // Foreground mist: thins AND pulls downward on scroll so the next
+  // section reveals cinematically — the mist reads as receding rather
+  // than just fading.
+  const mistOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.6, 0.18]);
+  const mistY = useTransform(scrollYProgress, [0, 1], [0, 64]);
+  const mistScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
 
-  // Headline travels further than the photo so the words read as
-  // "lifting away" with the page, not glued to the image.
-  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -56]);
+  // Headline exits with a slight scale-down + 2 px blur so the words
+  // read as receding into the room, not as a flat slide-out.
+  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -64]);
+  const headlineScale = useTransform(scrollYProgress, [0, 0.4, 1], [1, 1, 0.94]);
+  const headlineBlur = useTransform(scrollYProgress, [0, 0.55, 1], [0, 0, 2]);
   const headlineOpacity = useTransform(
     scrollYProgress,
     [0, 0.45, 0.85, 1],
-    [1, 0.95, 0.55, 0.25],
+    [1, 0.95, 0.55, 0.22],
   );
 
   // Saffron bloom drift on scroll — moves slightly so the lamp
   // catches the rising scroll motion.
-  const bloomY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const bloomScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const bloomY = useTransform(scrollYProgress, [0, 1], [0, -52]);
+  const bloomScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  // Mouse parallax — bounded to ±6 px so it never feels gimmicky.
-  // Layered on top of the scroll parallax for a hand-held feel.
-  const [parallax, setParallax] = useState({ x: 0, y: 0 });
+  // Cursor interaction — drives 3 distinct layers with different
+  // magnitudes so the parallax reads as depth, not as one flat
+  // photo that drifts. The eased follow uses a target/current pair
+  // lerped each frame so movement feels hand-held, not snappy.
+  //
+  //   cursor   — translated deity photo (largest magnitude)
+  //   tilt     — rotateX/Y on the deity photo (read directly from
+  //              the normalized cursor position, not eased, so the
+  //              tilt tracks the eye 1:1 for natural response)
+  //   lamp     — translated lamp bloom (smaller magnitude)
+  //   glowPos  — saffron radial origin (light tracks the eye)
+  //   primary/ghost — magnetic CTA drift
+  //
+  // All four values are gated behind prefers-reduced-motion.
+  const [cursor, setCursor] = useState({ x: 0, y: 0, nx: 0, ny: 0 });
+  const [magnetic, setMagnetic] = useState({ primary: { x: 0, y: 0 }, ghost: { x: 0, y: 0 } });
   useEffect(() => {
     if (prefersReduced) return undefined;
     let raf = 0;
-    let targetX = 0;
-    let targetY = 0;
-    let curX = 0;
-    let curY = 0;
+    // Targets — what the layers are chasing.
+    let tCursor = { x: 0, y: 0 };
+    let tLamp = { x: 0, y: 0 };
+    let tGlow = { x: 0.5, y: 0.5 };
+    let tMagPrimary = { x: 0, y: 0 };
+    let tMagGhost = { x: 0, y: 0 };
+    // Current values — what's actually rendered (eased toward targets).
+    let cCursor = { x: 0, y: 0 };
+    let cLamp = { x: 0, y: 0 };
+    let cGlow = { x: 0.5, y: 0.5 };
+    let cMagPrimary = { x: 0, y: 0 };
+    let cMagGhost = { x: 0, y: 0 };
+
+    // Live cursor in [-1, 1] — used directly (not eased) by the
+    // 3D tilt and the back-glow radial so they feel like 1:1.
+    let liveNx = 0;
+    let liveNy = 0;
+
+    const PRIMARY_RECT = { cx: 0, cy: 0 }; // updated per-frame
+    const GHOST_RECT = { cx: 0, cy: 0 };
 
     const onMove = (e) => {
       const w = window.innerWidth || 1;
       const h = window.innerHeight || 1;
-      // Normalize to [-1, 1] around viewport center.
       const nx = (e.clientX / w) * 2 - 1;
       const ny = (e.clientY / h) * 2 - 1;
-      targetX = -nx * 6;
-      targetY = -ny * 5;
+      liveNx = nx;
+      liveNy = ny;
+      tCursor.x = -nx * 22;          // deity: ±22 px
+      tCursor.y = -ny * 18;
+      tLamp.x = -nx * 10;            // lamp bloom: ±10 px (smaller → reads as depth)
+      tLamp.y = -ny * 8;
+      tGlow.x = 0.5 + nx * 0.18;     // saffron radial origin follows cursor
+      tGlow.y = 0.5 + ny * 0.18;
+
+      // Magnetic CTAs — measure distance from each button center.
+      const magRadius = 220;
+      const magStrength = 0.18;
+      const magLift = 3;
+      const px = (e.clientX - PRIMARY_RECT.cx);
+      const py = (e.clientY - PRIMARY_RECT.cy);
+      const pd = Math.hypot(px, py);
+      if (pd < magRadius) {
+        const k = (1 - pd / magRadius) * magStrength;
+        tMagPrimary.x = -px * k;
+        tMagPrimary.y = -py * k - (1 - pd / magRadius) * magLift;
+      } else {
+        tMagPrimary.x = 0;
+        tMagPrimary.y = 0;
+      }
+      const gx = (e.clientX - GHOST_RECT.cx);
+      const gy = (e.clientY - GHOST_RECT.cy);
+      const gd = Math.hypot(gx, gy);
+      if (gd < magRadius) {
+        const k = (1 - gd / magRadius) * magStrength * 0.7;
+        tMagGhost.x = -gx * k;
+        tMagGhost.y = -gy * k;
+      } else {
+        tMagGhost.x = 0;
+        tMagGhost.y = 0;
+      }
+
       if (!raf) raf = requestAnimationFrame(step);
     };
+
     const step = () => {
-      curX += (targetX - curX) * 0.08;
-      curY += (targetY - curY) * 0.08;
-      setParallax({ x: curX, y: curY });
-      if (Math.abs(targetX - curX) > 0.05 || Math.abs(targetY - curY) > 0.05) {
+      const ease = 0.09;
+      cCursor.x += (tCursor.x - cCursor.x) * ease;
+      cCursor.y += (tCursor.y - cCursor.y) * ease;
+      cLamp.x += (tLamp.x - cLamp.x) * ease;
+      cLamp.y += (tLamp.y - cLamp.y) * ease;
+      cGlow.x += (tGlow.x - cGlow.x) * ease;
+      cGlow.y += (tGlow.y - cGlow.y) * ease;
+      cMagPrimary.x += (tMagPrimary.x - cMagPrimary.x) * 0.12;
+      cMagPrimary.y += (tMagPrimary.y - cMagPrimary.y) * 0.12;
+      cMagGhost.x += (tMagGhost.x - cMagGhost.x) * 0.12;
+      cMagGhost.y += (tMagGhost.y - cMagGhost.y) * 0.12;
+
+      // Update the button center rects each frame so the magnetic
+      // radius tracks button position (text reflow, viewport resize).
+      const pBtn = primaryBtnRef.current;
+      if (pBtn) {
+        const r = pBtn.getBoundingClientRect();
+        PRIMARY_RECT.cx = r.left + r.width / 2;
+        PRIMARY_RECT.cy = r.top + r.height / 2;
+      }
+      const gBtn = ghostBtnRef.current;
+      if (gBtn) {
+        const r = gBtn.getBoundingClientRect();
+        GHOST_RECT.cx = r.left + r.width / 2;
+        GHOST_RECT.cy = r.top + r.height / 2;
+      }
+
+      setCursor({
+        x: cCursor.x,
+        y: cCursor.y,
+        nx: liveNx,
+        ny: liveNy,
+      });
+      setMagnetic({
+        primary: { x: cMagPrimary.x, y: cMagPrimary.y },
+        ghost: { x: cMagGhost.x, y: cMagGhost.y },
+      });
+
+      const dx = Math.abs(tCursor.x - cCursor.x) + Math.abs(tCursor.y - cCursor.y);
+      const lx = Math.abs(tLamp.x - cLamp.x) + Math.abs(tLamp.y - cLamp.y);
+      const gx = Math.abs(tGlow.x - cGlow.x) + Math.abs(tGlow.y - cGlow.y);
+      const mx = Math.abs(tMagPrimary.x - cMagPrimary.x) + Math.abs(tMagPrimary.y - cMagPrimary.y) +
+                 Math.abs(tMagGhost.x - cMagGhost.x) + Math.abs(tMagGhost.y - cMagGhost.y);
+      if (dx > 0.05 || lx > 0.05 || gx > 0.0008 || mx > 0.05) {
         raf = requestAnimationFrame(step);
       } else {
         raf = 0;
@@ -194,16 +321,38 @@ export function Hero() {
         className={cn('absolute inset-0 -z-30 bg-gradient-to-t', deep)}
       />
 
-      {/* ----- Layer 2: deity photo with mouse + scroll parallax ----- */}
+      {/* ----- Layer 2: back-glow radial that follows the cursor ----- */}
+      {/* Sits behind the deity but in front of the gradient — paints a
+          warm halo at the cursor position so the figure is lit from
+          where the user is looking. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-25"
+        style={{
+          opacity: prefersReduced ? 0 : 0.55,
+          background: prefersReduced
+            ? 'transparent'
+            : `radial-gradient(38% 42% at ${((cursor.nx * 0.5 + 0.5) * 100).toFixed(2)}% ${((cursor.ny * 0.5 + 0.5) * 100).toFixed(2)}%, rgba(229,162,74,0.55), rgba(229,162,74,0) 70%)`,
+          transition: 'background 80ms linear',
+        }}
+      />
+
+      {/* ----- Layer 3: deity photo with 3D tilt + cursor parallax ----- */}
+      {/* Outer motion.div takes the smoothstep scroll curves (Y/X/scale/
+          rotate). Inner div takes the live cursor values: 3D rotateX/Y
+          tilt + translate, with perspective so the rotation reads as
+          depth rather than 2D skew. */}
       <motion.div
         aria-hidden
         className="absolute inset-0 -z-20"
         style={{
-          x: photoX,
-          y: photoY,
-          scale: photoScale,
+          y: useTransform(photoScroll, (v) => v.y),
+          x: useTransform(photoScroll, (v) => v.x),
+          scale: useTransform(photoScroll, (v) => v.scale),
+          rotate: useTransform(photoScroll, (v) => v.rotate),
           opacity: photoOpacity,
-          rotate: photoRotate,
+          filter: photoFilter,
+          perspective: 1200,
         }}
       >
         <div
@@ -211,24 +360,44 @@ export function Hero() {
             'absolute inset-0 will-change-transform',
             prefersReduced ? undefined : 'anim-deity-breath',
           )}
-          style={{
-            transform: prefersReduced
+          style={
+            prefersReduced
               ? undefined
-              : `translate3d(${parallax.x}px, ${parallax.y}px, 0)`,
-          }}
+              : {
+                  transform: `translate3d(${cursor.x}px, ${cursor.y}px, 0)`,
+                  transformStyle: 'preserve-3d',
+                }
+          }
         >
-          {/* Full-bleed deity photo — edge-to-edge, no crop, no border.
-              In dark mode the photo picks up the cinematic filter
-              (brightness .88 / contrast 1.08 / saturate .92) so it
-              reads as scripture lit by lamp, not HDR. */}
-          <img
-            src="/little-1.jpg"
-            alt=""
-            className={cn(
-              'h-full w-full object-cover object-center opacity-90',
-              isDark && 'cinematic',
-            )}
-          />
+          {/* Tilt layer: 3D rotateX/Y bound to the cursor so the photo
+              reads as a physical surface that rotates with the eye.
+              The translate is on the parent so the rotation pivots
+              around the photo's center, not around its translated
+              position. cursor.nx / cursor.ny are in [-1, 1]. */}
+          <div
+            className="absolute inset-0 will-change-transform"
+            style={
+              prefersReduced
+                ? undefined
+                : {
+                    transform: `rotateX(${(cursor.ny * 4).toFixed(2)}deg) rotateY(${(-cursor.nx * 5).toFixed(2)}deg)`,
+                    transformOrigin: '50% 50%',
+                  }
+            }
+          >
+            {/* Full-bleed deity photo — edge-to-edge, no crop, no border.
+                In dark mode the photo picks up the cinematic filter
+                (brightness .88 / contrast 1.08 / saturate .92) so it
+                reads as scripture lit by lamp, not HDR. */}
+            <img
+              src="/little-1.jpg"
+              alt=""
+              className={cn(
+                'h-full w-full object-cover object-center opacity-90',
+                isDark && 'cinematic',
+              )}
+            />
+          </div>
         </div>
       </motion.div>
 
@@ -246,7 +415,14 @@ export function Hero() {
       {/* ----- Layer 4: ambient radial lights (breathing) ---------- */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 anim-breathe">
-          <RadialLight color={saffronLight} size="62%" pos="50% 22%" />
+          {/* Saffron origin follows the cursor (gated behind prefers-
+              reduced-motion) — light tracks the eye so the room reads
+              as lit by oil lamps being aimed. */}
+          <RadialLight
+            color={saffronLight}
+            size="62%"
+            pos={prefersReduced ? '50% 22%' : `${(50 + cursor.nx * 18).toFixed(2)}% ${(22 + cursor.ny * 14).toFixed(2)}%`}
+          />
           <RadialLight color={peacockLight} size="55%" pos="82% 88%" />
           {/* Extra warm bloom in dark mode — a soft second lamp above
               the headline so the text feels surrounded by oil-lamp
@@ -258,11 +434,19 @@ export function Hero() {
 
         {/* Lamp bloom — pinned upper-right. The base bloom drives
             with scroll; the flicker class adds a slow warm flicker
-            so the diya feels lit instead of static. */}
+            so the diya feels lit instead of static. Cursor adds a
+            smaller-magnitude drift so the lamp tracks the eye but
+            reads as a separate plane (smaller than the deity → depth). */}
         <motion.div
           aria-hidden
           className="absolute -right-20 -top-24 h-[420px] w-[420px]"
-          style={{ y: bloomY, scale: bloomScale }}
+          style={{
+            y: bloomY,
+            scale: bloomScale,
+            x: prefersReduced ? 0 : cursor.x * 0.45,
+            // The lamp uses the same eased cursor but at 0.45× — so
+            // it tracks the eye on a parallel plane behind the deity.
+          }}
         >
           <div
             className={cn(
@@ -284,14 +468,14 @@ export function Hero() {
         <Embers count={14} />
       </div>
 
-      {/* ----- Layer 6: foreground mist (drifts + scroll-thins) ---- */}
+      {/* ----- Layer 6: foreground mist (drifts + scroll-pulls down) */}
       <motion.div
         aria-hidden
         className={cn(
-          'absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent',
+          'absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent origin-bottom',
           prefersReduced ? undefined : 'anim-mist-drift',
         )}
-        style={{ opacity: mistOpacity, y: mistY }}
+        style={{ opacity: mistOpacity, y: mistY, scaleY: mistScale }}
       />
 
       {/* ----- Layer 7: film grain --------------------------------- */}
@@ -299,7 +483,15 @@ export function Hero() {
 
       {/* ----- Typography + CTA ----------------------------------- */}
       <div className="container relative grid min-h-[100svh] grid-cols-1 items-end pb-24 pt-40 md:items-center md:pb-32 md:pt-44 lg:pb-40 lg:pt-52">
-        <motion.div style={{ y: headlineY, opacity: headlineOpacity }} className="max-w-4xl">
+        <motion.div
+          style={{
+            y: headlineY,
+            opacity: headlineOpacity,
+            scale: headlineScale,
+            filter: useTransform(headlineBlur, (b) => `blur(${b}px)`),
+          }}
+          className="max-w-4xl"
+        >
           <motion.div
             initial="hidden"
             animate="visible"
@@ -341,22 +533,47 @@ export function Hero() {
               variants={wordRise}
               className="mt-8 flex flex-wrap items-center gap-4"
             >
-              <Button as="link" to="/visit" size="lg">
-                <MapPin size={14} />
-                Visit the Temple
-              </Button>
-              <Button
-                as="a"
-                href={site.contacts.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="lg"
-                variant="ghost"
-                className="border-cream-50/30 text-cream-50 hover:border-saffron-400 hover:text-saffron-300"
+              {/* Primary CTA — magnetic. Ref-attached so the cursor loop
+                  can compute the button's center for the radius check. */}
+              <span
+                ref={primaryBtnRef}
+                style={{
+                  transform: prefersReduced
+                    ? undefined
+                    : `translate3d(${magnetic.primary.x}px, ${magnetic.primary.y}px, 0)`,
+                  transition: 'transform 220ms cubic-bezier(0.22, 1, 0.36, 1)',
+                }}
+                className="inline-flex"
               >
-                <Play size={14} />
-                Watch Live Darshan
-              </Button>
+                <Button as="link" to="/visit" size="lg">
+                  <MapPin size={14} />
+                  Visit the Temple
+                </Button>
+              </span>
+              {/* Ghost CTA — magnetic, lighter (0.7× magnitude). */}
+              <span
+                ref={ghostBtnRef}
+                style={{
+                  transform: prefersReduced
+                    ? undefined
+                    : `translate3d(${magnetic.ghost.x}px, ${magnetic.ghost.y}px, 0)`,
+                  transition: 'transform 220ms cubic-bezier(0.22, 1, 0.36, 1)',
+                }}
+                className="inline-flex"
+              >
+                <Button
+                  as="a"
+                  href={site.contacts.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  size="lg"
+                  variant="ghost"
+                  className="border-cream-50/30 text-cream-50 hover:border-saffron-400 hover:text-saffron-300"
+                >
+                  <Play size={14} />
+                  Watch Live Darshan
+                </Button>
+              </span>
             </motion.div>
 
             {/* Live "Next darshan" tag — replaces the static scroll cue
