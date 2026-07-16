@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Atmosphere } from '@/components/ui/Atmosphere.jsx';
 import { cn } from '@/lib/cn.js';
 
@@ -63,10 +64,31 @@ export function Section({
   children,
   ...rest
 }) {
+  // v0.9 premium arrival — every Section wrapper is a Reveal target
+  // so the section settles into view as a whole ("focus-pull" weight)
+  // instead of its child blocks each fading in independently. The
+  // children retain their own per-block RevealOnScroll staggers for
+  // detail motion; the section wrapper handles the chapter-level
+  // arrival.
+  const ref = useRef(null);
+  useEffect(() => {
+    if (typeof window === 'undefined' || !ref.current) return undefined;
+    const el = ref.current;
+    el.setAttribute('data-reveal-target', 'yes');
+    el.setAttribute('data-reveal', 'no');
+    return undefined;
+  }, []);
+
   return (
     <Tag
+      ref={ref}
       id={id}
-      className={cn('relative isolate overflow-hidden', variants[variant], padFor[pad], className)}
+      className={cn(
+        'relative isolate overflow-hidden reveal focus-pull',
+        variants[variant],
+        padFor[pad],
+        className,
+      )}
       {...rest}
     >
       {atmosphere && atmosphereFor[variant] && (

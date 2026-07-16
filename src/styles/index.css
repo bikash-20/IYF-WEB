@@ -91,6 +91,10 @@
   .dark .text-cream-50\/60  { color: rgba(242, 238, 231, 0.60); }
 
   html {
+    /* Native smooth scroll for anchor links + ScrollToTop fallback
+       paths. The premium feel is reinforced by the custom tween in
+       ScrollToTop (480ms easeOutExpo) — native is only used for
+       #fragment jumps and as a safety net. */
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
@@ -103,6 +107,14 @@
     transition: background-color 700ms var(--ease-divine),
                 color 700ms var(--ease-divine),
                 border-color 700ms var(--ease-divine);
+  }
+
+  /* Momentum scroll feel — disable the "elastic bounce" when the
+     user scrolls past the top/bottom of the page so the page feels
+     solid (like iOS Safari with rubber-banding off) rather than
+     springy. Helps long pages read as calm rather than toy-like. */
+  body {
+    overscroll-behavior-y: contain;
   }
 
   body {
@@ -166,7 +178,7 @@
     }
   }
 
-  /* ----- v0.8.1 Reveal system ----------------------------------
+  /* ----- v0.9 Reveal system -------------------------------------
    * Pure-CSS fade-up reveal driven by a single global
    * IntersectionObserver (mounted in App.jsx). The design has two
    * safety properties:
@@ -185,24 +197,73 @@
    *      and read "out of view", but the 2s fallback guarantees
    *      release even in that case.
    *
+   * v0.9 upgrade — premium arrival feel:
+   *   - Slower base duration (1100ms) so reveals feel cinematic, not
+   *     snappy. Matches the editorial pace of the rest of the site.
+   *   - Larger travel (28px → 0) so the eye registers motion.
+   *   - Slight blur (4px → 0) so elements "settle into focus" the
+   *     way a camera pulls focus on arrival.
+   *   - Cinematic cubic-bezier (0.16, 1, 0.3, 1) — "easeOutExpo"-ish,
+   *     fast at start, very slow at the end so the final settling is
+   *     imperceptible. This is the curve used by high-end editorial
+   *     sites (Apple, Stripe, Linear).
+   *   - `focus-pull` modifier: larger travel + bigger blur for hero-
+   *     scale elements (section headings, hero headlines) so they
+   *     feel like they have weight. Used at the section root.
+   *
    * Reduced motion: the `prefers-reduced-motion` block short-circuits
    * the transition so reveals are instantaneous and content is
    * visible immediately.
    * --------------------------------------------------------------- */
   .reveal[data-reveal="no"] {
     opacity: 0;
-    transform: translate3d(0, 14px, 0);
+    transform: translate3d(0, 28px, 0);
+    filter: blur(4px);
     transition:
-      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
+      opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
   }
   .reveal[data-reveal="yes"] {
     opacity: 1;
     transform: none;
+    filter: blur(0);
     transition:
-      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* "focus-pull" — heavier reveal for hero-scale elements (section
+     headings, the hero). Adds 12px more travel and 2px more blur so
+     they read as having weight, not as content. */
+  .reveal.focus-pull[data-reveal="no"] {
+    transform: translate3d(0, 40px, 0);
+    filter: blur(6px);
+  }
+  .reveal.focus-pull[data-reveal="yes"] {
+    transform: none;
+    filter: blur(0);
+  }
+
+  /* "settle" — for tiny UI like badges, labels, inline links.
+     Shorter duration + smaller travel so they don't drag. */
+  .reveal.settle[data-reveal="no"] {
+    transform: translate3d(0, 12px, 0);
+    filter: blur(2px);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.settle[data-reveal="yes"] {
+    transform: none;
+    filter: blur(0);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 700ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -210,6 +271,7 @@
     .reveal[data-reveal="yes"] {
       opacity: 1;
       transform: none;
+      filter: none;
       transition: none;
     }
   }

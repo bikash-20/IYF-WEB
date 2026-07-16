@@ -85,12 +85,15 @@ export default function App() {
       el.setAttribute('data-reveal', 'yes');
     };
 
-    // Hard fallback: after 2s, reveal everything regardless of scroll
-    // position. This is the layer that catches theme-toggle orphans
-    // and any IntersectionObserver misfires.
+    // Hard fallback: after 1.4s, reveal everything regardless of
+    // scroll position. This is the layer that catches theme-toggle
+    // orphans and any IntersectionObserver misfires. Trimmed from
+    // 2s to 1.4s so the wait never feels like a stall — the reveal
+    // curve itself is 1.1s, so by the time the fallback fires the
+    // user has already seen the cinematic settle complete.
     const fallback = window.setTimeout(() => {
       root.querySelectorAll('[data-reveal-target][data-reveal="no"]').forEach(reveal);
-    }, 2000);
+    }, 1400);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -99,9 +102,12 @@ export default function App() {
         });
       },
       // amount: 0.01 = "fire as soon as 1% of the element peeks into
-      // the viewport". Generous rootMargin so reveals fire BEFORE the
-      // user actually scrolls past them — feels proactive, not late.
-      { threshold: 0.01, rootMargin: '0px 0px -10% 0px' },
+      // the viewport". Negative bottom rootMargin means the element
+      // must be ≥ 15% into the viewport before we trigger — generous
+      // enough that reveals fire BEFORE the user actually scrolls past
+      // them, but not so eager that they trigger while the user is
+      // skimming past fast. Feels proactive, not late.
+      { threshold: 0.01, rootMargin: '0px 0px -15% 0px' },
     );
 
     // Observe existing + future targets. MutationObserver picks up

@@ -26,8 +26,6 @@ import { cn } from '@/lib/cn.js';
  * Cursor interaction (prefers-reduced-motion gates every effect):
  *   - Deity photo: 3D tilt (rotateX/Y ±5°) anchored to the photo's
  *     center, plus a translate up to ±22 px for hand-held parallax.
- *     A back-glow radial follows the cursor so the figure is lit
- *     from where the user is looking.
  *   - Lamp bloom: drifts ±10 px toward cursor (smaller magnitude
  *     than the deity so the parallax reads as depth, not glued).
  *   - Saffron radial light: its origin shifts toward the cursor
@@ -47,20 +45,19 @@ import { cn } from '@/lib/cn.js';
  *
  * Stack (bottom → top):
  *   1. Time-of-day base gradient (warm cream → deep amber → indigo)
- *   2. Back-glow radial that follows the cursor (depth cue)
- *   3. Deity photo, full-bleed, with 3D tilt + cursor parallax
- *   4. DustField — 44 drifting particles (cream + saffron embers,
+ *   2. Deity photo, full-bleed, with 3D tilt + cursor parallax
+ *   3. DustField — 44 drifting particles (cream + saffron embers,
  *      ~half twinkling). Visible at all times.
- *   5. IncenseDust — 32 slow motes for "still air with movement"
- *   6. Two ambient radial lights, breathing (24 s loop): saffron
+ *   4. IncenseDust — 32 slow motes for "still air with movement"
+ *   5. Two ambient radial lights, breathing (24 s loop): saffron
  *      upper-center (cursor-tracking), peacock lower-right
- *   7. Lamp bloom — saffron, upper-right, with slow flicker + cursor
+ *   6. Lamp bloom — saffron, upper-right, with slow flicker + cursor
  *      drift, tracks where the user is looking
- *   8. Embers — 14 slow rising sparks above the lamp bloom
- *   9. Foreground mist (drift loop + scroll-pulled down) so the
+ *   7. Embers — 14 slow rising sparks above the lamp bloom
+ *   8. Foreground mist (drift loop + scroll-pulled down) so the
  *      bottom of the hero never sits static
- *  10. Grain overlay
- *  11. Typography: eyebrow → headline (word-rise) → subhead → CTA →
+ *   9. Grain overlay
+ *  10. Typography: eyebrow → headline (word-rise) → subhead → CTA →
  *      live "Next darshan" tag. Headline scales + blurs out on scroll
  *      for a depth-of-field exit instead of a flat slide.
  */
@@ -321,23 +318,7 @@ export function Hero() {
         className={cn('absolute inset-0 -z-30 bg-gradient-to-t', deep)}
       />
 
-      {/* ----- Layer 2: back-glow radial that follows the cursor ----- */}
-      {/* Sits behind the deity but in front of the gradient — paints a
-          warm halo at the cursor position so the figure is lit from
-          where the user is looking. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-25"
-        style={{
-          opacity: prefersReduced ? 0 : 0.55,
-          background: prefersReduced
-            ? 'transparent'
-            : `radial-gradient(38% 42% at ${((cursor.nx * 0.5 + 0.5) * 100).toFixed(2)}% ${((cursor.ny * 0.5 + 0.5) * 100).toFixed(2)}%, rgba(229,162,74,0.55), rgba(229,162,74,0) 70%)`,
-          transition: 'background 80ms linear',
-        }}
-      />
-
-      {/* ----- Layer 3: deity photo with 3D tilt + cursor parallax ----- */}
+      {/* ----- Layer 2: deity photo with 3D tilt + cursor parallax ----- */}
       {/* Outer motion.div takes the smoothstep scroll curves (Y/X/scale/
           rotate). Inner div takes the live cursor values: 3D rotateX/Y
           tilt + translate, with perspective so the rotation reads as
