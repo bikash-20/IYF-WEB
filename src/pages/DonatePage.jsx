@@ -40,7 +40,7 @@ export function DonatePage() {
           />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {causes.map((c, i) => (
-              <Reveal key={c.k} index={i} gap={0.05}>
+              <Reveal key={c.k} index={i} gap={0.06}>
                 <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
                   <c.icon size={20} className="text-saffron-600" />
                   <h3 className="mt-4 font-display text-xl text-temple-800">{c.k}</h3>

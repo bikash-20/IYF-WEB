@@ -15,7 +15,7 @@ export function VisitSection() {
         />
 
         <div className="grid gap-5 md:grid-cols-12">
-          <Reveal className="md:col-span-7">
+          <Reveal className="portrait md:col-span-7">
             <div className="relative h-80 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-200/50 dark:border-white/8 dark:bg-ink-section-2 md:h-full">
               <div
                 className="absolute inset-0 opacity-80"

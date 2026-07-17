@@ -116,7 +116,7 @@ export function TodaysTemple() {
                   <Reveal
                     as="li"
                     key={p.id}
-                    delay={i * 0.04}
+                    delay={i * 0.05}
                     className={`grid grid-cols-[auto_1fr_auto] items-baseline gap-4 py-3 md:gap-6 ${
                       isDone ? 'opacity-55' : ''
                     }`}

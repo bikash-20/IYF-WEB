@@ -45,7 +45,7 @@ export function PrabhupadaCorner() {
           {/* Image column — image on the left to break rhythm with the
               About and Coordinator sections above. */}
           <div className="md:col-span-5 md:order-1">
-            <Reveal className="relative">
+            <Reveal className="portrait relative">
               <RadialLight
                 tone="saffron"
                 alpha={0.22}

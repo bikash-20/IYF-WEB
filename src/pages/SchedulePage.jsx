@@ -29,7 +29,7 @@ export function SchedulePage() {
             {dailySchedule.map((row, i) => {
               const isClosed = row.kind === 'closes';
               return (
-                <Reveal as="li" key={row.id} index={i} gap={0.04} className="relative pl-8 pb-10 last:pb-0">
+                <Reveal as="li" key={row.id} index={i} gap={0.06} className="relative pl-8 pb-10 last:pb-0">
                   <span
                     className={cn(
                       'absolute -left-1.5 top-1.5 h-3 w-3 rounded-full border-2 border-cream-50',

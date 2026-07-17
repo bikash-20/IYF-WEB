@@ -71,7 +71,7 @@ export function FloatingCard({
     className,
   );
 
-  const revealDelay = (index || 0) * 0.05;
+  const revealDelay = (index || 0) * 0.06;
 
   if (to) {
     return (

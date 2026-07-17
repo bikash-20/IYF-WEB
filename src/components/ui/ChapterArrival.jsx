@@ -19,10 +19,11 @@ import { cn } from '@/lib/cn.js';
  * graceful-degradation is clean), and is opt-in so pages that don't
  * want chapter motion don't get it.
  *
- * The wrapper uses the global `reveal focus-pull` rules from
- * index.css (40px travel, 6px blur-out, 1100ms cubic-bezier). It is
- * itself a data-reveal-target — the App.jsx observer flips it from
- * "no" to "yes" when it scrolls into view.
+ * The wrapper uses the global `reveal curtain` rules from
+ * index.css (clip-path inset 0 0 100% 0 → 0, plus 20px rise, 1100ms
+ * cubic-bezier) so the chapter reads as a curtain opening rather
+ * than a flat slide. It is itself a data-reveal-target — the App.jsx
+ * observer flips it from "no" to "yes" when it scrolls into view.
  *
  * Usage:
  *   <Section>
@@ -58,7 +59,7 @@ export function ChapterArrival({
   return (
     <Tag
       ref={ref}
-      className={cn('reveal focus-pull', className)}
+      className={cn('reveal curtain', className)}
       {...rest}
     >
       {children}

@@ -41,7 +41,7 @@ export function AboutPage() {
       <Section variant="warm">
         <Container>
           <div className="grid items-center gap-10 md:grid-cols-12 md:gap-12">
-            <Reveal className="md:col-span-6">
+            <Reveal className="portrait md:col-span-6">
               <img
                 src="/little-2.jpg"
                 alt="Soft daylight at the mandir"
@@ -89,7 +89,7 @@ export function AboutPage() {
         <Container>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
-              <Reveal key={v.title} index={i} gap={0.05}>
+              <Reveal key={v.title} index={i} gap={0.06}>
                 <Card>
                   <CardEyebrow>{v.eyebrow}</CardEyebrow>
                   <h3 className="mt-1 font-display text-xl text-temple-800">{v.title}</h3>
@@ -109,7 +109,7 @@ export function AboutPage() {
           </h2>
           <ol className="mt-8 grid gap-5 md:grid-cols-2">
             {timeline.map((t, i) => (
-              <Reveal key={t.year} index={i} gap={0.05}>
+              <Reveal key={t.year} index={i} gap={0.06}>
                 <li className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
                   <div className="font-mono text-xs uppercase tracking-eyebrow text-saffron-700">
                     {t.year}

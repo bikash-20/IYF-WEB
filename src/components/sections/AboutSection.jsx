@@ -77,7 +77,7 @@ export function AboutSection() {
 
           {/* Image column — offset down for the staggered rhythm */}
           <div className="md:col-span-5 md:pt-16">
-            <Reveal delay={0.15} className="relative">
+            <Reveal delay={0.15} className="portrait relative">
               <RadialLight
                 tone="saffron"
                 alpha={0.18}

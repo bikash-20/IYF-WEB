@@ -50,9 +50,9 @@ export function EditorialGallery() {
           {galleryItems.slice(0, 8).map((item, i) => (
             <Reveal
               key={item.id}
-              delay={i * 0.04}
+              delay={i * 0.06}
               className={cn(
-                'group relative overflow-hidden rounded-editorial shadow-soft outline-none ring-cream-50/0 transition-shadow duration-500 ease-divine hover:shadow-temple focus-visible:ring-2 focus-visible:ring-saffron-500/60 motion-reduce:transition-none dark:shadow-lift dark:hover:shadow-temple-deep dark:focus-visible:ring-saffron-400/70',
+                'portrait group relative overflow-hidden rounded-editorial shadow-soft outline-none ring-cream-50/0 transition-shadow duration-500 ease-divine hover:shadow-temple focus-visible:ring-2 focus-visible:ring-saffron-500/60 motion-reduce:transition-none dark:shadow-lift dark:hover:shadow-temple-deep dark:focus-visible:ring-saffron-400/70',
                 spans[i],
                 'min-h-[260px] md:min-h-0',
                 'transition-transform duration-300 ease-divine will-change-transform hover:-translate-y-[3px] active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100',

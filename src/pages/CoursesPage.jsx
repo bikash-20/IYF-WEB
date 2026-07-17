@@ -50,7 +50,7 @@ export function CoursesPage() {
 
           <ul className="grid gap-4 md:grid-cols-2">
             {smartCourse.modules.map((m, i) => (
-              <Reveal as="li" key={m.letter} index={i} gap={0.05}>
+              <Reveal as="li" key={m.letter} index={i} gap={0.06}>
                 <div className="grid grid-cols-[auto_1fr] items-start gap-5 rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full border border-saffron-500/40 font-display text-2xl text-saffron-600">
                     {m.letter}

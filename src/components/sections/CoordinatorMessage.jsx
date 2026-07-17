@@ -120,7 +120,7 @@ export function CoordinatorMessage() {
 
           {/* Portrait column — offset for editorial rhythm, unframed */}
           <div className="md:col-span-5 md:pt-20">
-            <Reveal delay={0.15} as="figure" className="relative">
+            <Reveal delay={0.15} as="figure" className="portrait relative">
               <RadialLight
                 tone="maroon"
                 alpha={0.16}

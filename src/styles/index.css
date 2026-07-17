@@ -178,7 +178,7 @@
     }
   }
 
-  /* ----- v0.9 Reveal system -------------------------------------
+  /* ----- v1.0 Reveal system --------------------------------------
    * Pure-CSS fade-up reveal driven by a single global
    * IntersectionObserver (mounted in App.jsx). The design has two
    * safety properties:
@@ -189,81 +189,144 @@
    *      JS never runs, no element is ever hidden — graceful
    *      degradation to "no animation, fully visible".
    *
-   *   2. The App.jsx observer + a 2s hard fallback timer both flip
+   *   2. The App.jsx observer + a 1.4s hard fallback timer both flip
    *      data-reveal="yes" once the element enters the viewport
-   *      (or after 2s, whichever comes first). The fallback is the
+   *      (or after 1.4s, whichever comes first). The fallback is the
    *      layer that catches theme-toggle re-renders — the per-element
    *      observer may briefly re-attach during a parent re-render
-   *      and read "out of view", but the 2s fallback guarantees
-   *      release even in that case.
+   *      and read "out of view", but the timer guarantees release
+   *      even in that case.
    *
-   * v0.9 upgrade — premium arrival feel:
-   *   - Slower base duration (1100ms) so reveals feel cinematic, not
-   *     snappy. Matches the editorial pace of the rest of the site.
-   *   - Larger travel (28px → 0) so the eye registers motion.
-   *   - Slight blur (4px → 0) so elements "settle into focus" the
-   *     way a camera pulls focus on arrival.
-   *   - Cinematic cubic-bezier (0.16, 1, 0.3, 1) — "easeOutExpo"-ish,
-   *     fast at start, very slow at the end so the final settling is
-   *     imperceptible. This is the curve used by high-end editorial
-   *     sites (Apple, Stripe, Linear).
-   *   - `focus-pull` modifier: larger travel + bigger blur for hero-
-   *     scale elements (section headings, hero headlines) so they
-   *     feel like they have weight. Used at the section root.
+   * v1.0 — "gentle rise + fade" (calmer than v0.9):
+   *   - Removed the camera-style blur — it read as "in-focus settle"
+   *     on a temple site rather than "subtle entrance", and competed
+   *     with the radial-light components sitting behind cards.
+   *   - Shorter, calmer base duration (700ms) instead of 1100ms —
+   *     the cinematic curve already does the slow-end work, so the
+   *     extra half-second was just waiting on nothing.
+   *   - Reduced travel (24px → 0) instead of 28px — enough motion
+   *     to register, not enough to call attention to itself.
+   *   - Kept the cinematic curve cubic-bezier(0.16, 1, 0.3, 1)
+   *     ("easeOutExpo"-ish — fast at start, imperceptible at end).
+   *     This is the curve used by Apple / Stripe / Linear landing
+   *     pages; it makes the final settling feel free.
+   *   - Dropped `will-change` — the transform is short-lived and
+   *     compositor promotion is not needed for 700ms one-shots on
+   *     a handful of elements per scroll. Don't add it speculatively.
+   *
+   * Modifiers:
+   *   - `focus-pull`: heavier reveal for hero-scale elements
+   *     (section headings, hero headlines). 40px travel + 900ms so
+   *     the weight reads as deliberate, not draggy.
+   *   - `settle`: tiny UI (badges, labels, inline links). 12px
+   *     travel + 500ms so they don't draw attention to themselves.
+   *
+   * Stagger: Reveal.jsx sets `style.transitionDelay` inline based
+   * on `index * gap + delay` so sequenced children cascade without
+   * extra JS. Default gap is 0.04s (40ms) — readable as rhythm,
+   * not as lag.
    *
    * Reduced motion: the `prefers-reduced-motion` block short-circuits
    * the transition so reveals are instantaneous and content is
-   * visible immediately.
+   * visible immediately. No movement at all.
    * --------------------------------------------------------------- */
+  /* v1.1 — split the default's transform/opacity timing so the rise
+     "leads" the fade by ~150ms. Locked-sync reads as one flat
+     motion; a slight desync reads as the element physically arriving
+     before it fully paints into view. Transform completes at 850ms,
+     opacity at 700ms — the eye catches the rise first, then the
+     element "settles in". */
   .reveal[data-reveal="no"] {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
-    filter: blur(4px);
+    transform: translate3d(0, 24px, 0);
     transition:
-      opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform, filter;
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal[data-reveal="yes"] {
     opacity: 1;
-    transform: none;
-    filter: blur(0);
+    transform: translate3d(0, 0, 0);
     transition:
-      opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* "focus-pull" — heavier reveal for hero-scale elements (section
-     headings, the hero). Adds 12px more travel and 2px more blur so
-     they read as having weight, not as content. */
+     headings, the hero). More travel + a touch longer so they read
+     as having weight, not as content. Same desync — transform leads. */
   .reveal.focus-pull[data-reveal="no"] {
     transform: translate3d(0, 40px, 0);
-    filter: blur(6px);
+    transition:
+      opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.focus-pull[data-reveal="yes"] {
-    transform: none;
-    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* "settle" — for tiny UI like badges, labels, inline links.
      Shorter duration + smaller travel so they don't drag. */
   .reveal.settle[data-reveal="no"] {
     transform: translate3d(0, 12px, 0);
-    filter: blur(2px);
     transition:
-      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 700ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.settle[data-reveal="yes"] {
-    transform: none;
-    filter: blur(0);
+    transform: translate3d(0, 0, 0);
     transition:
-      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 700ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* "portrait" — for image-bearing elements (EditorialGallery tiles,
+     EditorialImage, darshan / festival / schedule cards). Adds a
+     subtle scale-up (0.96 → 1) so the photo "settles into focus"
+     rather than just sliding up. Pairs with the default rise+fade.
+     1000ms duration — gives the eye time to register the scale as
+     a depth-of-field cue, not a bounce. The transform-origin is
+     bottom-center so it reads as "rising up from the page". */
+  .reveal.portrait[data-reveal="no"] {
+    transform: translate3d(0, 28px, 0) scale(0.96);
+    transform-origin: 50% 100%;
+    transition:
+      opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.portrait[data-reveal="yes"] {
+    transform: translate3d(0, 0, 0) scale(1);
+    transform-origin: 50% 100%;
+    transition:
+      opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* "curtain" — for chapter intros (ChapterArrival). A clip-path
+     "curtain rise" (inset 0 0 100% 0 → inset 0) instead of translate.
+     Reads as a cinematic curtain opening onto the chapter, not as
+     a flat slide. 1100ms — slow enough to feel deliberate, fast
+     enough not to gate the user. Pairs with a subtle 20px rise so
+     the content lifts as the curtain opens. */
+  .reveal.curtain[data-reveal="no"] {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translate3d(0, 20px, 0);
+    transition:
+      opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+      clip-path 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.curtain[data-reveal="yes"] {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+      clip-path 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -271,7 +334,17 @@
     .reveal[data-reveal="yes"] {
       opacity: 1;
       transform: none;
-      filter: none;
+      clip-path: none;
+      transition: none;
+    }
+    /* portrait + curtain collapse to a plain fade for reduced-motion */
+    .reveal.portrait[data-reveal="no"],
+    .reveal.portrait[data-reveal="yes"],
+    .reveal.curtain[data-reveal="no"],
+    .reveal.curtain[data-reveal="yes"] {
+      opacity: 1;
+      transform: none;
+      clip-path: none;
       transition: none;
     }
   }

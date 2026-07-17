@@ -29,7 +29,7 @@ export function GalleryPage() {
           <SectionHeading eyebrow="Deity darshan" title="From the altar" />
           <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
             {galleryItems.map((g, i) => (
-              <Reveal key={g.id} delay={(i % 6) * 0.04} className="block">
+              <Reveal key={g.id} delay={(i % 6) * 0.06} className="portrait block">
                 <motion.a
                   href={g.src || site.contacts.facebook}
                   target={g.src ? undefined : '_blank'}
