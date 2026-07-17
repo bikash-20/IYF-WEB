@@ -10,9 +10,9 @@ import { Footer } from './Footer.jsx';
  * bottom of every page in the Footer — but it no longer breaks the
  * seamless dark surface between the glass navbar and the home hero.
  *
- * The top-edge saffron scroll-progress bar is still off (removed in
- * v0.7). The `ScrollProgress` primitive still exists in
- * `src/components/ui/` if we ever want it back as an opt-in.
+ * The top-edge saffron scroll-progress bar is off (removed in v0.7).
+ * The `ScrollProgress` primitive was deleted in v1.0.0 — re-add from
+ * git history if ever needed.
  *
  * v0.8: theme-aware surfaces. The wrapper carries the page bg + fg
  * for both modes; `bg-cream-50 text-temple-800` in light and
