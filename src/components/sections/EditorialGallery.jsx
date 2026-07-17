@@ -1,6 +1,6 @@
 import { Play } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
-import { SectionHeader } from '@/components/ui/SectionHeader.jsx';
+import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 import { galleryItems } from '@/data/gallery.js';
 import { site } from '@/lib/site.js';
@@ -40,7 +40,7 @@ export function EditorialGallery() {
   return (
     <Section variant="warm" pad="default">
       <Container>
-        <SectionHeader
+        <SectionHeading
           eyebrow="Inside the mandir"
           title="Gallery"
           lede="Selected photographs from daily darshan, festivals, and youth programs at the temple."

@@ -1,5 +1,5 @@
 import { Section, Container } from '@/components/ui/Section.jsx';
-import { SectionHeader } from '@/components/ui/SectionHeader.jsx';
+import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 import { dailySchedule } from '@/data/dailySchedule.js';
 
@@ -7,7 +7,7 @@ import { dailySchedule } from '@/data/dailySchedule.js';
  * ScheduleTimeline — the vertical timeline for daily arati.
  *
  * v0.2:
- *   - Uses SectionHeader so the eyebrow/title/lede match every other section
+ *   - Uses SectionHeading so the eyebrow/title/lede match every other section
  *   - Saffron dot anchor sits inside a soft saffron halo
  *   - Lines through each entry are quieter (border editorial)
  *
@@ -19,7 +19,7 @@ export function ScheduleTimeline() {
   return (
     <Section variant="pure" pad="default">
       <Container>
-        <SectionHeader
+        <SectionHeading
           eyebrow="Every day at the mandir"
           title="Darshan & Arati Schedule"
           lede="Timings shift slightly with the seasons. Mangal Arati begins before sunrise — please arrive quietly."

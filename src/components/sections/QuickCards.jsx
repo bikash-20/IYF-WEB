@@ -1,5 +1,5 @@
 import { Section, Container } from '@/components/ui/Section.jsx';
-import { SectionHeader } from '@/components/ui/SectionHeader.jsx';
+import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { FloatingCard } from '@/components/ui/FloatingCard.jsx';
 
 /**
@@ -38,7 +38,7 @@ export function QuickCards() {
   return (
     <Section variant="default" pad="tight">
       <Container>
-        <SectionHeader
+        <SectionHeading
           eyebrow="Where to begin"
           title="A few good doors in"
           lede="Pick the one that fits the moment you're in."

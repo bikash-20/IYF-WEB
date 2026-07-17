@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Check, Clock } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
-import { SectionHeader } from '@/components/ui/SectionHeader.jsx';
+import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 import { useCurrentProgram, useNow } from '@/hooks/useNow.js';
 import { featuredFestival } from '@/data/featuredFestival.js';
@@ -76,7 +76,7 @@ export function TodaysTemple() {
   return (
     <Section variant="warm" pad="default">
       <Container>
-        <SectionHeader
+        <SectionHeading
           eyebrow="Today at the mandir"
           title="Today's Temple"
           lede="What is alive at the mandir right now, what to read for a quiet minute, and what is coming next."
