@@ -79,7 +79,8 @@ export function AboutSection() {
           <div className="md:col-span-5 md:pt-16">
             <Reveal delay={0.15} className="relative">
               <RadialLight
-                color="rgba(217,138,43,0.18)"
+                tone="saffron"
+                alpha={0.18}
                 size="60%"
                 pos="100% 100%"
                 className="!absolute -right-10 -top-10 hidden md:block"

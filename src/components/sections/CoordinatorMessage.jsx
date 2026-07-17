@@ -122,7 +122,8 @@ export function CoordinatorMessage() {
           <div className="md:col-span-5 md:pt-20">
             <Reveal delay={0.15} as="figure" className="relative">
               <RadialLight
-                color="rgba(92,22,32,0.16)"
+                tone="maroon"
+                alpha={0.16}
                 size="65%"
                 pos="100% 100%"
                 className="!absolute -right-12 -top-12 hidden md:block"

@@ -47,7 +47,8 @@ export function PrabhupadaCorner() {
           <div className="md:col-span-5 md:order-1">
             <Reveal className="relative">
               <RadialLight
-                color="rgba(217,138,43,0.22)"
+                tone="saffron"
+                alpha={0.22}
                 size="60%"
                 pos="0% 100%"
                 className="!absolute -left-10 -top-10 hidden md:block"

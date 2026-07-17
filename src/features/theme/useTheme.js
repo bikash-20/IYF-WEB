@@ -43,9 +43,11 @@ function applyTheme(theme) {
   if (typeof document === 'undefined') return;
   const root = document.documentElement;
   root.classList.toggle('dark', theme === 'dark');
-  // color-scheme follows the data-theme attribute so native form
-  // controls (scrollbars, autofill) render correctly per theme.
-  root.setAttribute('data-theme', theme);
+  // color-scheme follows the .dark class so native form controls
+  // (scrollbars, autofill) render correctly per theme. tokens.css
+  // owns the visual remap; the data-theme attribute is no longer
+  // needed because nothing reads it.
+  root.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
 }
 
 export function useTheme() {

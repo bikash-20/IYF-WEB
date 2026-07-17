@@ -36,7 +36,8 @@ export function TodaysDarshan() {
           <Reveal className="md:col-span-7">
             <div className="relative overflow-hidden rounded-editorial border border-temple-800/10 bg-cream-50/80 p-8 shadow-soft backdrop-blur-sm dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift md:p-10">
               <RadialLight
-                color="rgba(217,138,43,0.18)"
+                tone="saffron"
+                alpha={0.18}
                 size="50%"
                 pos="100% 0%"
                 className="!relative inset-0 h-full w-full"

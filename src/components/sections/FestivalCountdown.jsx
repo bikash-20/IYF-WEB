@@ -46,13 +46,15 @@ export function FestivalCountdown() {
       <Container>
         <Reveal className="relative overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/60 p-8 dark:border-saffron-400/15 dark:bg-ink-deep md:p-14">
           <RadialLight
-            color="rgba(217,138,43,0.22)"
+            tone="saffron"
+            alpha={0.22}
             size="55%"
             pos="0% 0%"
             className="!relative inset-0 h-full w-full"
           />
           <RadialLight
-            color="rgba(27,94,122,0.18)"
+            tone="peacock"
+            alpha={0.18}
             size="60%"
             pos="100% 100%"
             className="!relative inset-0 h-full w-full"
