@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { PageHero } from '@/components/layout/PageHero.jsx';
 import { Section, Container } from '@/components/ui/Section.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { Card, CardEyebrow } from '@/components/ui/Card.jsx';
 import { Button } from '@/components/ui/Button.jsx';
 import { Mantra } from '@/components/ui/Mantra.jsx';
@@ -41,15 +41,15 @@ export function AboutPage() {
       <Section variant="warm">
         <Container>
           <div className="grid items-center gap-10 md:grid-cols-12 md:gap-12">
-            <RevealOnScroll className="md:col-span-6">
+            <Reveal className="md:col-span-6">
               <img
                 src="/little-2.jpg"
                 alt="Soft daylight at the mandir"
                 className="aspect-[4/5] w-full rounded-xl2 object-cover shadow-soft"
                 loading="lazy"
               />
-            </RevealOnScroll>
-            <RevealOnScroll className="md:col-span-6" delay={0.1}>
+            </Reveal>
+            <Reveal className="md:col-span-6" delay={0.1}>
               <div className="eyebrow">Our story</div>
               <h2 className="mt-3 font-display text-display-md text-balance">
                 From a small group of college students to a daily programme.
@@ -70,7 +70,7 @@ export function AboutPage() {
                   Mahaprabhu and the Gaudiya Vaishnava lineage.
                 </p>
               </div>
-            </RevealOnScroll>
+            </Reveal>
           </div>
         </Container>
       </Section>
@@ -89,13 +89,13 @@ export function AboutPage() {
         <Container>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
-              <RevealOnScroll key={v.title} delay={i * 0.05}>
+              <Reveal key={v.title} index={i} gap={0.05}>
                 <Card>
                   <CardEyebrow>{v.eyebrow}</CardEyebrow>
                   <h3 className="mt-1 font-display text-xl text-temple-800">{v.title}</h3>
                   <p className="text-sm leading-relaxed text-temple-700/80">{v.body}</p>
                 </Card>
-              </RevealOnScroll>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -109,14 +109,14 @@ export function AboutPage() {
           </h2>
           <ol className="mt-8 grid gap-5 md:grid-cols-2">
             {timeline.map((t, i) => (
-              <RevealOnScroll key={t.year} delay={i * 0.05}>
+              <Reveal key={t.year} index={i} gap={0.05}>
                 <li className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
                   <div className="font-mono text-xs uppercase tracking-eyebrow text-saffron-700">
                     {t.year}
                   </div>
                   <p className="mt-3 text-base leading-relaxed text-temple-700">{t.body}</p>
                 </li>
-              </RevealOnScroll>
+              </Reveal>
             ))}
           </ol>
         </Container>

@@ -1,5 +1,4 @@
 import { Badge } from '@/components/ui/Badge.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 import { UtensilsCrossed, Sparkles, CalendarRange } from 'lucide-react';
 
@@ -53,7 +52,7 @@ function bandLabel(festival) {
 function FestivalCard({ festival }) {
   const meta = TYPE_META[festival.type] || TYPE_META.single;
   return (
-    <RevealOnScroll>
+    <Reveal>
       <article className="group relative flex h-full flex-col rounded-2xl border border-temple-800/10 bg-cream-50 p-5 shadow-soft transition-all duration-500 ease-divine hover:border-saffron-500/40 hover:shadow-temple motion-reduce:transition-none dark:border-white/8 dark:bg-ink-floating/80 dark:shadow-lift dark:hover:border-saffron-400/40 dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.55),0_0_30px_rgba(224,170,76,0.15)]">
         <header className="flex items-start justify-between gap-3">
           <div>
@@ -84,7 +83,7 @@ function FestivalCard({ festival }) {
           ) : null}
         </footer>
       </article>
-    </RevealOnScroll>
+    </Reveal>
   );
 }
 

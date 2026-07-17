@@ -6,7 +6,7 @@ import { cn } from '@/lib/cn.js';
  *
  * Wrap the first content block of a Section with this to give the
  * whole section a single, cinematic reveal that settles the
- * reader into the chapter before the inner <RevealOnScroll> blocks
+ * reader into the chapter before the inner <Reveal> blocks
  * start staggering their detail motion.
  *
  * Why this exists as its own component (rather than baking it into
@@ -31,7 +31,11 @@ import { cn } from '@/lib/cn.js';
  *         <h2>...</h2>
  *         <p>...</p>
  *       </ChapterArrival>
- *       <RevealStagger>...</RevealStagger>
+ *       {items.map((item, i) => (
+ *         <Reveal key={item.id} index={i}>
+ *           <Card {...item} />
+ *         </Reveal>
+ *       ))}
  *     </Container>
  *   </Section>
  */

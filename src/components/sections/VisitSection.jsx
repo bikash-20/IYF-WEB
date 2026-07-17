@@ -1,6 +1,6 @@
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { site } from '@/lib/site.js';
 import { Phone, MessageCircle, Mail, Facebook } from 'lucide-react';
 
@@ -15,7 +15,7 @@ export function VisitSection() {
         />
 
         <div className="grid gap-5 md:grid-cols-12">
-          <RevealOnScroll className="md:col-span-7">
+          <Reveal className="md:col-span-7">
             <div className="relative h-80 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-200/50 dark:border-white/8 dark:bg-ink-section-2 md:h-full">
               <div
                 className="absolute inset-0 opacity-80"
@@ -45,9 +45,9 @@ export function VisitSection() {
                 Open in Maps →
               </a>
             </div>
-          </RevealOnScroll>
+          </Reveal>
 
-          <RevealOnScroll className="md:col-span-5" delay={0.1}>
+          <Reveal className="md:col-span-5" delay={0.1}>
             <ul className="divide-y divide-temple-800/10 overflow-hidden rounded-xl2 border border-temple-800/10 bg-cream-50 dark:divide-white/8 dark:border-white/8 dark:bg-ink-floating/85">
               <ContactRow icon={<Phone size={14} />} k="Phone" v={site.contacts.phoneDisplay} href={`tel:${site.contacts.phone}`} />
               <ContactRow
@@ -75,7 +75,7 @@ export function VisitSection() {
                 href={site.contacts.facebook}
               />
             </ul>
-          </RevealOnScroll>
+          </Reveal>
         </div>
       </Container>
     </Section>

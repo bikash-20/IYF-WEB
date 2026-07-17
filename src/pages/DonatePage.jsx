@@ -4,7 +4,7 @@ import { PageHero } from '@/components/layout/PageHero.jsx';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Button } from '@/components/ui/Button.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
 import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
@@ -40,13 +40,13 @@ export function DonatePage() {
           />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {causes.map((c, i) => (
-              <RevealOnScroll key={c.k} delay={i * 0.05}>
+              <Reveal key={c.k} index={i} gap={0.05}>
                 <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
                   <c.icon size={20} className="text-saffron-600" />
                   <h3 className="mt-4 font-display text-xl text-temple-800">{c.k}</h3>
                   <p className="mt-1 text-sm leading-relaxed text-temple-700/80">{c.body}</p>
                 </div>
-              </RevealOnScroll>
+              </Reveal>
             ))}
           </div>
         </Container>

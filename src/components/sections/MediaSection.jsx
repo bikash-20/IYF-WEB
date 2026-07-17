@@ -1,6 +1,6 @@
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { Play, ArrowUpRight } from 'lucide-react';
 import { site } from '@/lib/site.js';
 
@@ -29,7 +29,7 @@ export function MediaSection() {
         <SectionHeading eyebrow="Watch & follow" title="Live Darshan & Media" />
 
         <div className="grid gap-5 md:grid-cols-2">
-          <RevealOnScroll>
+          <Reveal>
             <a
               href={site.contacts.youtube}
               target="_blank"
@@ -51,9 +51,9 @@ export function MediaSection() {
                 <Play size={20} className="ml-1 text-cream-50" />
               </div>
             </a>
-          </RevealOnScroll>
+          </Reveal>
 
-          <RevealOnScroll delay={0.1} className="flex flex-col gap-3">
+          <Reveal delay={0.1} className="flex flex-col gap-3">
             {links.map((l) => (
               <a
                 key={l.title}
@@ -72,7 +72,7 @@ export function MediaSection() {
                 />
               </a>
             ))}
-          </RevealOnScroll>
+          </Reveal>
         </div>
       </Container>
     </Section>

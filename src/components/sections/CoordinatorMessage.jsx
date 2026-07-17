@@ -1,7 +1,6 @@
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { EditorialImage } from '@/components/ui/EditorialImage.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 
 /**
@@ -15,7 +14,7 @@ import { Reveal } from '@/components/ui/Reveal.jsx';
  * is offset and unframed so the letter is the protagonist.
  *
  * v0.8.1: replaced Framer Motion `whileInView` variants with the
- * CSS-driven reveal system. RevealOnScroll triggers the column as a
+ * CSS-driven reveal system. Reveal triggers the column as a
  * whole; children stagger via inline delays.
  */
 export function CoordinatorMessage() {
@@ -24,7 +23,7 @@ export function CoordinatorMessage() {
       <Container>
         <div className="grid items-start gap-14 md:grid-cols-12 md:gap-20">
           {/* Letter column */}
-          <RevealOnScroll className="md:col-span-7">
+          <Reveal className="md:col-span-7">
             {/* Eyebrow */}
             <Reveal className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft" delay={0.0}>
               A personal letter
@@ -117,7 +116,7 @@ export function CoordinatorMessage() {
                 </span>
               </div>
             </Reveal>
-          </RevealOnScroll>
+          </Reveal>
 
           {/* Portrait column — offset for editorial rhythm, unframed */}
           <div className="md:col-span-5 md:pt-20">

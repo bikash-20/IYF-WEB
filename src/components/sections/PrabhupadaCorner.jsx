@@ -3,7 +3,6 @@ import { Section, Container } from '@/components/ui/Section.jsx';
 import { EditorialImage } from '@/components/ui/EditorialImage.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { Badge } from '@/components/ui/Badge.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 
 /**
@@ -18,7 +17,7 @@ import { Reveal } from '@/components/ui/Reveal.jsx';
  * saffron radial to echo the warmth of the lamplight in the photo.
  *
  * v0.8.1: replaced Framer Motion `whileInView` variants with the
- * CSS-driven reveal system (RevealOnScroll + Reveal with inline
+ * CSS-driven reveal system (Reveal with inline
  * delays) to be robust against theme toggle re-renders.
  */
 
@@ -76,10 +75,10 @@ export function PrabhupadaCorner() {
             </Reveal>
           </div>
 
-          {/* Body column — RevealOnScroll triggers the column as a
-              whole; each child uses Reveal with an inline delay for
-              the stagger effect. */}
-          <RevealOnScroll className="md:col-span-7 md:order-2 md:pt-2">
+          {/* Body column — Reveal triggers the column as a
+              single fade-up; rows below stagger through plain `Reveal`
+              with index-based delays. */}
+          <Reveal className="md:col-span-7 md:order-2 md:pt-2">
             <Reveal className="eyebrow" delay={0.0}>
               Śrīla Prabhupāda corner
             </Reveal>
@@ -178,7 +177,7 @@ export function PrabhupadaCorner() {
                 ))}
               </ul>
             </Reveal>
-          </RevealOnScroll>
+          </Reveal>
         </div>
       </Container>
     </Section>

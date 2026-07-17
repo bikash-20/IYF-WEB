@@ -3,7 +3,6 @@ import { ArrowUpRight } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { EditorialImage } from '@/components/ui/EditorialImage.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 import { site } from '@/lib/site.js';
 
@@ -17,7 +16,7 @@ import { site } from '@/lib/site.js';
  *   - Replaces ad-hoc styles with Section + Radials + design system
  *
  * v0.8.1: replaced Framer Motion `whileInView` variants with the
- * CSS-driven reveal system (RevealOnScroll + Reveal). The old
+ * CSS-driven reveal system (Reveal). The old
  * variants-based stagger broke during theme toggle because the
  * per-element IntersectionObserver coupled to Framer Motion's
  * animation controller could leave children stuck at opacity:0.
@@ -30,10 +29,10 @@ export function AboutSection() {
     <Section variant="soft" pad="default">
       <Container>
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
-          {/* Text column — starts higher (items-start). RevealOnScroll
-              triggers a CSS fade for the whole column; each child uses
-              Reveal with an inline transition-delay for the stagger. */}
-          <RevealOnScroll className="md:col-span-7 md:pt-2">
+          {/* Text column — starts higher (items-start). Reveal
+              triggers the column as a single fade-up; the inner items
+              stagger via inline `delay={i * N}`. */}
+          <Reveal className="md:col-span-7 md:pt-2">
             <Reveal className="eyebrow" delay={0.0}>
               About the mandir
             </Reveal>
@@ -74,7 +73,7 @@ export function AboutSection() {
                 Read the temple&apos;s story
               </Link>
             </Reveal>
-          </RevealOnScroll>
+          </Reveal>
 
           {/* Image column — offset down for the staggered rhythm */}
           <div className="md:col-span-5 md:pt-16">

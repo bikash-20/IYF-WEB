@@ -63,7 +63,7 @@ export default function App() {
   // permanent, so the element stayed at opacity:0.
   //
   // The new design:
-  //   1. RevealOnScroll renders plain <div data-reveal-target> nodes.
+  //   1. <Reveal> renders plain nodes with data-reveal-target.
   //      No Framer Motion. CSS handles the fade.
   //   2. ONE IntersectionObserver, mounted here, watches every
   //      [data-reveal-target] node in the app shell.

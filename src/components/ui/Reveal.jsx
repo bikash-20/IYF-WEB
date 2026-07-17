@@ -4,16 +4,41 @@ import { cn } from '@/lib/cn.js';
 /**
  * Reveal — single-element CSS fade-up reveal.
  *
- * Sister to RevealOnScroll but for elements that aren't wrapped in
- * the page-level observer yet, or that need a custom selector.
- * Used inside `RevealGroup` for child elements.
+ * Renders a plain node with `data-reveal-target` so the *single*
+ * global IntersectionObserver (mounted in App.jsx) can flip
+ * `data-reveal="yes"` when the node scrolls into view. CSS in
+ * index.css handles the fade. There is no per-element observer,
+ * which makes Reveal robust against parent re-renders (theme toggle
+ * no longer resets opacity).
+ *
+ * Props:
+ *   as        — tag name (defaults to "div").
+ *   delay     — extra seconds added to the transitionDelay.
+ *   index     — optional index for staggered children. Internally
+ *               `delay = index * gap + extraDelay`, where `gap`
+ *               defaults to 0.04. Set `gap` to override.
+ *   gap       — per-step seconds between staggered children when
+ *               using `index`. Defaults to 0.04.
+ *   className — appended to the "reveal" base class.
+ *   ...rest   — anything else (style, event handlers, aria-*).
+ *
+ * Reduced motion: the global CSS short-circuits the transition to
+ * `none` and leaves opacity at 1 so reveals are instantaneous.
  */
-export function Reveal({ as: Tag = 'div', delay = 0, className, children, ...rest }) {
+export function Reveal({
+  as: Tag = 'div',
+  delay = 0,
+  index,
+  gap = 0.04,
+  className,
+  children,
+  ...rest
+}) {
   const ref = useRef(null);
   const hasSetInitialState = useRef(false);
 
-  // এই effect শুধু ONE TIME চলবে (mount-এ) — data-reveal attribute সেট করার জন্য।
-  // delay বদলালে এটা আর re-run হবে না, তাই visibility state কখনো regress করবে না।
+  // Mount only — flip on data-reveal-target. Doing this once keeps
+  // re-renders (theme toggle, route change) from resetting opacity.
   useEffect(() => {
     if (typeof window === 'undefined' || !ref.current) return;
     if (hasSetInitialState.current) return;
@@ -21,16 +46,22 @@ export function Reveal({ as: Tag = 'div', delay = 0, className, children, ...res
     el.setAttribute('data-reveal-target', 'yes');
     el.setAttribute('data-reveal', 'no');
     hasSetInitialState.current = true;
-  }, []); // ← delay সরিয়ে দিলাম dependency থেকে
+  }, []);
 
-  // delay বদলালে শুধু transitionDelay আপডেট হবে, data-reveal attribute অক্ষত থাকবে
+  // delay / index changes only update transitionDelay; the
+  // data-reveal-target attribute is already set and will not regress.
   useEffect(() => {
     if (!ref.current) return;
-    if (delay) ref.current.style.transitionDelay = `${delay}s`;
-  }, [delay]);
+    const computedDelay = typeof index === 'number' ? index * gap + delay : delay;
+    if (computedDelay) ref.current.style.transitionDelay = `${computedDelay}s`;
+  }, [delay, index, gap]);
+
+  const style = {
+    ...(rest.style || {}),
+  };
 
   return (
-    <Tag ref={ref} className={cn('reveal', className)} style={rest.style} {...rest}>
+    <Tag ref={ref} className={cn('reveal', className)} style={style} {...rest}>
       {children}
     </Tag>
   );

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { PageHero } from '@/components/layout/PageHero.jsx';
 import { Section, Container } from '@/components/ui/Section.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
 import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
@@ -29,7 +29,7 @@ export function SchedulePage() {
             {dailySchedule.map((row, i) => {
               const isClosed = row.kind === 'closes';
               return (
-                <RevealOnScroll as="li" key={row.id} delay={i * 0.04} className="relative pl-8 pb-10 last:pb-0">
+                <Reveal as="li" key={row.id} index={i} gap={0.04} className="relative pl-8 pb-10 last:pb-0">
                   <span
                     className={cn(
                       'absolute -left-1.5 top-1.5 h-3 w-3 rounded-full border-2 border-cream-50',
@@ -58,7 +58,7 @@ export function SchedulePage() {
                       <div className="mt-1 text-sm leading-relaxed text-temple-700/80">{row.note}</div>
                     </div>
                   </div>
-                </RevealOnScroll>
+                </Reveal>
               );
             })}
           </ol>
@@ -73,14 +73,14 @@ export function SchedulePage() {
               { k: 'Closed', v: 'Temple rests from 1:00 PM to 4:00 PM, and again after 8:30 PM.' },
               { k: 'Public holidays', v: 'Only on rare occasions — check the events page.' },
             ].map((b) => (
-              <RevealOnScroll key={b.k}>
+              <Reveal key={b.k}>
                 <div className="rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
                   <div className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-700">
                     {b.k}
                   </div>
                   <p className="mt-2 text-sm text-temple-700/85">{b.v}</p>
                 </div>
-              </RevealOnScroll>
+              </Reveal>
             ))}
           </div>
         </Container>

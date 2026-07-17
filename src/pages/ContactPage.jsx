@@ -17,7 +17,7 @@ import { PageHero } from '@/components/layout/PageHero.jsx';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { Button } from '@/components/ui/Button.jsx';
 import { AnimatedInput } from '@/components/ui/AnimatedInput.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { ChapterArrival } from '@/components/ui/ChapterArrival.jsx';
 import { FloatingPetals } from '@/components/ui/FloatingPetals.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
@@ -220,14 +220,13 @@ export function ContactPage() {
               Three small reassurances before you write.
             </h2>
           </ChapterArrival>
-          <RevealStagger
-            className="grid gap-4 md:grid-cols-3"
-            delay={0.07}
-            as="ul"
-          >
-            {trust.map((t) => (
-              <li
+          <ul className="grid gap-4 md:grid-cols-3">
+            {trust.map((t, i) => (
+              <Reveal
+                as="li"
                 key={t.k}
+                index={i}
+                gap={0.07}
                 className="flex items-start gap-3 rounded-xl2 border border-temple-800/10 bg-cream-50 p-5 dark:border-white/8 dark:bg-ink-floating/80"
               >
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-peacock-500/10 text-peacock-600 ring-1 ring-peacock-500/15">
@@ -239,9 +238,9 @@ export function ContactPage() {
                   </div>
                   <p className="mt-1 text-sm text-temple-700/90">{t.v}</p>
                 </div>
-              </li>
+              </Reveal>
             ))}
-          </RevealStagger>
+          </ul>
         </Container>
       </Section>
 
@@ -249,7 +248,7 @@ export function ContactPage() {
       <Section>
         <Container>
           <div className="grid gap-6 md:grid-cols-2 md:gap-7">
-            <RevealOnScroll>
+            <Reveal>
               <FormCard
                 title="General Inquiry"
                 eyebrow="Ask anything"
@@ -346,9 +345,9 @@ export function ContactPage() {
                   )}
                 </AnimatePresence>
               </FormCard>
-            </RevealOnScroll>
+            </Reveal>
 
-            <RevealOnScroll delay={0.08}>
+            <Reveal delay={0.08}>
               <FormCard
                 title="Volunteer Sign-up"
                 eyebrow="Lend a hand"
@@ -449,7 +448,7 @@ export function ContactPage() {
                   )}
                 </AnimatePresence>
               </FormCard>
-            </RevealOnScroll>
+            </Reveal>
           </div>
         </Container>
       </Section>
@@ -520,13 +519,13 @@ export function ContactPage() {
                 the IYF secretary.
               </p>
             </ChapterArrival>
-            <RevealOnScroll delay={0.08} className="md:col-span-8">
+            <Reveal delay={0.08} className="md:col-span-8">
               <ul className="rounded-xl2 border border-temple-800/10 bg-cream-100/60 px-6">
                 {faqs.map((f) => (
                   <FAQItem key={f.q} q={f.q} a={f.a} />
                 ))}
               </ul>
-            </RevealOnScroll>
+            </Reveal>
           </div>
         </Container>
       </Section>

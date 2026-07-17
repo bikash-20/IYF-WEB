@@ -1,11 +1,10 @@
 import { cn } from '@/lib/cn.js';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 
 /**
  * SectionHeader — the standard section header. Eyebrow, h2, lede,
  * all with staggered fade-up on viewport entry. Use this instead of
- * building one inline. RevealOnScroll triggers the column; each
+ * building one inline. Reveal triggers the column; each
  * child uses Reveal with an inline delay for the cascade.
  *
  * v0.8.1: replaced Framer Motion `whileInView` + variants with
@@ -13,7 +12,7 @@ import { Reveal } from '@/components/ui/Reveal.jsx';
  */
 export function SectionHeader({ eyebrow, title, lede, align = 'left', className }) {
   return (
-    <RevealOnScroll
+    <Reveal
       as="header"
       className={cn(
         'mb-16 max-w-2xl md:mb-20',
@@ -40,6 +39,6 @@ export function SectionHeader({ eyebrow, title, lede, align = 'left', className 
           {lede}
         </Reveal>
       )}
-    </RevealOnScroll>
+    </Reveal>
   );
 }

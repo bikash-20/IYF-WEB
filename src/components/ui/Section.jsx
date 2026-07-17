@@ -74,7 +74,7 @@ export function Section({
   // yet). Net effect: scan() queued the target as out-of-view, the
   // observer never fired for it, and the whole section stayed
   // invisible. Chapter-level arrival is now the responsibility of
-  // each <RevealOnScroll> / <RevealStagger> block inside the section.
+  // each <Reveal> block inside the section.
   return (
     <Tag
       id={id}

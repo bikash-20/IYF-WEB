@@ -3,7 +3,7 @@ import { PageHero } from '@/components/layout/PageHero.jsx';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Button } from '@/components/ui/Button.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
+import { Reveal } from '@/components/ui/Reveal.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
 import { pageEnter } from '@/lib/motion.js';
 import { site } from '@/lib/site.js';
@@ -50,7 +50,7 @@ export function CoursesPage() {
 
           <ul className="grid gap-4 md:grid-cols-2">
             {smartCourse.modules.map((m, i) => (
-              <RevealOnScroll as="li" key={m.letter} delay={i * 0.05}>
+              <Reveal as="li" key={m.letter} index={i} gap={0.05}>
                 <div className="grid grid-cols-[auto_1fr] items-start gap-5 rounded-xl2 border border-temple-800/10 bg-cream-50 p-6 dark:border-white/8 dark:bg-ink-floating/85">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full border border-saffron-500/40 font-display text-2xl text-saffron-600">
                     {m.letter}
@@ -60,7 +60,7 @@ export function CoursesPage() {
                     <p className="mt-2 text-sm leading-relaxed text-temple-700/85">{m.body}</p>
                   </div>
                 </div>
-              </RevealOnScroll>
+              </Reveal>
             ))}
           </ul>
         </Container>

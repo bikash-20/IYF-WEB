@@ -3,7 +3,6 @@ import { Mail, Phone, MapPin, Youtube, Facebook, MessageCircle } from 'lucide-re
 import { site } from '@/lib/site.js';
 import { MadeByBikash } from '@/components/ui/MadeByBikash.jsx';
 import { Mantra } from '@/components/ui/Mantra.jsx';
-import { RevealOnScroll } from '@/components/ui/RevealOnScroll.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 
 const groups = [
@@ -48,14 +47,14 @@ const social = [
  * and credit line.
  *
  * v0.8.1: replaced Framer Motion `whileInView` variants with the
- * CSS-driven reveal system (RevealOnScroll + Reveal). Hover and tap
+ * CSS-driven reveal system (Reveal). Hover and tap
  * transforms on social icons became CSS-driven hover scale + tap.
  */
 export function Footer() {
   return (
-    <RevealOnScroll
+    <Reveal
       as="footer"
-      className="relative overflow-hidden border-t border-temple-800/10 bg-ink-900 text-cream-100 dark:border-white/8"
+      className="relative isolate overflow-hidden border-t border-temple-800/10 bg-ink-900 text-cream-100 dark:border-white/8 dark:bg-ink-deep"
     >
       {/* Corner glow — saffron halo behind the footer in light mode;
           in dark mode the `.dark .lamp-ambient` overlay adds a second
@@ -179,6 +178,6 @@ export function Footer() {
           <MadeByBikash />
         </Reveal>
       </div>
-    </RevealOnScroll>
+    </Reveal>
   );
 }

@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { site } from '@/lib/site.js';
-import { useScrolled } from '@/hooks/useScrollReveal.js';
+import { useScrolled } from '@/hooks/useScrolled.js';
 import { useTheme } from '@/features/theme/useTheme.js';
 import { ThemeToggle } from '@/features/theme/ThemeToggle.jsx';
 import { cn } from '@/lib/cn.js';
