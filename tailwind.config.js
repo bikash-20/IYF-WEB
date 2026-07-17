@@ -170,6 +170,10 @@ export default {
         lift: '0 2px 4px rgba(20,16,24,0.05), 0 16px 40px rgba(20,16,24,0.08)',
         temple: '0 4px 8px rgba(20,16,24,0.06), 0 24px 56px rgba(20,16,24,0.10)',
         saffron: '0 8px 28px rgba(217,138,43,0.22)',
+        // Hero-scale shadow used on cards that need to lift dramatically
+        // against a dark page. Saffron glow stays in the mix so the
+        // shadow reads as "lit by oil lamps" rather than just black.
+        'temple-deep': '0 25px 60px rgba(0,0,0,0.55), 0 0 30px rgba(224,170,76,0.15)',
         // Inner highlight used on glass surfaces
         'inset-top-light': 'inset 0 1px 0 rgba(255,255,255,0.6)',
       },

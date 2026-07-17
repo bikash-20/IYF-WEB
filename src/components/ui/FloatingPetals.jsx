@@ -22,7 +22,19 @@ export function FloatingPetals({ count = 14, trigger = true, seed = 42 }) {
     const dur = 1.6 + rnd(4) * 1.4;
     const delay = rnd(5) * 0.35;
     const sway = (rnd(6) - 0.5) * 60; // px
-    const palette = ['#D98A2B', '#E0A451', '#136F63', '#FCD9A8'];
+    // Token-driven petal palette. Each entry references a project token
+// via CSS var() so the petals auto-track the active theme.
+// Token → original hex equivalent:
+//   saffron-500 (#D98A2B) — saffron orange
+//   saffron-400 (#E5A24A) — warm cream-gold
+//   peacock-700 (#0D3A4C) — deep teal
+//   cream-100   (#F5EFE3) — soft paper (close to original #FCD9A8)
+const palette = [
+  'var(--saffron-500)',
+  'var(--saffron-400)',
+  'var(--peacock-700)',
+  'var(--cream-100)',
+];
     const fill = palette[i % palette.length];
     return { left, rotate, scale, dur, delay, sway, fill, i };
   });

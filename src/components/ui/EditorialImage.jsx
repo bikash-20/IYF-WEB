@@ -13,7 +13,7 @@ import { cn } from '@/lib/cn.js';
  *   - src / alt — required
  *   - aspect   — Tailwind aspect-* class (default "4/5")
  *   - caption  — small mono caption shown below
- *   - glow     — color of the soft light behind (default saffron-soft)
+ *   - glow     — CSS color for the soft light behind (default saffron-500 @ 20%)
  *   - priority  — set true for above-the-fold (skips lazy-loading)
  *   - interactive — opt in to the hover scale-up
  *   - className — additional container classes
@@ -23,7 +23,7 @@ export function EditorialImage({
   alt,
   aspect = 'aspect-[4/5]',
   caption,
-  glow = 'rgba(217,138,43,0.20)',
+  glow = 'color-mix(in srgb, var(--saffron-500) 20%, transparent)',
   priority = false,
   interactive = false,
   className,

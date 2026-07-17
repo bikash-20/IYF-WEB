@@ -72,7 +72,7 @@ export const Button = forwardRef(function Button(
           {children}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-[radial-gradient(80%_60%_at_50%_120%,rgba(255,255,255,0.18),transparent_70%)] opacity-0 transition-opacity duration-500 ease-divine group-hover/btn:opacity-100 motion-reduce:transition-none"
+            className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-radial-saffron-lamp opacity-0 transition-opacity duration-500 ease-divine group-hover/btn:opacity-100 motion-reduce:transition-none"
           />
         </Link>
       </motion.span>
@@ -90,7 +90,7 @@ export const Button = forwardRef(function Button(
         {children}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-[radial-gradient(80%_60%_at_50%_120%,rgba(255,255,255,0.18),transparent_70%)] opacity-0 transition-opacity duration-500 ease-divine group-hover/btn:opacity-100 motion-reduce:transition-none"
+          className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-radial-saffron-lamp opacity-0 transition-opacity duration-500 ease-divine group-hover/btn:opacity-100 motion-reduce:transition-none"
         />
       </motion.a>
     );
@@ -106,7 +106,7 @@ export const Button = forwardRef(function Button(
       {children}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-[radial-gradient(80%_60%_at_50%_120%,rgba(255,255,255,0.18),transparent_70%)] opacity-0 transition-opacity duration-500 ease-divine group-hover/btn:opacity-100 motion-reduce:transition-none"
+        className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-radial-saffron-lamp opacity-0 transition-opacity duration-500 ease-divine group-hover/btn:opacity-100 motion-reduce:transition-none"
       />
     </motion.button>
   );

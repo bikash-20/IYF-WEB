@@ -47,7 +47,7 @@ export function MadeByBikash() {
           hover
             ? {
                 backgroundImage:
-                  'linear-gradient(110deg, #f1b96b 0%, #d98a2b 35%, #f1b96b 55%, #1b5e7a 100%)',
+                  'linear-gradient(110deg, var(--saffron-300) 0%, var(--saffron-500) 35%, var(--saffron-300) 55%, var(--peacock-500) 100%)',
                 backgroundSize: '200% 100%',
                 animation: 'madeby-sweep 2.2s linear infinite',
               }

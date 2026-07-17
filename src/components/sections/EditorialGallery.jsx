@@ -52,7 +52,7 @@ export function EditorialGallery() {
               key={item.id}
               delay={i * 0.04}
               className={cn(
-                'group relative overflow-hidden rounded-editorial shadow-soft outline-none ring-cream-50/0 transition-shadow duration-500 ease-divine hover:shadow-temple focus-visible:ring-2 focus-visible:ring-saffron-500/60 motion-reduce:transition-none dark:shadow-lift dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.6),0_0_30px_rgba(224,170,76,0.18)] dark:focus-visible:ring-saffron-400/70',
+                'group relative overflow-hidden rounded-editorial shadow-soft outline-none ring-cream-50/0 transition-shadow duration-500 ease-divine hover:shadow-temple focus-visible:ring-2 focus-visible:ring-saffron-500/60 motion-reduce:transition-none dark:shadow-lift dark:hover:shadow-temple-deep dark:focus-visible:ring-saffron-400/70',
                 spans[i],
                 'min-h-[260px] md:min-h-0',
                 'transition-transform duration-300 ease-divine will-change-transform hover:-translate-y-[3px] active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100',
@@ -83,11 +83,7 @@ export function EditorialGallery() {
                   />
                 )}
                 <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      'linear-gradient(to top, rgba(15,13,20,0.65) 0%, rgba(15,13,20,0) 60%)',
-                  }}
+                  className="bg-veil-ink-bottom absolute inset-0"
                   aria-hidden
                 />
                 {/* hover saffron sweep */}

@@ -39,25 +39,17 @@ export function SacredQuote({
       )}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            'radial-gradient(80% 70% at 50% 45%, rgba(15,13,20,0.30) 0%, rgba(15,13,20,0.78) 70%, rgba(15,13,20,0.92) 100%)',
-        }}
+        className="bg-veil-ink-radial absolute inset-0 -z-10"
       />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            'linear-gradient(180deg, rgba(15,13,20,0.55) 0%, rgba(15,13,20,0.30) 50%, rgba(15,13,20,0.75) 100%)',
-        }}
+        className="bg-veil-ink-vertical absolute inset-0 -z-10"
       />
       <div aria-hidden className="absolute inset-0 -z-10 grain opacity-15 mix-blend-overlay" />
       <div
         aria-hidden
         className="absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-[55%] rounded-full opacity-50 blur-3xl"
-        style={{ background: 'radial-gradient(closest-side, rgba(229,162,74,0.45), rgba(229,162,74,0) 70%)' }}
+        style={{ background: 'radial-gradient(closest-side, color-mix(in srgb, var(--saffron-400) 45%, transparent), transparent 70%)' }}
       />
       <div className="container section-pad text-center">
         <Reveal className="relative mx-auto max-w-3xl">
@@ -65,7 +57,7 @@ export function SacredQuote({
           <div
             aria-hidden
             className="font-display select-none pointer-events-none absolute left-1/2 -top-10 -translate-x-1/2 text-[7rem] leading-none text-saffron-300/30 sm:-top-14 sm:text-[9rem]"
-            style={{ textShadow: '0 0 60px rgba(229,162,74,0.35)' }}
+            style={{ textShadow: '0 0 60px color-mix(in srgb, var(--saffron-400) 35%, transparent)' }}
           >
             “
           </div>

@@ -153,7 +153,7 @@ function FormCard({ title, eyebrow, icon: Icon, children, successText }) {
     >
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-px -z-10 rounded-[inherit] bg-[radial-gradient(120%_80%_at_0%_100%,rgba(217,138,43,0.16),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none"
+        className="bg-radial-saffron-tl pointer-events-none absolute -inset-px -z-10 rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none"
       />
       <div className="flex items-start gap-3">
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-saffron-500/10 text-saffron-600 ring-1 ring-saffron-500/15">

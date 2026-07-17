@@ -538,6 +538,69 @@
   .link-underline:focus-visible::after {
     transform: scaleX(1);
   }
+
+  /* ----- Radial light utilities (token-driven) -----------------------
+   * These replace the inline `bg-[radial-gradient(...rgba(R,G,B,A)...]`
+   * arbitrary values that used to pepper the codebase. Each utility
+   * resolves to the project's CSS custom properties so the lights
+   * automatically pick up the active theme.
+   *
+   * Naming convention: `.bg-radial-<tone>-<position>` — e.g.
+   *   .bg-radial-saffron-center  → saffron radial centered
+   *   .bg-radial-peacock-tl      → peacock radial in the top-left
+   *
+   * For one-off gradients that don't have a utility (yet), prefer
+   * `RadialLight` with a `tone` prop, or pass `var(--saffron-500)` /
+   * etc. via inline `style`.
+   * ------------------------------------------------------------------- */
+  .bg-radial-saffron-center {
+    background: radial-gradient(60% 80% at 50% 40%, rgba(217, 138, 43, 0.35) 0%, rgba(15, 13, 20, 0) 70%);
+  }
+  .bg-radial-saffron-tl {
+    background: radial-gradient(120% 80% at 0% 100%, rgba(217, 138, 43, 0.16) 0%, transparent 60%);
+  }
+  .bg-radial-saffron-warm-soft {
+    background: radial-gradient(60% 60% at 50% 50%, rgba(217, 138, 43, 0.10) 0%, transparent 70%);
+  }
+  .bg-radial-peacock-tl {
+    background: radial-gradient(60% 60% at 30% 40%, rgba(27, 94, 122, 0.15) 0%, rgba(27, 94, 122, 0) 60%);
+  }
+  .bg-radial-peacock-br {
+    background: radial-gradient(60% 60% at 70% 60%, rgba(217, 138, 43, 0.18) 0%, rgba(217, 138, 43, 0) 60%);
+  }
+  .bg-radial-peacock-br-strong {
+    background: radial-gradient(60% 60% at 70% 60%, rgba(217, 138, 43, 0.20) 0%, rgba(217, 138, 43, 0) 60%);
+  }
+  .bg-radial-saffron-lamp {
+    background: radial-gradient(80% 60% at 50% 120%, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
+  }
+  .bg-radial-lamp-bloom {
+    background: radial-gradient(circle at center, rgba(224, 170, 76, 0.22) 0%, transparent 60%);
+  }
+  .bg-radial-install-tl-br {
+    background: radial-gradient(120% 80% at 0% 0%, rgba(245, 185, 107, 0.20) 0%, rgba(245, 185, 107, 0) 50%),
+                radial-gradient(120% 80% at 100% 100%, rgba(232, 162, 74, 0.10) 0%, rgba(232, 162, 74, 0) 55%);
+  }
+
+  /* Card-tint gradient used by Gallery feature panels */
+  .bg-tint-cream-saffron {
+    background: linear-gradient(135deg, rgba(46, 33, 24, 0.08) 0%, rgba(217, 138, 43, 0.12) 100%);
+  }
+
+  /* Photographic caption veil — fades photo to dark for caption
+     legibility, used at the bottom of editorial gallery frames. */
+  .bg-veil-ink-bottom {
+    background: linear-gradient(to top, rgba(15, 13, 20, 0.65) 0%, rgba(15, 13, 20, 0) 60%);
+  }
+
+  /* SacredQuote veil — heavy dark ink fade with a saffron bloom
+     underneath the quote glyph. */
+  .bg-veil-ink-radial {
+    background: radial-gradient(80% 70% at 50% 45%, rgba(15, 13, 20, 0.30) 0%, rgba(15, 13, 20, 0.78) 70%, rgba(15, 13, 20, 0.92) 100%);
+  }
+  .bg-veil-ink-vertical {
+    background: linear-gradient(180deg, rgba(15, 13, 20, 0.55) 0%, rgba(15, 13, 20, 0.30) 50%, rgba(15, 13, 20, 0.75) 100%);
+  }
 }
 
 @layer utilities {

@@ -28,7 +28,7 @@ export function Embers({ count = 14, seed = 91 }) {
             width: `${s.size}px`,
             height: `${s.size}px`,
             opacity: s.opacity,
-            boxShadow: '0 0 10px 3px rgba(241, 185, 107, 0.75)',
+            boxShadow: '0 0 10px 3px color-mix(in srgb, var(--saffron-300) 75%, transparent)',
             animationName: 'ember-rise',
             animationDuration: `${s.dur}s`,
             animationDelay: `${s.delay}s`,

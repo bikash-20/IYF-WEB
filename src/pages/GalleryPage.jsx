@@ -50,7 +50,7 @@ export function GalleryPage() {
                     className="flex h-full w-full items-end p-4 grain"
                     style={{
                       background:
-                        'linear-gradient(135deg, rgba(46,33,24,0.08) 0%, rgba(217,138,43,0.12) 100%)',
+                        'linear-gradient(135deg, color-mix(in srgb, var(--temple-800) 8%, transparent) 0%, color-mix(in srgb, var(--saffron-500) 12%, transparent) 100%)',
                     }}
                   >
                     <span className="font-mono text-[0.7rem] uppercase tracking-eyebrow text-temple-700/80">
@@ -84,11 +84,7 @@ export function GalleryPage() {
             aria-label="Open Gauradesh TV on YouTube"
           >
             <div
-              className="absolute inset-0 opacity-50 transition-opacity duration-700 group-hover:opacity-80"
-              style={{
-                background:
-                  'radial-gradient(60% 80% at 50% 40%, rgba(217,138,43,0.4) 0%, rgba(15,13,20,0) 70%)',
-              }}
+              className="bg-radial-saffron-center absolute inset-0 opacity-50 transition-opacity duration-700 group-hover:opacity-80"
               aria-hidden
             />
             <div className="absolute left-5 top-5 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-400">

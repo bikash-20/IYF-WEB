@@ -297,10 +297,12 @@ export function Hero() {
 
   // Pre-compute the radial light colors based on lamp intensity.
   // In dark mode the lamp bloom is brighter and warmer so the mood
-  // reads as "lit by oil lamps" rather than "studio".
-  const saffronLight = `rgba(229,162,74,${((isDark ? 0.42 : 0.34) * lampIntensity).toFixed(3)})`;
-  const peacockLight = `rgba(27,94,122,${((isDark ? 0.16 : 0.18) + (isDark ? 0.10 : 0.14) * (1 - lampIntensity)).toFixed(3)})`;
-  const extraLamp = `rgba(245,200,120,${((isDark ? 0.32 : 0.24) * lampIntensity).toFixed(3)})`;
+  // reads as "lit by oil lamps" rather than "studio". The colors
+  // resolve through CSS tokens via color-mix so they auto-track
+  // the active theme without hardcoded RGB triples.
+  const saffronLight = `color-mix(in srgb, var(--saffron-400) ${(((isDark ? 0.42 : 0.34) * lampIntensity) * 100).toFixed(1)}%, transparent)`;
+  const peacockLight = `color-mix(in srgb, var(--peacock-500) ${(((isDark ? 0.16 : 0.18) + (isDark ? 0.10 : 0.14) * (1 - lampIntensity)) * 100).toFixed(1)}%, transparent)`;
+  const extraLamp = `color-mix(in srgb, var(--saffron-400) ${(((isDark ? 0.32 : 0.24) * lampIntensity) * 100).toFixed(1)}%, transparent)`;
 
   return (
     <section
@@ -436,7 +438,7 @@ export function Hero() {
             )}
           >
             <RadialLight
-              color={`rgba(245,200,120,${((isDark ? 0.30 : 0.24) * lampIntensity).toFixed(3)})`}
+              color={`color-mix(in srgb, var(--saffron-400) ${(((isDark ? 0.30 : 0.24) * lampIntensity) * 100).toFixed(1)}%, transparent)`}
               size="80%"
               pos="50% 50%"
             />

@@ -46,7 +46,7 @@ export function ThemeToggle({ className }) {
         <span
           aria-hidden
           className={cn(
-            'absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(224,170,76,0.22),transparent_60%)]',
+            'bg-radial-lamp-bloom absolute inset-0 rounded-full',
             !prefersReduced && 'anim-pulse-slow',
           )}
         />

@@ -296,11 +296,7 @@ export function InstallBanner() {
               {/* warm gradient gleam */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 -z-10"
-                style={{
-                  background:
-                    'radial-gradient(120% 80% at 0% 0%, rgba(245,185,107,0.20) 0%, rgba(245,185,107,0) 50%), radial-gradient(120% 80% at 100% 100%, rgba(232,162,74,0.10) 0%, rgba(232,162,74,0) 55%)',
-                }}
+                className="bg-radial-install-tl-br pointer-events-none absolute inset-0 -z-10"
               />
 
               <div className="flex gap-4 p-4 pr-10 sm:p-5">
@@ -391,7 +387,7 @@ function IconBadge({ phase }) {
           preserveAspectRatio="xMidYMid slice"
           clipPath="url(#badge-eye)"
         />
-        <circle cx="32" cy="28" r="16" fill="none" stroke="rgba(217,138,43,0.55)" strokeWidth="1.5" />
+        <circle cx="32" cy="28" r="16" fill="none" stroke="rgb(217,138,43)" strokeOpacity="0.55" strokeWidth="1.5" />
       </svg>
       {phase === 'success' ? (
         <span className="absolute -right-1 -top-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-saffron-500 text-cream-50 shadow-soft">

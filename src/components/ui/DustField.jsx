@@ -44,8 +44,8 @@ export function DustField({ count = 44, seed = 17 }) {
             filter: p.blur ? `blur(${p.blur}px)` : undefined,
             boxShadow: p.glow
               ? p.warm
-                ? '0 0 10px 3px rgba(241, 185, 107, 0.65)'
-                : '0 0 8px 2px rgba(253, 224, 152, 0.55)'
+                ? '0 0 10px 3px color-mix(in srgb, var(--saffron-300) 65%, transparent)'
+                : '0 0 8px 2px color-mix(in srgb, var(--saffron-300) 55%, transparent)'
               : undefined,
             mixBlendMode: p.warm ? 'screen' : 'screen',
             animationName: p.twinkle ? 'twinkle, drift' : 'drift',

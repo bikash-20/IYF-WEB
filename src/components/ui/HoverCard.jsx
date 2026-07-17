@@ -46,7 +46,7 @@ export const HoverCard = forwardRef(function HoverCard(
       {/* saffron glow that rises from the bottom-left on hover */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-px -z-10 rounded-[inherit] bg-[radial-gradient(120%_80%_at_0%_100%,rgba(217,138,43,0.16),transparent_60%)] opacity-0 transition-opacity duration-500 ease-divine group-hover/hcard:opacity-100 motion-reduce:transition-none"
+        className="bg-radial-saffron-tl pointer-events-none absolute -inset-px -z-10 rounded-[inherit] opacity-0 transition-opacity duration-500 ease-divine group-hover/hcard:opacity-100 motion-reduce:transition-none"
       />
       {children}
     </motion.div>

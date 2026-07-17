@@ -30,7 +30,7 @@ export function VisitPage() {
                   className="absolute inset-0 opacity-80"
                   style={{
                     background:
-                      'radial-gradient(60% 60% at 30% 40%, rgba(27,94,122,0.18) 0%, rgba(27,94,122,0) 60%), radial-gradient(60% 60% at 70% 60%, rgba(217,138,43,0.20) 0%, rgba(217,138,43,0) 60%)',
+                      'radial-gradient(60% 60% at 30% 40%, color-mix(in srgb, var(--peacock-500) 18%, transparent) 0%, transparent 60%), radial-gradient(60% 60% at 70% 60%, color-mix(in srgb, var(--saffron-500) 20%, transparent) 0%, transparent 60%)',
                   }}
                   aria-hidden
                 />

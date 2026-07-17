@@ -28,51 +28,56 @@ import { cn } from '@/lib/cn.js';
 // matches the active theme. Without `bgDark`, the section behind the
 // dark body would still paint cream/beige in dark mode, producing the
 // "dark navbar + dark cards on cream" look.
+//
+// Light colors are expressed as `color-mix(in srgb, var(--token) X%, transparent)`
+// so each radial gradient resolves through the design tokens in
+// tokens.css. This keeps the lights bound to the brand palette and
+// means a token rename automatically updates every atmosphere.
 const variants = {
   'warm-white': {
     bg: 'bg-cream-50 dark:hidden',
     bgDark: 'hidden bg-ink-page dark:block',
     lights: [
-      { color: 'rgba(229,162,74,0.16)', size: '45%', pos: '78% 18%' },
-      { color: 'rgba(245,239,227,0.6)', size: '60%', pos: '20% 90%' },
+      { color: 'color-mix(in srgb, var(--saffron-400) 16%, transparent)', size: '45%', pos: '78% 18%' },
+      { color: 'color-mix(in srgb, var(--cream-50) 60%, transparent)', size: '60%', pos: '20% 90%' },
     ],
   },
   'cream-soft': {
     bg: 'bg-cream-100 dark:hidden',
     bgDark: 'hidden bg-ink-section dark:block',
     lights: [
-      { color: 'rgba(217,138,43,0.10)', size: '50%', pos: '15% 110%' },
-      { color: 'rgba(46,33,24,0.04)', size: '70%', pos: '100% 0%' },
+      { color: 'color-mix(in srgb, var(--saffron-500) 10%, transparent)', size: '50%', pos: '15% 110%' },
+      { color: 'color-mix(in srgb, var(--temple-800) 4%, transparent)', size: '70%', pos: '100% 0%' },
     ],
   },
   'pure-cream': {
     bg: 'bg-pure-cream dark:hidden',
     bgDark: 'hidden bg-ink-page dark:block',
     lights: [
-      { color: 'rgba(229,162,74,0.08)', size: '40%', pos: '50% 20%' },
+      { color: 'color-mix(in srgb, var(--saffron-400) 8%, transparent)', size: '40%', pos: '50% 20%' },
     ],
   },
   'warm-beige': {
     bg: 'bg-beige-50 dark:hidden',
     bgDark: 'hidden bg-ink-page dark:block',
     lights: [
-      { color: 'rgba(27,94,122,0.10)', size: '45%', pos: '15% 30%' },
-      { color: 'rgba(217,138,43,0.16)', size: '50%', pos: '90% 75%' },
+      { color: 'color-mix(in srgb, var(--peacock-500) 10%, transparent)', size: '45%', pos: '15% 30%' },
+      { color: 'color-mix(in srgb, var(--saffron-500) 16%, transparent)', size: '50%', pos: '90% 75%' },
     ],
   },
   'peacock-haze': {
     bg: 'bg-cream-100 dark:hidden',
     bgDark: 'hidden bg-peacock-deep dark:block',
     lights: [
-      { color: 'rgba(27,94,122,0.18)', size: '55%', pos: '50% 0%' },
-      { color: 'rgba(245,239,227,0.5)', size: '60%', pos: '50% 100%' },
+      { color: 'color-mix(in srgb, var(--peacock-500) 18%, transparent)', size: '55%', pos: '50% 0%' },
+      { color: 'color-mix(in srgb, var(--cream-50) 50%, transparent)', size: '60%', pos: '50% 100%' },
     ],
   },
   'ink-deep': {
     bg: 'bg-ink-900',
     lights: [
-      { color: 'rgba(217,138,43,0.18)', size: '50%', pos: '20% 30%' },
-      { color: 'rgba(255,255,255,0.04)', size: '70%', pos: '100% 100%' },
+      { color: 'color-mix(in srgb, var(--saffron-500) 18%, transparent)', size: '50%', pos: '20% 30%' },
+      { color: 'color-mix(in srgb, white 4%, transparent)', size: '70%', pos: '100% 100%' },
     ],
   },
 };

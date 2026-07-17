@@ -37,11 +37,7 @@ export function MediaSection() {
               className="group relative flex aspect-video items-center justify-center overflow-hidden rounded-xl2 border border-temple-800/10 bg-ink-900 text-cream-50 dark:border-white/8"
             >
               <div
-                className="absolute inset-0 opacity-50 transition-opacity duration-700 group-hover:opacity-70"
-                style={{
-                  background:
-                    'radial-gradient(60% 80% at 50% 40%, rgba(217,138,43,0.35) 0%, rgba(15,13,20,0) 70%)',
-                }}
+                className="bg-radial-saffron-center absolute inset-0 opacity-50 transition-opacity duration-700 group-hover:opacity-70"
                 aria-hidden
               />
               <div className="absolute left-5 top-5 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-400 dark:glow-gold-soft">
