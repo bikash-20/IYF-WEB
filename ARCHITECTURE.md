@@ -84,15 +84,15 @@ App
    └─ Footer
 ```
 
-`components/ui/*` is the **primitive layer** — Button, Card, Section, Badge, RevealOnScroll, SectionHeading. They own styling and behaviour, never copy.
+`components/ui/*` is the **primitive layer** — Button, Card, Section, Badge, Reveal, SectionHeading. They own styling and behaviour, never copy.
 
-`components/sections/*` is the **composition layer** — Hero, ScheduleTimeline, BeSmartSection, etc. They compose primitives.
+`components/sections/*` is the **composition layer** — Hero, ScheduleTimeline, BeSmartSection, etc. They compose primitives. **This is the canonical home for section-shaped components in V1.**
 
 `components/layout/*` is the **shell layer** — Navbar, Footer, Ticker, PageHero, ScrollToTop, RouteFallback. They own global state interactions (scroll, route changes).
 
 `pages/*` is the **route layer** — one file per route, thin, declarative.
 
-`features/*` is reserved for V2 — when a feature grows beyond ~3 components or owns its own data fetching, it moves here with its `data/`, `hooks/`, and `components/` colocated.
+`features/*` is reserved for **cross-cutting concerns that don't belong to a single section or route** — e.g. theme/state plumbing. When a feature grows beyond ~3 components or owns its own data fetching, it moves here with its `data/`, `hooks/`, and `components/` colocated.
 
 ## 8. Folder architecture — why each folder exists
 
@@ -106,11 +106,11 @@ App
 | `src/hooks/`          | Tiny custom hooks. Each one is named for what it does (`useScrolled`, `useMeta`).             |
 | `src/components/ui/`  | The primitive library. Every component here is reusable, themable, and < 100 lines.            |
 | `src/components/layout/` | The app shell pieces. The Navbar knows about the scroll; the Ticker knows about reduced-motion. |
-| `src/components/sections/` | The home-page building blocks. Composed from `ui/`. They are not yet feature-locked.       |
-| `src/features/`       | V2-ready. Each folder will own its own data, hooks, components, and tests.                     |
+| `src/components/sections/` | The home-page building blocks. Composed from `ui/`. Canonical home for section-shaped components in V1. |
+| `src/features/`       | Cross-cutting concerns that don't belong to a single section. V1 holds only `theme/` (ThemeContext + ThemeToggle + useTheme). V2 will add `about/`, `events/`, etc. as those grow their own data and state. |
 | `src/pages/`          | One file per route. Renders sections, sets meta, animates the page transition.                |
 
-The intentional split is **`components/` for shared building blocks, `features/` for things that own their data and could be deleted without breaking the rest of the app**. V1 doesn't need features, but the folder exists so the boundary is honest from day one.
+The intentional split is **`components/` for shared building blocks, `features/` for things that own their data and could be deleted without breaking the rest of the app**. V1 uses `features/theme/` for the cross-cutting theme plumbing (light/dark, persistence, system pref) — everything else stays in `components/` until a section grows enough to warrant its own folder.
 
 ## 9. State architecture
 
@@ -232,7 +232,7 @@ When V2 ships a backend (Express or Spring Boot, TBD), the seams are:
 | CMS             | `data/*.js`                           | Headless CMS (Sanity / Strapi) — same shape, fetched at build time |
 | Search          | none                                  | Algolia or a simple `/api/search` with a client-side index         |
 | i18n            | English only                          | `i18next` + Bengali/Sanskrit dictionaries; font fallback in place  |
-| Dark mode       | none                                  | `data-theme="dark"` swap; tokens are already CSS variables         |
+| Dark mode       | `.dark` class on `<html>` via useTheme | Tokens already live as CSS variables; `colorScheme` mirrors the class so native form controls match |
 
 ## 19. Technical debt to avoid
 
@@ -259,4 +259,4 @@ When V2 ships a backend (Express or Spring Boot, TBD), the seams are:
 
 ---
 
-*Last updated: V1.*
+*Last updated: V1.0.0 — reveal + theme audit, SectionHeader/Heading merge, features/ cleanup, tokens as single source of truth.*
