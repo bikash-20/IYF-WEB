@@ -6,6 +6,7 @@ import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { DustField } from '@/components/ui/DustField.jsx';
 import { Embers } from '@/components/ui/Embers.jsx';
 import { IncenseDust } from '@/components/ui/IncenseDust.jsx';
+import { AnimatedCountdown } from '@/components/ui/AnimatedCountdown.jsx';
 import { useHeroTime } from '@/hooks/useHeroTime.js';
 import { useCurrentProgram } from '@/hooks/useNow.js';
 import { useTheme } from '@/features/theme/useTheme.js';
@@ -76,17 +77,6 @@ function minutesUntilLabel(timeStr, bdMinutes) {
   let diff = target - bdMinutes;
   if (diff <= 0) diff += 24 * 60;
   return diff;
-}
-
-function prettyMinutes(diff) {
-  if (diff == null) return '';
-  if (diff < 1) return 'moments';
-  if (diff === 1) return '1 minute';
-  if (diff < 60) return `${diff} minutes`;
-  const h = Math.floor(diff / 60);
-  const m = diff % 60;
-  if (m === 0) return h === 1 ? '1 hour' : `${h} hours`;
-  return `${h} h ${m} m`;
 }
 
 export function Hero() {
@@ -575,7 +565,12 @@ export function Hero() {
                   ? 'The mandir is closed — opens at 4 AM'
                   : current
                   ? `Now at the mandir — ${current.label}`
-                  : `Today's ${target?.label ?? 'darshan'} begins ${prettyMinutes(diff)}`}
+                  : (
+                    <>
+                      Today&apos;s {target?.label ?? 'darshan'} begins{' '}
+                      <AnimatedCountdown minutes={diff} />
+                    </>
+                  )}
               </span>
               <Sparkles size={12} className="text-saffron-300/70" />
             </motion.div>

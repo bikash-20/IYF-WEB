@@ -3,6 +3,7 @@ import { Clock, Sparkles } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
+import { AnimatedClock } from '@/components/ui/AnimatedClock.jsx';
 import { useCurrentProgram } from '@/hooks/useNow.js';
 
 /**
@@ -19,15 +20,6 @@ import { useCurrentProgram } from '@/hooks/useNow.js';
  */
 export function TodaysDarshan() {
   const { current, next, bdMinutes } = useCurrentProgram();
-
-  // Show times in 12h Bangladesh time for display
-  const fmt = (m) => {
-    const h24 = Math.floor(m / 60) % 24;
-    const min = m % 60;
-    const meridiem = h24 >= 12 ? 'PM' : 'AM';
-    const h12 = ((h24 + 11) % 12) + 1;
-    return `${h12}:${String(min).padStart(2, '0')} ${meridiem}`;
-  };
 
   return (
     <Section variant="warm" pad="default">
@@ -61,7 +53,9 @@ export function TodaysDarshan() {
                       Began {current.time}
                     </span>
                     <span className="text-temple-400 dark:text-fg-muted">·</span>
-                    <span className="text-temple-700/70 dark:text-fg-muted">Bangladesh time {fmt(bdMinutes)}</span>
+                    <span className="text-temple-700/70 dark:text-fg-muted">
+                      Bangladesh time <AnimatedClock minutes={bdMinutes} />
+                    </span>
                   </div>
                 </>
               ) : (

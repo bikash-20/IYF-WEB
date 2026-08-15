@@ -4,6 +4,8 @@ import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber.jsx';
+import { AnimatedClock } from '@/components/ui/AnimatedClock.jsx';
+import { AnimatedCountdown } from '@/components/ui/AnimatedCountdown.jsx';
 import { useCurrentProgram, useNow } from '@/hooks/useNow.js';
 import { featuredFestival } from '@/data/featuredFestival.js';
 import { todaysThought } from '@/content/thoughtOfTheDay.js';
@@ -41,15 +43,6 @@ function minutesUntil(timeStr, now) {
   return diff;
 }
 
-function pretty(diff) {
-  if (diff == null) return '';
-  if (diff < 60) return `in ${diff} min`;
-  const h = Math.floor(diff / 60);
-  const m = diff % 60;
-  if (m === 0) return `in ${h} h`;
-  return `in ${h} h ${m} m`;
-}
-
 function useFestivalCountdown() {
   const ms = useNow(1000);
   const target = new Date(featuredFestival.date).getTime();
@@ -65,14 +58,6 @@ export function TodaysTemple() {
   const thought = todaysThought();
   const verse = todaysVerse();
   const countdown = useFestivalCountdown();
-
-  const fmt = (m) => {
-    const h24 = Math.floor(m / 60) % 24;
-    const min = m % 60;
-    const meridiem = h24 >= 12 ? 'PM' : 'AM';
-    const h12 = ((h24 + 11) % 12) + 1;
-    return `${h12}:${String(min).padStart(2, '0')} ${meridiem}`;
-  };
 
   return (
     <Section variant="warm" pad="default">
@@ -91,7 +76,7 @@ export function TodaysTemple() {
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <div className="eyebrow">Live schedule</div>
               <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-temple-600/70 dark:text-fg-muted">
-                Bangladesh · {fmt(bdMinutes)}
+                Bangladesh · <AnimatedClock minutes={bdMinutes} />
               </div>
             </div>
 
@@ -143,7 +128,7 @@ export function TodaysTemple() {
                         <Check size={12} className="inline-block text-temple-500" aria-label="Completed" />
                       ) : (
                         <span className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-temple-700/70 dark:text-fg-muted">
-                          {pretty(minutesUntil(p.time, bdMinutes))}
+                          in <AnimatedCountdown minutes={minutesUntil(p.time, bdMinutes)} short />
                         </span>
                       )}
                     </span>
