@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/Button.jsx';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { useMeta } from '@/hooks/useMeta.js';
@@ -16,7 +15,7 @@ export function NotFoundPage() {
             The path leads elsewhere.
           </h1>
           <p className="mt-4 max-w-prose text-temple-700/85">
-            The page you're looking for isn't here. It may have moved, or it never was. Return to the home page or visit the mandir.
+            The page you&apos;re looking for isn&apos;t here. It may have moved, or it never was. Return to the home page or visit the mandir.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Button as="link" to="/">

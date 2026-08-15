@@ -62,7 +62,7 @@ export function DonatePage() {
               Talk to the temple team
             </h2>
             <p className="mt-3 text-cream-100/80">
-              Online donation isn't wired up yet. Reach out and we'll walk you through bank transfer, in-person offering, or sponsorship of a specific seva.
+              Online donation isn&apos;t wired up yet. Reach out and we&apos;ll walk you through bank transfer, in-person offering, or sponsorship of a specific seva.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

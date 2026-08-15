@@ -74,7 +74,7 @@ export function CoursesPage() {
             </div>
             <h2 className="mt-3 font-display text-display-md text-cream-50">Join the course</h2>
             <p className="mt-3 text-cream-100/80">
-              New batches open a few times a year. Reach out and we'll let you know when the next one starts.
+              New batches open a few times a year. Reach out and we&apos;ll let you know when the next one starts.
             </p>
           </div>
           <Button as="link" to="/contact" className="bg-saffron-500 hover:bg-saffron-600">
