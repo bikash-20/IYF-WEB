@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
+import { AnimatedNumber } from '@/components/ui/AnimatedNumber.jsx';
 import { featuredFestival } from '@/data/featuredFestival.js';
 
 /**
@@ -32,9 +33,10 @@ export function FestivalCountdown() {
 
   const Cell = ({ value, label }) => (
     <div className="flex flex-col items-center">
-      <span className="font-display text-4xl tabular-nums text-cream-50 md:text-5xl">
-        {String(value).padStart(2, '0')}
-      </span>
+      <AnimatedNumber
+        value={value}
+        className="font-display text-4xl tabular-nums text-cream-50 md:text-5xl"
+      />
       <span className="mt-1 font-mono text-[0.65rem] uppercase tracking-eyebrow text-saffron-300 dark:text-saffron-400 dark:glow-gold-soft">
         {label}
       </span>

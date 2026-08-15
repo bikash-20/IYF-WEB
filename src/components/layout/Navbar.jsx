@@ -114,7 +114,29 @@ export function Navbar() {
                 )
               }
             >
-              {item.label}
+              {/* v1.1: active link gets a soft saffron pill that slides
+                  between items via Framer Motion's shared layoutId — the
+                  signature premium nav effect. Reduced-motion users get a
+                  plain color state instead (no slide). */}
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      className={cn(
+                        'pointer-events-none absolute inset-0 -z-10 rounded-full',
+                        heroMode
+                          ? 'bg-cream-50/10 ring-1 ring-cream-50/15'
+                          : isDark
+                            ? 'bg-saffron-400/10 ring-1 ring-saffron-400/20'
+                            : 'bg-saffron-500/10 ring-1 ring-saffron-500/20',
+                      )}
+                    />
+                  )}
+                  {item.label}
+                </>
+              )}
             </NavLink>
           ))}
         </div>

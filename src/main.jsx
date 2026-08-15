@@ -1,6 +1,7 @@
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import App from './App.jsx';
 import './styles/index.css';
 
@@ -38,8 +39,14 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    {/* v1.1: honour prefers-reduced-motion site-wide. `reducedMotion="user"`
+        disables transform + layout animations (the layoutId nav pill, the
+        AnimatedNumber odometer roll, hover lifts) for users who ask for
+        less motion, while opacity fades remain so content still eases in. */}
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MotionConfig>
   </StrictMode>,
 );

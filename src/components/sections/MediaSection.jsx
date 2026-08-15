@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
@@ -43,8 +44,15 @@ export function MediaSection() {
               <div className="absolute left-5 top-5 font-mono text-[0.7rem] uppercase tracking-eyebrow text-saffron-400 dark:glow-gold-soft">
                 Gauradesh TV — Live
               </div>
-              <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-cream-50/30 bg-cream-50/10 backdrop-blur transition-transform duration-500 group-hover:scale-110">
-                <Play size={20} className="ml-1 text-cream-50" />
+              <div className="relative flex h-16 w-16 items-center justify-center">
+                {/* v1.1: live pulse rings — two expanding saffron halos
+                    breathe outward from the play button so the stream
+                    reads as "live" at a glance. Skipped entirely for
+                    reduced-motion users. */}
+                <PulseRings />
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-cream-50/30 bg-cream-50/10 backdrop-blur transition-transform duration-500 group-hover:scale-110">
+                  <Play size={20} className="ml-1 text-cream-50" />
+                </div>
               </div>
             </a>
           </Reveal>
@@ -72,5 +80,36 @@ export function MediaSection() {
         </div>
       </Container>
     </Section>
+  );
+}
+
+/**
+ * PulseRings — the "live" halo around the play button. Two saffron
+ * rings expand and fade on an infinite loop, offset so the pulse
+ * reads continuous rather than mechanical. Returns null under
+ * prefers-reduced-motion.
+ */
+function PulseRings() {
+  const prefersReduced = useReducedMotion();
+  if (prefersReduced) return null;
+
+  const ring =
+    'pointer-events-none absolute inset-0 rounded-full border border-saffron-400/50';
+
+  return (
+    <>
+      <motion.span
+        aria-hidden
+        className={ring}
+        animate={{ scale: [1, 1.55], opacity: [0.7, 0] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }}
+      />
+      <motion.span
+        aria-hidden
+        className={ring}
+        animate={{ scale: [1, 1.55], opacity: [0.7, 0] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut', delay: 1.2 }}
+      />
+    </>
   );
 }

@@ -3,6 +3,7 @@ import { ArrowUpRight, Check, Clock } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
+import { AnimatedNumber } from '@/components/ui/AnimatedNumber.jsx';
 import { useCurrentProgram, useNow } from '@/hooks/useNow.js';
 import { featuredFestival } from '@/data/featuredFestival.js';
 import { todaysThought } from '@/content/thoughtOfTheDay.js';
@@ -249,9 +250,10 @@ export function TodaysTemple() {
 function CountCell({ value, label }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="font-display text-4xl tabular-nums text-cream-50 md:text-5xl">
-        {String(value).padStart(2, '0')}
-      </span>
+      <AnimatedNumber
+        value={value}
+        className="font-display text-4xl tabular-nums text-cream-50 md:text-5xl"
+      />
       <span className="mt-1 font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-300">
         {label}
       </span>
