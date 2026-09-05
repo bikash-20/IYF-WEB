@@ -4,6 +4,8 @@ import { ArrowUpRight } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
+import { Parallax } from '@/components/ui/Parallax.jsx';
+import { parallaxPresets } from '@/lib/parallax.js';
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber.jsx';
 import { featuredFestival } from '@/data/featuredFestival.js';
 
@@ -47,20 +49,28 @@ export function FestivalCountdown() {
     <Section variant="deep" pad="default">
       <Container>
         <Reveal className="relative overflow-hidden rounded-editorial border border-cream-50/10 bg-ink-800/60 p-8 dark:border-saffron-400/15 dark:bg-ink-deep md:p-14">
-          <RadialLight
-            tone="saffron"
-            alpha={0.22}
-            size="55%"
-            pos="0% 0%"
-            className="!relative inset-0 h-full w-full"
-          />
-          <RadialLight
-            tone="peacock"
-            alpha={0.18}
-            size="60%"
-            pos="100% 100%"
-            className="!relative inset-0 h-full w-full"
-          />
+          {/* Dual radial lights — counter-drifting parallax so the
+              saffron (top-left) and peacock (bottom-right) lights
+              move away from each other as the user scrolls through.
+              Reads as the room "expanding" out of the card. */}
+          <Parallax speed={parallaxPresets.subtle} className="absolute inset-0" aria-hidden>
+            <RadialLight
+              tone="saffron"
+              alpha={0.22}
+              size="55%"
+              pos="0% 0%"
+              className="!relative inset-0 h-full w-full"
+            />
+          </Parallax>
+          <Parallax speed={parallaxPresets.reverse} className="absolute inset-0" aria-hidden>
+            <RadialLight
+              tone="peacock"
+              alpha={0.18}
+              size="60%"
+              pos="100% 100%"
+              className="!relative inset-0 h-full w-full"
+            />
+          </Parallax>
           <div className="absolute inset-0 grain opacity-[0.06] mix-blend-overlay" aria-hidden />
 
           <div className="relative grid items-center gap-10 md:grid-cols-2">

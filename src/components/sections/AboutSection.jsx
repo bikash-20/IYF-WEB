@@ -4,6 +4,8 @@ import { Section, Container } from '@/components/ui/Section.jsx';
 import { EditorialImage } from '@/components/ui/EditorialImage.jsx';
 import { RadialLight } from '@/components/ui/RadialLight.jsx';
 import { Reveal } from '@/components/ui/Reveal.jsx';
+import { Parallax } from '@/components/ui/Parallax.jsx';
+import { parallaxPresets } from '@/lib/parallax.js';
 import { site } from '@/lib/site.js';
 
 /**
@@ -75,23 +77,43 @@ export function AboutSection() {
             </Reveal>
           </Reveal>
 
-          {/* Image column — offset down for the staggered rhythm */}
+          {/* Image column — offset down for the staggered rhythm.
+              The portrait uses two parallax layers at slightly opposite
+              speeds so the saffron glow (background) drifts down while
+              the photo (foreground) rises into view, giving a subtle
+              "depth of field" feel as the user scrolls past. The "Est.
+              2007" caption stays static — parallaxing a caption reads
+              as busy. */}
           <div className="md:col-span-5 md:pt-16">
             <Reveal delay={0.15} className="portrait relative">
-              <RadialLight
-                tone="saffron"
-                alpha={0.18}
-                size="60%"
-                pos="100% 100%"
-                className="!absolute -right-10 -top-10 hidden md:block"
-              />
-              <EditorialImage
-                src="/little-2.jpg"
-                alt="Soft daylight inside the temple"
-                aspect="4/5"
-                priority
-                interactive
-              />
+              {/* Background glow — slow, downward drift (positive speed).
+                  The wrapper has to be absolutely positioned too, since
+                  the inner RadialLight is absolute; otherwise translating
+                  a static flow layer wouldn't be visible. */}
+              <Parallax
+                speed={parallaxPresets.default}
+                className="absolute inset-0 hidden md:block"
+                aria-hidden
+              >
+                <RadialLight
+                  tone="saffron"
+                  alpha={0.18}
+                  size="60%"
+                  pos="100% 100%"
+                  className="!absolute -right-10 -top-10"
+                />
+              </Parallax>
+              {/* Foreground image — subtle upward drift (negative speed)
+                  so the photo approaches the eye as it scrolls past. */}
+              <Parallax speed={parallaxPresets.reverse}>
+                <EditorialImage
+                  src="/little-2.jpg"
+                  alt="Soft daylight inside the temple"
+                  aspect="4/5"
+                  priority
+                  interactive
+                />
+              </Parallax>
               <figure className="absolute bottom-4 left-4 hidden max-w-[180px] rounded-editorial border border-cream-50/30 bg-cream-50/95 p-4 shadow-lift backdrop-blur-sm dark:border-white/15 dark:bg-ink-floating/95 md:block">
                 <div className="font-mono text-[0.62rem] uppercase tracking-eyebrow text-saffron-700 dark:text-saffron-400 dark:glow-gold-soft">
                   Est.

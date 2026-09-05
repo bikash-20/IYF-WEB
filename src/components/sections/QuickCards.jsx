@@ -1,6 +1,9 @@
 import { Section, Container } from '@/components/ui/Section.jsx';
 import { SectionHeading } from '@/components/ui/SectionHeading.jsx';
 import { FloatingCard } from '@/components/ui/FloatingCard.jsx';
+import { RadialLight } from '@/components/ui/RadialLight.jsx';
+import { Parallax } from '@/components/ui/Parallax.jsx';
+import { parallaxPresets } from '@/lib/parallax.js';
 
 /**
  * QuickCards — three handcrafted cards, not SaaS tiles.
@@ -37,7 +40,21 @@ const cards = [
 export function QuickCards() {
   return (
     <Section variant="default" pad="tight">
-      <Container>
+      {/* Decorative background glow that lags behind the cards as
+          the user scrolls through, so the section reads with
+          visible depth. Stronger drift than the other integrations
+          because this section is a quiet band that needs a single
+          piece of motion to feel alive. */}
+      <Parallax speed={parallaxPresets.strong} className="absolute inset-0" aria-hidden>
+        <RadialLight
+          tone="saffron"
+          alpha={0.14}
+          size="65%"
+          pos="50% 50%"
+          className="!relative inset-0 h-full w-full"
+        />
+      </Parallax>
+      <Container className="relative">
         <SectionHeading
           eyebrow="Where to begin"
           title="A few good doors in"
