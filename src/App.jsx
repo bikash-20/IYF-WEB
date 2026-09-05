@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Layout } from '@/components/layout/Layout.jsx';
+import { SmoothScrollProvider } from '@/components/layout/SmoothScrollProvider.jsx';
 import { ScrollToTop } from '@/components/layout/ScrollToTop.jsx';
 import { RouteFallback } from '@/components/layout/RouteFallback.jsx';
 import { HomePage } from '@/pages/HomePage.jsx';
@@ -184,25 +185,27 @@ export default function App() {
   }, [location.pathname]);
 
   return (
-    <Layout>
-      <ScrollToTop />
-      <Suspense fallback={<RouteFallback />}>
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/schedule" element={<SchedulePage />} />
-            <Route path="/events" element={<EventsPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/courses" element={<CoursesPage />} />
-            <Route path="/donate" element={<DonatePage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/visit" element={<VisitPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </AnimatePresence>
-      </Suspense>
-      <InstallBanner />
-    </Layout>
+    <SmoothScrollProvider>
+      <Layout>
+        <ScrollToTop />
+        <Suspense fallback={<RouteFallback />}>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/schedule" element={<SchedulePage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/donate" element={<DonatePage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/visit" element={<VisitPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </AnimatePresence>
+        </Suspense>
+        <InstallBanner />
+      </Layout>
+    </SmoothScrollProvider>
   );
 }

@@ -24,10 +24,21 @@ export function Layout({ children }) {
   return (
     <div className="relative flex min-h-screen flex-col bg-cream-50 text-temple-800 dark:bg-ink-page dark:text-fg-main">
       <Navbar />
-      <main id="main" className="flex-1">
-        {children}
-      </main>
-      <Footer />
+      {/* data-scroll-content — the smooth-scroll engine translates
+          this wrapper (via transform: translate3d) instead of the
+          page or <main>. The navbar stays in body flow so its
+          sticky positioning continues to work; main + footer ride
+          together so the footer ends up at the viewport bottom
+          exactly when the user reaches the end of the document. */}
+      <div
+        data-scroll-content
+        className="flex flex-1 flex-col"
+      >
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

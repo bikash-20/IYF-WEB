@@ -112,9 +112,32 @@
   /* Momentum scroll feel — disable the "elastic bounce" when the
      user scrolls past the top/bottom of the page so the page feels
      solid (like iOS Safari with rubber-banding off) rather than
-     springy. Helps long pages read as calm rather than toy-like. */
+     springy. Helps long pages read as calm rather than toy-like.
+     Always on (engine + native paths both benefit). */
   body {
     overscroll-behavior-y: contain;
+  }
+
+  /* Smooth-scroll engine lock — when the JS engine is mounted we lock
+     native scroll on <html> and <body> so the virtualizer can drive
+     the page through a translate3d on [data-scroll-content]. With
+     overflow hidden + height 100%, the viewport becomes the visual
+     scroll surface; the document keeps its native height so layout
+     measurements (IntersectionObservers, useScroll, etc.) don't change.
+
+     When the engine is bypassed (prefers-reduced-motion: reduce), the
+     class is never added and the page scrolls natively.
+
+     touch-action: none on body disables iOS Safari's rubber-band
+     pan gesture so our touchmove handler can drive the page 1:1. */
+  html.smooth-scroll-locked,
+  html.smooth-scroll-locked body {
+    overflow: hidden;
+    height: 100%;
+  }
+  html.smooth-scroll-locked body {
+    touch-action: none;
+    overscroll-behavior: none;
   }
 
   body {

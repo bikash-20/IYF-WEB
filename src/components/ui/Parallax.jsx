@@ -1,5 +1,6 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useReducedMotion } from 'framer-motion';
+import { getSmoothScroll } from '@/lib/smoothScroll.js';
 import { cn } from '@/lib/cn.js';
 
 /**
@@ -30,6 +31,15 @@ import { cn } from '@/lib/cn.js';
  *   - The curve is smoothstep (`t * t * (3 - 2t)`), the same shape the
  *     Hero uses for its photo scroll, so parallax across the page
  *     reads with one consistent organic feel.
+ *   - **Smooth-scroll engine integration.** When the engine is mounted,
+ *     `momentum` (the lerped residual between target and current scroll
+ *     position) is fed into the offset so a heavy flick overshoots the
+ *     layer a few pixels past its normal position before it settles.
+ *     That's the visual callback for "the page is still gliding" —
+ *     without it the parallax would feel mechanical next to the heavy
+ *     main scroll. When the engine isn't mounted (reduced-motion
+ *     bypass), momentum stays at 0 and the parallax reads from
+ *     scrollYProgress alone — identical to the previous behaviour.
  *   - Honours `prefers-reduced-motion` via Framer Motion's
  *     `useReducedMotion()` (the site already wraps in
  *     `<MotionConfig reducedMotion="user">`, but we double-gate here
@@ -74,17 +84,38 @@ export function Parallax({
     offset: ['start end', 'end start'],
   });
 
-  // For background-like behaviour (speed > 0): the element should
-  // drift DOWN as the user scrolls down — i.e., lag behind the
-  // page. We map progress [0,1] → [-speed, +speed] * magnitude and
-  // smoothstep it so motion eases in/out at the section's edges.
-  // Negative speed flips the sign so the layer rises into view
-  // (foreground / "approaching").
-  const smooth = (t) => t * t * (3 - 2 * t); // same curve as Hero.jsx
+  // Momentum — a MotionValue that mirrors the smooth-scroll engine's
+  // current velocity in px/frame. We use a MotionValue (not React
+  // state) so updates bypass React's render cycle: the engine
+  // publishes velocity up to ~60 times/second while the page is
+  // gliding, and we don't want 60 renders/second per Parallax.
+  //
+  // The subscription is module-scoped so a single engine listener
+  // fans out to every mounted Parallax's MotionValue. See
+  // useMomentumSubscription below.
+  const momentum = useMotionValue(0);
+  useMomentumSubscription(momentum);
+
+  // For background-like behaviour (speed > 0): the element drifts
+  // DOWN as the user scrolls down — i.e., lags behind the page.
+  // We map progress [0,1] → [-speed, +speed] * magnitude, smoothstep
+  // it, then add a small momentum nudge.
+  //
+  // The momentum contribution is signed by `speed` so backgrounds
+  // (positive speed) glide a touch more downward when the page is
+  // still moving downward, and foregrounds (negative speed) rise a
+  // touch more. Cap the multiplier at 0.5 so a violent flick never
+  // produces more than ~½ a layer-width of overshoot.
+  const smooth = (t) => t * t * (3 - 2 * t);
   const magnitude = axis === 'x' ? MAX_X_PX : MAX_Y_PX;
-  const offset = useTransform(scrollYProgress, (p) => {
-    const eased = smooth(p); // 0 → 1 with smoothstep
-    return (eased - 0.5) * 2 * speed * magnitude; // [-speed, +speed] * mag
+  const offset = useTransform([scrollYProgress, momentum], ([p, m]) => {
+    const eased = smooth(p);
+    const base = (eased - 0.5) * 2 * speed * magnitude;
+    // m is px/frame; multiply by a constant to translate "engine
+    // velocity in px/frame" into "extra parallax offset in px". 0.5
+    // is tuned so a 6 px/frame flick adds ~3 px of parallax nudge.
+    const nudge = m * 0.5 * speed;
+    return base + nudge;
   });
 
   const transformProp = axis === 'x' ? { x: offset } : { y: offset };
@@ -108,4 +139,42 @@ export function Parallax({
       {children}
     </motion.div>
   );
+}
+
+// ----- Momentum subscription ---------------------------------------------
+//
+// The engine publishes `momentum` up to ~60 times/second while the
+// page is gliding. We don't want N Parallax components × 60 renders,
+// so we keep ONE engine listener active and fan out to every mounted
+// Parallax's MotionValue. The first mount starts the listener; the
+// last unmount stops it.
+
+let momentumSubscribers = 0;
+const momentumMotionValues = new Set();
+let momentumUnsubscribe = null;
+const MOMENTUM_CAP_PX = 6; // ±6 px/frame — keeps nudges subtle
+
+function useMomentumSubscription(motionValue) {
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const scroll = getSmoothScroll();
+    momentumMotionValues.add(motionValue);
+    momentumSubscribers++;
+    if (momentumSubscribers === 1) {
+      momentumUnsubscribe = scroll.on('momentum', (v) => {
+        const capped = Math.max(-MOMENTUM_CAP_PX, Math.min(MOMENTUM_CAP_PX, v));
+        for (const mv of momentumMotionValues) {
+          mv.set(capped);
+        }
+      });
+    }
+    return () => {
+      momentumMotionValues.delete(motionValue);
+      momentumSubscribers--;
+      if (momentumSubscribers === 0 && momentumUnsubscribe) {
+        momentumUnsubscribe();
+        momentumUnsubscribe = null;
+      }
+    };
+  }, [motionValue]);
 }
